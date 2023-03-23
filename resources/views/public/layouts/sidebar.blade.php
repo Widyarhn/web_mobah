@@ -17,12 +17,12 @@
         </a>
         <ul id="tambahAkun-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
-                <a href="#">
-                    <i class="bi bi-circle"></i><span>Akun Admin</span>
+                <a href="tambah-admin">
+                    <i class="bi bi-circle" ></i><span>Akun Admin</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ route('mitra.index') }}">
                     <i class="bi bi-circle"></i><span>Akun Mitra</span>
                 </a>
             </li>

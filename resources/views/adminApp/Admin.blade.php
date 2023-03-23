@@ -1,4 +1,4 @@
-@extends("...public.main")
+@extends("public.layouts.main")
 
 @section("title_content", "Dashboard Admin App")
 
