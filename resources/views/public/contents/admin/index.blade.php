@@ -1,46 +1,44 @@
-@extends('public.layouts.main')
+@extends("public.layouts.main")
 
-@section('title', 'Tamah Admin')
+@section("title_content", "Tambah Admin")
 
-@section('css')
+@section("page_title" , "Tambah Admin")
 
+@section("breadcrumb")
+<ol class="breadcrumb">
+    <li class="breadcrumb-item ">
+        Home
+    </li>
+    <li class="breadcrumb-item active">
+        Manajemen Admin
+    </li>
+</ol>
 @endsection
 
-@section('breadcumb')
-<div class="breadcrumb-header justify-content-between">
-    <div>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a   href="javascript:void(0);"></a></li>
-                <li class="breadcrumb-item active" aria-current="page"> Management Admin</li>
-            </ol>
-        </nav>
-    </div>
-</div>
-@endsection
-
-<body class="bg-light">
-    <main class="container">
-        <!-- START DATA -->
-        <div class="my-3 p-3 bg-body rounded shadow-sm">
-            <!-- TOMBOL TAMBAH DATA -->
-            <div class="pb-3">
-                <a href='' class="btn btn-primary tombol-tambah">+ Tambah Data</a>
+@section('content')
+<section class="section dashboard">
+    <div class="row">
+        <main class="container">
+            <!-- START DATA -->
+            <div class="my-3 p-3 bg-body rounded shadow-sm">
+                <!-- TOMBOL TAMBAH DATA -->
+                <div class="pb-3">
+                    <a href='' class="btn btn-primary tombol-tambah">+ Tambah Data</a>
+                </div>
+                <table class="table table-striped" id="myTable">
+                    <thead>
+                        <tr>
+                            <th class="col-md-1">No</th>
+                            <th class="col-md-5">Nama</th>
+                            <th class="col-md-4">Username</th>
+                            <th class="col-md-2">Aksi</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
-            <table class="table table-striped" id="myTable">
-                <thead>
-                    <tr>
-                        <th class="col-md-1">No</th>
-                        <th class="col-md-5">Nama</th>
-                        <th class="col-md-4">Username</th>
-                        <th class="col-md-2">Aksi</th>
-                    </tr>
-                </thead>
-            </table>
-
-        </div>
-        <!-- AKHIR DATA -->
-    </main>
+            <!-- AKHIR DATA -->
+        </main>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -52,7 +50,7 @@
                 </div>
                 <div class="modal-body">
                     <!-- START FORM -->
-                  
+                
                     <div class="alert alert-danger d-none"></div>
                     <div class="alert alert-success d-none"></div>
 
@@ -77,9 +75,11 @@
             </div>
         </div>
     </div>
+</section>
+@endsection
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+@section("component_js")
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
 </script>
 <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
@@ -195,6 +195,4 @@
         $('.alert-success').html('');
     });
 </script>
-</body>
-
-</html>
+@endsection

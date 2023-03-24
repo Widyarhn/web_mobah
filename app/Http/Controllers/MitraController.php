@@ -37,7 +37,7 @@ class MitraController extends Controller
         // }
         return DataTables::of($data)->make();
     }
- 
+
     //     
 
     // }
