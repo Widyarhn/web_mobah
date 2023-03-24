@@ -18,11 +18,37 @@ use App\Http\Controllers\DashboardController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', [LoginController::class, 'index'])->name('loginform')->middleware('guest');
-Route::post('/', [LoginController::class, 'authenticate'])->name('login');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+// Route::get('/', [LoginController::class, 'index'])->name('loginform')->middleware('guest');
+// Route::post('/', [LoginController::class, 'authenticate'])->name('login');
+// Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::group(['middleware' => ['guest']], function() {
+    Route::get('/login', [LoginController::class, 'index'])->name('loginform'); 
+    Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
+});
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
+    
+    Route::get('/akun/admin', [AdminController::class, 'index']);
+    Route::get('/akun/mitra', [MitraController::class, 'index']);
+    Route::get('/akun/validator', [ValidatorController::class, 'index']);
+
+    Route::get('/data/pemantauan-gabah', [AdminController::class, 'index']);
+    Route::get('/data/klasifikasi-gabah', [MitraController::class, 'index']);
+    Route::get('/data/data-gabah', [ValidatorController::class, 'index']);
 
 
+    // Route::get('/tambah-admin', [AdminController::class, 'index'])->name('contents.admin');
+    // Route::resource('tambah-admin/admin', UserController::class);
+    // Route::get('mitra/datatable', [MitraController::class, 'datatable'])->name('mitra.datatable');
+    // Route::resource('mitra', MitraController::class);
+    // Route::resource('/profile', ProfileController::class);
+    // Route::get('/profile/{id}/ubah_password', [UbahPasswordController::class ,'index'])->name('ubah_password');
+    // Route::post('/profile/{id}/ubah_password', [UbahPasswordController::class ,'update'])->name('update_password');
+
+    Route::get("/logout", [LoginController::class, 'logout']);
+});
 
 Route::middleware('auth')->group(function (){
 
@@ -39,4 +65,6 @@ Route::middleware('auth')->group(function (){
     // Route::resource('/profile', ProfileController::class);
     // Route::get('/profile/{id}/ubah_password', [UbahPasswordController::class ,'index'])->name('ubah_password');
     // Route::post('/profile/{id}/ubah_password', [UbahPasswordController::class ,'update'])->name('update_password');
+
+    Route::get("/logout", [LoginController::class, 'logout']);
 });
