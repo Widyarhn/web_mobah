@@ -56,7 +56,7 @@ class AuthController extends Controller
     public function authenticate(Request $request){
         
         if(Auth::attempt(['email' => $request->cred, 'password' => $request->password]) 
-          || Auth::attempt(['username' => $request->cred, 'password' => $request->password])){
+        || Auth::attempt(['username' => $request->cred, 'password' => $request->password])){
             
             if(Auth::user()->status_user->name == 'unverified') 
                 return redirect()->route('auth.login')->with('error', 'Your account is unverified, please check your email for activation!');
