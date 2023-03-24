@@ -15,7 +15,7 @@ class MitraController extends Controller
      */
     public function index()
     {
-        return view('public.contents.mitra.index');
+        return view('akun.mitra.index');
     }
 
     /**
@@ -25,7 +25,7 @@ class MitraController extends Controller
      */
     public function create()
     {
-        return view('public.contents.mitra.cretae');
+        return view('akun.mitra.cretae');
     }
 
 
