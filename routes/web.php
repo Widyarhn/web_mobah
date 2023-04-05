@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MitraController;
+use App\Http\Controllers\ValidatorController;
 use App\Http\Controllers\DashboardController;
 
 
@@ -39,6 +40,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('mitra/datatable', [MitraController::class, 'datatable'])->name('mitra.datatable');
     Route::resource('mitra', MitraController::class);
     
+    Route::get('validator/datatable', [ValidatorController::class, 'datatable'])->name('validator.datatable');
+    Route::resource('validator', ValidatorController::class);
     // Route::get('tambah-admin', [AdminController::class, 'index'])->name('contents.admin');
     // Route::resource('/profile', ProfileController::class);
     // Route::get('/profile/{id}/ubah_password', [UbahPasswordController::class ,'index'])->name('ubah_password');
