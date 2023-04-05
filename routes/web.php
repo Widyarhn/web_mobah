@@ -7,7 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MitraController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\GabahController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,10 +39,18 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('mitra/datatable', [MitraController::class, 'datatable'])->name('mitra.datatable');
     Route::resource('mitra', MitraController::class);
     
-    // Route::get('tambah-admin', [AdminController::class, 'index'])->name('contents.admin');
+    //Gabah
+    Route::get('data-gabah/datatable', [GabahController::class, 'datatable'])->name('data-gabah.datatable');
+    Route::get("/pemantauan-gabah", [GabahController::class, 'monitoring']);
+    Route::get("/klasifikasi-gabah", [GabahController::class, 'klasifikasi']);
+    Route::get("/logout", [LoginController::class, 'logout']);
+    
+    Route::resource("data-gabah", GabahController::class);
+
+});
+
+
+// Route::get('tambah-admin', [AdminController::class, 'index'])->name('contents.admin');
     // Route::resource('/profile', ProfileController::class);
     // Route::get('/profile/{id}/ubah_password', [UbahPasswordController::class ,'index'])->name('ubah_password');
     // Route::post('/profile/{id}/ubah_password', [UbahPasswordController::class ,'update'])->name('update_password');
-
-    Route::get("/logout", [LoginController::class, 'logout']);
-});

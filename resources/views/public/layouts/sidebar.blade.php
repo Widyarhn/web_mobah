@@ -40,17 +40,17 @@
         </a>
         <ul id="dataMaster-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
-                <a href="{{url('/pemantauan-gabah') }}">
+                <a href="{{url('/pemantauan-gabah') }}" class=" {{ Request::segment("1") == "pemantauan-gabah" ? 'active' : '' }}">
                     <i class="bi bi-circle"></i><span>Pemantauan Gabah</span>
                 </a>
             </li>
             <li>
-                <a href="{{url('/klasifikasi-gabah') }}">
+                <a href="{{url('/klasifikasi-gabah') }}" class=" {{ Request::segment("1") == "klasifikasi-gabah" ? 'active' : '' }}">
                     <i class="bi bi-circle"></i><span>Klasifikasi Gabah</span>
                 </a>
             </li>
             <li>
-                <a href="{{url('/data-gabah') }}">
+                <a href="{{route('data-gabah.index') }}" class=" {{ Request::segment("1") == "data-gabah.index" ? 'active' : '' }}">
                     <i class="bi bi-circle"></i><span>Data Gabah</span>
                 </a>
             </li>
