@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('mitra', MitraController::class);
     
     Route::get('validator/datatable', [ValidatorController::class, 'datatable'])->name('validator.datatable');
-    Route::resource('validator', ValidatorController::class);
+    Route::resource('/validator', ValidatorController::class);
     // Route::get('tambah-admin', [AdminController::class, 'index'])->name('contents.admin');
     //Gabah
     Route::get('data-gabah/datatable', [GabahController::class, 'datatable'])->name('data-gabah.datatable');

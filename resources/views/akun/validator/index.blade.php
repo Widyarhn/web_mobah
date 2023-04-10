@@ -16,7 +16,6 @@
         </nav>
     </div>
 </div>
-@endsection
 
 @section('content')
 
@@ -49,18 +48,22 @@
 </div>
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Form Tambah Akun Validator</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+        <form action="/validator" method="POST" id="editForm">
+            
+            {{ csrf_field() }}
+            {{ method_field('PUT') }}
+            
             <div class="modal-body">
                 <!-- START FORM -->
-            
-                <div class="alert alert-danger d-none"></div>
-                <div class="alert alert-success d-none"></div>
 
                 <div class="mb-3 row">
                     <label for="nama" class="col-sm-2 col-form-label">Nama</label>
@@ -81,6 +84,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary tombol-simpan">Simpan</button>
             </div>
+        </form>
         </div>
     </div>
 </div>
