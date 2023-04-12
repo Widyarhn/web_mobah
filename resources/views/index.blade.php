@@ -14,6 +14,7 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fontawesome.com/icons" />
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&family=Jost:wght@500;600;700&display=swap" rel="stylesheet"> 
 
     <!-- Icon Font Stylesheet -->
@@ -31,7 +32,7 @@
     <link href="{{ asset('fitapp') }}/css/style.css" rel="stylesheet">
 </head>
 
-<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51">
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51" style="color:black">
     <div class="container-xxl bg-white p-0">
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -57,9 +58,8 @@
                         <a href="#home" class="nav-item nav-link active">Home</a>
                         <a href="#about" class="nav-item nav-link">About</a>
                         <a href="#partnership" class="nav-item nav-link">Partnership</a>
-                        <a href="#pricing" class="nav-item nav-link">Product</a>
-                        <a href="#review" class="nav-item nav-link">Review</a>
-                        <a href="#contact" class="nav-item nav-link">Contact</a>
+                        <a href="#app" class="nav-item nav-link">App</a>
+                        <a href="#data-gabah" class="nav-item nav-link">Data Gabah</a>
                     </div>
                     <a href="{{ url('/login') }}" class="btn btn-primary-gradient rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Berlangganan?</a>
                 </div>
@@ -133,86 +133,42 @@
         <!-- About End -->
 
 
-        <!-- Features Start -->
+        <!-- Partnership Start -->
         <div class="container-xxl py-5" id="partnership">
             <div class="container py-5 px-lg-5">
-                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="text-primary-gradient fw-medium">Partnership</h5>
-                    <h1 class="mb-5">Kemitraan</h1>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="feature-item bg-light rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
-                                <i class="fa fa-eye text-white fs-4"></i>
-                            </div>
-                            <h5 class="mb-3">High Resolution</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                        </div>
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6">
+                        <img class="img-fluid wow fadeInUp" data-wow-delay="0.1s" src="{{ asset('fitapp') }}/img/about.png">
                     </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="feature-item bg-light rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
-                                <i class="fa fa-layer-group text-white fs-4"></i>
-                            </div>
-                            <h5 class="mb-3">Retina Ready</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="feature-item bg-light rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
-                                <i class="fa fa-edit text-white fs-4"></i>
-                            </div>
-                            <h5 class="mb-3">Editable Data</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="feature-item bg-light rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
-                                <i class="fa fa-shield-alt text-white fs-4"></i>
-                            </div>
-                            <h5 class="mb-3">Fully Secured</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="feature-item bg-light rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
-                                <i class="fa fa-cloud text-white fs-4"></i>
-                            </div>
-                            <h5 class="mb-3">Cloud Storage</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="feature-item bg-light rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
-                                <i class="fa fa-mobile-alt text-white fs-4"></i>
-                            </div>
-                            <h5 class="mb-3">Fully Responsive</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                        </div>
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <h5 class="text-primary-gradient fw-medium">Partnership</h5>
+                        <h1 class="mb-4">Gapoktan Sri Makmur III</h1>
+                        <p class="mb-4">Gabungan Kelompok Tani (Gapoktan) Sri Makmur berlokasi di Desa Krasak Kecamatan Jatibarang Kabupaten Indramayu. </p>
+                        
                     </div>
                 </div>
             </div>
+            
         </div>
-        <!-- Features End -->
+        
+        <!-- Partnership End -->
 
 
-        <!-- Screenshot Start -->
-        <div class="container-xxl py-5">
+        <!-- Product Start -->
+        <div class="container-xxl py-5" id="app">
             <div class="container py-5 px-lg-5">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
-                        <h5 class="text-primary-gradient fw-medium">Screenshot</h5>
-                        <h1 class="mb-4">User Friendly interface And Very Easy To Use Fitness App</h1>
-                        <p class="mb-4">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit clita duo justo eirmod magna dolore erat amet</p>
-                        <p><i class="fa fa-check text-primary-gradient me-3"></i>Diam dolor diam ipsum et tempor sit</p>
-                        <p><i class="fa fa-check text-primary-gradient me-3"></i>Aliqu diam amet diam et eos labore</p>
-                        <p class="mb-4"><i class="fa fa-check text-primary-gradient me-3"></i>Clita erat ipsum et lorem et sit</p>
-                        <a href="" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill mt-3">Read More</a>
+                        <h5 class="text-primary-gradient fw-medium">Screenshots App</h5>
+                        <h1 class="mb-4">User Friendly interface And Very Easy To Use MangDaib App</h1>
+                        <p class="mb-4">Mudah digunakan dengan tampilan yang menarik. Aplikasi MangDaib bertujuan:</p>
+                        <p><i class="fa fa-check text-primary-gradient me-3"></i>Untuk memudahkan Gapoktan mengelola data gabah</p>
+                        <p><i class="fa fa-check text-primary-gradient me-3"></i>Untuk memantau tingkat kadar air pada gabah</p>
+                        <a href="#steps" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill mt-3"><h5 class="text-white mb-0">How to Use?</h5></a>
+                        <a href="#steps" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill mt-3">
+                            <h5 class="text-white mb-0">Download App</h5>
+                        </a>
+                        
                     </div>
                     <div class="col-lg-4 d-flex justify-content-center justify-content-lg-end wow fadeInUp" data-wow-delay="0.3s">
                         <div class="owl-carousel screenshot-carousel">
@@ -226,15 +182,16 @@
                 </div>
             </div>
         </div>
-        <!-- Screenshot End -->
+        <!-- Product End -->
 
 
         <!-- Process Start -->
-        <div class="container-xxl py-5">
+        <div class="container-xxl py-5" id="steps">
             <div class="container py-5 px-lg-5">
+                
                 <div class="text-center pb-4 wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="text-primary-gradient fw-medium">How It Works</h5>
-                    <h1 class="mb-5">3 Easy Steps</h1>
+                    <h5 class="text-primary-gradient fw-medium">How to Use?</h5>
+                    <h1 class="mb-5">3 Easy Step</h1>
                 </div>
                 <div class="row gy-5 gx-4 justify-content-center">
                     <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.1s">
@@ -271,7 +228,7 @@
 
 
         <!-- Download Start -->
-        <div class="container-xxl py-5">
+        {{-- <div class="container-xxl py-5">
             <div class="container py-5 px-lg-5">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
@@ -304,240 +261,41 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Download End -->
 
 
         <!-- Pricing Start -->
-        <div class="container-xxl py-5" id="pricing">
+        
+        <!-- Pricing End -->
+
+        <!-- Data Gabah Start -->
+        <div class="container-xxl py-5" id="data-gabah">
             <div class="container py-5 px-lg-5">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="text-primary-gradient fw-medium">Pricing Plan</h5>
-                    <h1 class="mb-5">Choose Your Plan</h1>
+                    <h5 class="text-primary-gradient fw-medium">Data Gabah</h5>
+                    <h1 class="mb-5">Pilih Data Gabah</h1>
                 </div>
                 <div class="tab-class text-center pricing wow fadeInUp" data-wow-delay="0.1s">
                     <ul class="nav nav-pills d-inline-flex justify-content-center bg-primary-gradient rounded-pill mb-5">
                         <li class="nav-item">
-                            <button class="nav-link active" data-bs-toggle="pill" href="#tab-1">Monthly</button>
+                            <button class="nav-link active" data-bs-toggle="pill" href="#tab-1">Gabah Kering</button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" data-bs-toggle="pill" href="#tab-2">Yearly</button>
+                            <button class="nav-link" data-bs-toggle="pill" href="#tab-2">Gabah Basah</button>
                         </li>
                     </ul>
                     <div class="tab-content text-start">
-                        <div id="tab-1" class="tab-pane fade show p-0 active">
-                            <div class="row g-4">
-                                <div class="col-lg-4">
-                                    <div class="bg-light rounded">
-                                        <div class="border-bottom p-4 mb-4">
-                                            <h4 class="text-primary-gradient mb-1">Starter Plan</h4>
-                                            <span>Powerful & Awesome Features</span>
-                                        </div>
-                                        <div class="p-4 pt-0">
-                                            <h1 class="mb-3">
-                                                <small class="align-top" style="font-size: 22px; line-height: 45px;">$</small>14.99<small
-                                                    class="align-bottom" style="font-size: 16px; line-height: 40px;">/ Month</small>
-                                            </h1>
-                                            <div class="d-flex justify-content-between mb-3"><span>HTML5 & CSS3</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <div class="d-flex justify-content-between mb-3"><span>Bootstrap v5</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <div class="d-flex justify-content-between mb-3"><span>Responsive Layout</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <div class="d-flex justify-content-between mb-2"><span>Cross-browser Support</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <a href="" class="btn btn-primary-gradient rounded-pill py-2 px-4 mt-4">Get Started</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="bg-light rounded border">
-                                        <div class="border-bottom p-4 mb-4">
-                                            <h4 class="text-primary-gradient mb-1">Advance Plan</h4>
-                                            <span>Powerful & Awesome Features</span>
-                                        </div>
-                                        <div class="p-4 pt-0">
-                                            <h1 class="mb-3">
-                                                <small class="align-top" style="font-size: 22px; line-height: 45px;">$</small>24.99<small
-                                                    class="align-bottom" style="font-size: 16px; line-height: 40px;">/ Month</small>
-                                            </h1>
-                                            <div class="d-flex justify-content-between mb-3"><span>HTML5 & CSS3</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <div class="d-flex justify-content-between mb-3"><span>Bootstrap v5</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <div class="d-flex justify-content-between mb-3"><span>Responsive Layout</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <div class="d-flex justify-content-between mb-2"><span>Cross-browser Support</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <a href="" class="btn btn-secondary-gradient rounded-pill py-2 px-4 mt-4">Get Started</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="bg-light rounded">
-                                        <div class="border-bottom p-4 mb-4">
-                                            <h4 class="text-primary-gradient mb-1">Premium Plan</h4>
-                                            <span>Powerful & Awesome Features</span>
-                                        </div>
-                                        <div class="p-4 pt-0">
-                                            <h1 class="mb-3">
-                                                <small class="align-top" style="font-size: 22px; line-height: 45px;">$</small>34.99<small
-                                                    class="align-bottom" style="font-size: 16px; line-height: 40px;">/ Month</small>
-                                            </h1>
-                                            <div class="d-flex justify-content-between mb-3"><span>HTML5 & CSS3</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <div class="d-flex justify-content-between mb-3"><span>Bootstrap v5</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <div class="d-flex justify-content-between mb-3"><span>Responsive Layout</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <div class="d-flex justify-content-between mb-2"><span>Cross-browser Support</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <a href="" class="btn btn-primary-gradient rounded-pill py-2 px-4 mt-4">Get Started</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="tab-2" class="tab-pane fade p-0">
-                            <div class="row g-4">
-                                <div class="col-lg-4">
-                                    <div class="bg-light rounded">
-                                        <div class="border-bottom p-4 mb-4">
-                                            <h4 class="text-primary-gradient mb-1">Starter Plan</h4>
-                                            <span>Powerful & Awesome Features</span>
-                                        </div>
-                                        <div class="p-4 pt-0">
-                                            <h1 class="mb-3">
-                                                <small class="align-top" style="font-size: 22px; line-height: 45px;">$</small>114.99<small
-                                                    class="align-bottom" style="font-size: 16px; line-height: 40px;">/ Yearly</small>
-                                            </h1>
-                                            <div class="d-flex justify-content-between mb-3"><span>HTML5 & CSS3</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <div class="d-flex justify-content-between mb-3"><span>Bootstrap v5</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <div class="d-flex justify-content-between mb-3"><span>Responsive Layout</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <div class="d-flex justify-content-between mb-2"><span>Cross-browser Support</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <a href="" class="btn btn-primary-gradient rounded-pill py-2 px-4 mt-4">Get Started</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="bg-light rounded border">
-                                        <div class="border-bottom p-4 mb-4">
-                                            <h4 class="text-primary-gradient mb-1">Advance Plan</h4>
-                                            <span>Powerful & Awesome Features</span>
-                                        </div>
-                                        <div class="p-4 pt-0">
-                                            <h1 class="mb-3">
-                                                <small class="align-top" style="font-size: 22px; line-height: 45px;">$</small>124.99<small
-                                                    class="align-bottom" style="font-size: 16px; line-height: 40px;">/ Yearly</small>
-                                            </h1>
-                                            <div class="d-flex justify-content-between mb-3"><span>HTML5 & CSS3</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <div class="d-flex justify-content-between mb-3"><span>Bootstrap v5</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <div class="d-flex justify-content-between mb-3"><span>Responsive Layout</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <div class="d-flex justify-content-between mb-2"><span>Cross-browser Support</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <a href="" class="btn btn-primary-gradient rounded-pill py-2 px-4 mt-4">Get Started</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="bg-light rounded">
-                                        <div class="border-bottom p-4 mb-4">
-                                            <h4 class="text-primary-gradient mb-1">Premium Plan</h4>
-                                            <span>Powerful & Awesome Features</span>
-                                        </div>
-                                        <div class="p-4 pt-0">
-                                            <h1 class="mb-3">
-                                                <small class="align-top" style="font-size: 22px; line-height: 45px;">$</small>134.99<small
-                                                    class="align-bottom" style="font-size: 16px; line-height: 40px;">/ Yearly</small>
-                                            </h1>
-                                            <div class="d-flex justify-content-between mb-3"><span>HTML5 & CSS3</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <div class="d-flex justify-content-between mb-3"><span>Bootstrap v5</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <div class="d-flex justify-content-between mb-3"><span>Responsive Layout</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <div class="d-flex justify-content-between mb-2"><span>Cross-browser Support</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
-                                            <a href="" class="btn btn-primary-gradient rounded-pill py-2 px-4 mt-4">Get Started</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @include('lp.dataGabah')
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Pricing End -->
-
-
-        <!-- Testimonial Start -->
-        <div class="container-xxl py-5" id="review">
-            <div class="container py-5 px-lg-5">
-                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="text-primary-gradient fw-medium">Testimonial</h5>
-                    <h1 class="mb-5">What Say Our Clients!</h1>
-                </div>
-                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="testimonial-item rounded p-4">
-                        <div class="d-flex align-items-center mb-4">
-                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="{{ asset('fitapp') }}/img/testimonial-1.jpg" style="width: 85px; height: 85px;">
-                            <div class="ms-4">
-                                <h5 class="mb-1">Client Name</h5>
-                                <p class="mb-1">Profession</p>
-                                <div>
-                                    <small class="fa fa-star text-warning"></small>
-                                    <small class="fa fa-star text-warning"></small>
-                                    <small class="fa fa-star text-warning"></small>
-                                    <small class="fa fa-star text-warning"></small>
-                                    <small class="fa fa-star text-warning"></small>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    </div>
-                    <div class="testimonial-item rounded p-4">
-                        <div class="d-flex align-items-center mb-4">
-                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="{{ asset('fitapp') }}/img/testimonial-2.jpg" style="width: 85px; height: 85px;">
-                            <div class="ms-4">
-                                <h5 class="mb-1">Client Name</h5>
-                                <p class="mb-1">Profession</p>
-                                <div>
-                                    <small class="fa fa-star text-warning"></small>
-                                    <small class="fa fa-star text-warning"></small>
-                                    <small class="fa fa-star text-warning"></small>
-                                    <small class="fa fa-star text-warning"></small>
-                                    <small class="fa fa-star text-warning"></small>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    </div>
-                    <div class="testimonial-item rounded p-4">
-                        <div class="d-flex align-items-center mb-4">
-                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="{{ asset('fitapp') }}/img/testimonial-3.jpg" style="width: 85px; height: 85px;">
-                            <div class="ms-4">
-                                <h5 class="mb-1">Client Name</h5>
-                                <p class="mb-1">Profession</p>
-                                <div>
-                                    <small class="fa fa-star text-warning"></small>
-                                    <small class="fa fa-star text-warning"></small>
-                                    <small class="fa fa-star text-warning"></small>
-                                    <small class="fa fa-star text-warning"></small>
-                                    <small class="fa fa-star text-warning"></small>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    </div>
-                    <div class="testimonial-item rounded p-4">
-                        <div class="d-flex align-items-center mb-4">
-                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="{{ asset('fitapp') }}/img/testimonial-4.jpg" style="width: 85px; height: 85px;">
-                            <div class="ms-4">
-                                <h5 class="mb-1">Client Name</h5>
-                                <p class="mb-1">Profession</p>
-                                <div>
-                                    <small class="fa fa-star text-warning"></small>
-                                    <small class="fa fa-star text-warning"></small>
-                                    <small class="fa fa-star text-warning"></small>
-                                    <small class="fa fa-star text-warning"></small>
-                                    <small class="fa fa-star text-warning"></small>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Testimonial End -->
+        <!-- Data Gabah End -->
 
 
         <!-- Contact Start -->
-        <div class="container-xxl py-5" id="contact">
+        {{-- <div class="container-xxl py-5" id="contact">
             <div class="container py-5 px-lg-5">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                     <h5 class="text-primary-gradient fw-medium">Contact Us</h5>
@@ -582,7 +340,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Contact End -->
         
 
@@ -655,11 +413,16 @@
 
 
         <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-lg-square back-to-top pt-2"><i class="bi bi-arrow-up text-white"></i></a>
+        <a href="#home" class="btn btn-lg btn-lg-square back-to-top pt-2"><i class="bi bi-arrow-up text-white"></i></a>
     </div>
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> --}}
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('fitapp') }}/lib/wow/wow.min.js"></script>
     <script src="{{ asset('fitapp') }}/lib/easing/easing.min.js"></script>
@@ -669,6 +432,120 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('fitapp') }}/js/main.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+    <script>
+        var $table;
+        
+        $(document).ready(function() {
+            
+            table = $("#datatable").DataTable({
+                responsive: true,
+                processing: true,
+                serverSide: true,
+                autoWidth: true,
+                ajax: "{{ route('data-gabah.datatable') }}",
+                columnDefs: [
+                {
+                    targets: 0,
+                    render: function(data, type, full, meta) {
+                        return (meta.row + 1);
+                    }
+                }, 
+                {
+                    targets: 1,
+                    createdCell: function(td, cellData, rowData, row, col) {
+                        if($(td).text().length > 50) {
+                            let txt = $(td).text()
+                            $(td).text(txt.substr(0, 50) + '...')
+                        }
+                    },
+                    
+                },
+                {
+                    targets: 2,
+                    createdCell: function(td, cellData, rowData, row, col) {
+                        if($(td).text().length > 50) {
+                            let txt = $(td).text()
+                            $(td).text(txt.substr(0, 50) + '...')
+                        }
+                    },
+                    
+                },
+                {
+                    targets: 3,
+                    createdCell: function(td, cellData, rowData, row, col) {
+                        if($(td).text().length > 50) {
+                            let txt = $(td).text()
+                            $(td).text(txt.substr(0, 50) + '...')
+                        }
+                    },
+                    
+                },
+                {
+                    targets: 4,
+                    createdCell: function(td, cellData, rowData, row, col) {
+                        if($(td).text().length > 50) {
+                            let txt = $(td).text()
+                            $(td).text(txt.substr(0, 50) + '...')
+                        }
+                    },
+                    
+                },],
+                columns: [
+                { data: null },
+                { data: 'nama'},
+                { data: 'jenis'},
+                { data: 'berat'},
+                { data: 'klasifikasi'},
+                
+                ],
+                language: {
+                    searchPlaceholder: 'Search...',
+                    sSearch: '',
+                }
+            });
+        })
+        
+        function destroy(id) {
+            var url = "{{ route('mitra.destroy',":id") }}";
+            url = url.replace(':id', id);
+            
+            Swal.fire({
+                title: "Yakin ingin menghapus data ini?",
+                text: "Ketika data terhapus, anda tidak bisa mengembalikan data tersbut!",
+                icon: "warning",
+                showCancelButton  : true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor : "#d33",
+                confirmButtonText : "Ya, Hapus!"
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url    : url,
+                        type   : "delete",
+                        data: { "id":id },
+                        dataType: "JSON",
+                        success: function(data) {
+                            table.ajax.reload();
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Data berhasil dihapus',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    })
+                }
+            })
+        } 
+    </script>
 </body>
 
 </html>

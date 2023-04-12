@@ -44,8 +44,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
-
-            <div class="alert alert-info alert-dismissible fade show" role="alert">
+            
+            <div class="col-6 alert alert-info alert-dismissible fade show" role="alert">
                 Klik <b>...</b> untuk memfilter data yang ingin ditampilkan
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -68,7 +68,7 @@
                     </div>
                     
                     <div class="card-body">
-                        <h5 class="card-title">Data Gabah<span>| Today</span></h5>
+                        <h5 class="card-title">Data Gabah <span>| All Data</span></h5>
                         <div>
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                                 + Tambahkan Data Gabah
@@ -84,15 +84,10 @@
                                 <tr>
                                     <th class="col-md-1">No</th>
                                     <th class="col-md-3">Pemilik</th>
-                                    <th class="col-md-4">Jenis Gabah</th>
-                                    <th class="col-md-2">Berat</th>
-                                    <th class="col-md-4">Kadar Air 1</th>
-                                    <th class="col-md-4">Kadar Air 2</th>
-                                    <th class="col-md-2">Suhu 1</th>
-                                    <th class="col-md-2">Suhu 2</th>
-                                    <th class="col-md-2">Waktu</th>
-                                    <th class="col-md-3">Klasifikasi</th>
-                                    <th class="col-md-3">Action</th>
+                                    <th class="col-md-2">Jenis Gabah</th>
+                                    <th class="col-md-1">Berat</th>
+                                    <th class="col-md-3">Tanggal</th>
+                                    <th class="col-md-4">Action</th>
                                 </tr>
                             </thead>
                         </table>
@@ -104,7 +99,7 @@
         </main>
         
     </div>
-
+    
     {{-- Modal Tambah Data --}}
     <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -148,20 +143,67 @@
         </div>
     </div>
     
+    {{-- Modal Validasi Gabah --}}
+    @foreach ($pemilik as $item)
+    <div class="modal fade" id="exampleModal2-{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        <b>Validasi Gabah</b> 
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ url('/data-gabah/'.$item->gabah->id) }}" method="POST" id="validasi">
+                    @method("PUT")
+                    @csrf
+                    <input type="hidden" name="id" id="id" value="{{ $item->id }}">
+                    <div class="modal-body">
+                        <div class="form-group mb-2">
+                            <label for="nama"> Pemilik </label>
+                            <input type="text" class="form-control" name="nama" id="nama" value="{{ $item->nama }}" readonly>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="berat"> Berat </label>
+                            <input type="text" class="form-control" name="berat" id="berat" placeholder="Masukkan berat" value="{{ $item->gabah->berat }}" readonly>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="kadar_air2"> Kadar Air </label>
+                            <input type="text" class="form-control" name="kadar_air2" id="kadar_air2"  value="{{ $item->gabah->kadar_air2 }}" readonly>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="suhu2"> Suhu </label>
+                            <input type="text" class="form-control" name="suhu2" id="suhu2"  value="{{ $item->gabah->suhu2 }}" readonly >
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="klasifikasi"> Klasifikasi Gabah </label>
+                            <select name="klasifikasi" class="form-control" id="klasifikasi">
+                                <option value="">-- Pilih --</option>
+                                <option value="ideal">Ideal</option>
+                                <option value="basah">Basah</option>
+                                <option value="kering">Kering</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-danger btn-sm">Kembali</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endforeach
+
 </section>
 @endsection
 
 @section("component_js")
-<script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-<!-- DATA TABLE JS-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
-</script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
+</script> --}}
 <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
-crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
@@ -199,7 +241,7 @@ crossorigin="anonymous"></script>
         },
         errorElement: "span"
     });
-
+    
     
 </script>
 
@@ -220,123 +262,72 @@ crossorigin="anonymous"></script>
                 render: function(data, type, full, meta) {
                     return (meta.row + 1);
                 }
-            }, {
-                    targets: 1,
-                    createdCell: function(td, cellData, rowData, row, col) {
-                        if($(td).text().length > 50) {
-                            let txt = $(td).text()
-                            $(td).text(txt.substr(0, 50) + '...')
-                        }
-                    },
-
+            }, 
+            {
+                targets: 1,
+                createdCell: function(td, cellData, rowData, row, col) {
+                    if($(td).text().length > 50) {
+                        let txt = $(td).text()
+                        $(td).text(txt.substr(0, 50) + '...')
+                    }
                 },
-                {
-                    targets: 2,
-                    createdCell: function(td, cellData, rowData, row, col) {
-                        if($(td).text().length > 50) {
-                            let txt = $(td).text()
-                            $(td).text(txt.substr(0, 50) + '...')
-                        }
-                    },
-
+                
+            },
+            {
+                targets: 2,
+                createdCell: function(td, cellData, rowData, row, col) {
+                    if($(td).text().length > 50) {
+                        let txt = $(td).text()
+                        $(td).text(txt.substr(0, 50) + '...')
+                    }
                 },
-                {
-                    targets: 3,
-                    createdCell: function(td, cellData, rowData, row, col) {
-                        if($(td).text().length > 50) {
-                            let txt = $(td).text()
-                            $(td).text(txt.substr(0, 50) + '...')
-                        }
-                    },
-
+                
+            },
+            {
+                targets: 3,
+                createdCell: function(td, cellData, rowData, row, col) {
+                    if($(td).text().length > 50) {
+                        let txt = $(td).text()
+                        $(td).text(txt.substr(0, 50) + '...')
+                    }
                 },
-                {
-                    targets: 4,
-                    createdCell: function(td, cellData, rowData, row, col) {
-                        if($(td).text().length > 50) {
-                            let txt = $(td).text()
-                            $(td).text(txt.substr(0, 50) + '...')
-                        }
-                    },
-
+                
+            },
+            {
+                targets: 4,
+                createdCell: function(td, cellData, rowData, row, col) {
+                    if($(td).text().length > 50) {
+                        let txt = $(td).text()
+                        $(td).text(txt.substr(0, 50) + '...')
+                    }
                 },
-                {
-                    targets: 5,
-                    createdCell: function(td, cellData, rowData, row, col) {
-                        if($(td).text().length > 50) {
-                            let txt = $(td).text()
-                            $(td).text(txt.substr(0, 50) + '...')
-                        }
-                    },
-
-                },
-                {
-                    targets: 6,
-                    createdCell: function(td, cellData, rowData, row, col) {
-                        if($(td).text().length > 50) {
-                            let txt = $(td).text()
-                            $(td).text(txt.substr(0, 50) + '...')
-                        }
-                    },
-
-                },
-                {
-                    targets: 7,
-                    createdCell: function(td, cellData, rowData, row, col) {
-                        if($(td).text().length > 50) {
-                            let txt = $(td).text()
-                            $(td).text(txt.substr(0, 50) + '...')
-                        }
-                    },
-
-                },{
-                    targets: 8,
-                    createdCell: function(td, cellData, rowData, row, col) {
-                        if($(td).text().length > 50) {
-                            let txt = $(td).text()
-                            $(td).text(txt.substr(0, 50) + '...')
-                        }
-                    },
-
-                },
-                {
-                    targets: 9,
-                    createdCell: function(td, cellData, rowData, row, col) {
-                        if($(td).text().length > 50) {
-                            let txt = $(td).text()
-                            $(td).text(txt.substr(0, 50) + '...')
-                        }
-                    },
-
-                },
+                
+            },
+            
             {
                 targets: -1,
                 render: function(data, type, full, meta) {
                     let btn = `
                     <div class="btn-list">
-                        <a href="{{ route('mitra.edit', ':id') }}" class="btn btn-sm btn-primary"><span class="fe fe-edit"> </span></a>
-                        <a href="javascript:void(0)" onclick="destroy('${data}')" class="btn btn-sm btn-danger btn-delete"><span class="fe fe-trash-2"> </span></a>
+                        <a href="{{ route('mitra.edit', ':id') }}" class="btn btn-sm btn-secondary"><i class="bi bi-eye"></i></a>
+                        <a href="{{ route('mitra.edit', ':id') }}" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></a>
+                        <a href="javascript:void(0)" onclick="destroy('${data}')" class="btn btn-sm btn-danger btn-delete"><i class="bi bi-trash"></i></a>
                     </div>
                     `;
-
+                    
                     btn = btn.replace(':id', data);
-
+                    
                     return btn;
                 },
             }, ],
             columns: [
-                { data: null },
-                { data: 'nama'},
-                { data: 'jenis'},
-                { data: 'berat'},
-                { data: 'kadar_air1'},
-                { data: 'kadar_air2'},
-                { data: 'suhu1'},
-                { data: 'suhu2'},
-                { data: 'waktu'},
-                { data: 'klasifikasi'},
-                { data: 'id'}, 
-
+            { data: null },
+            { data: 'nama'},
+            { data: 'jenis'},
+            { data: 'berat'},
+            { data: 'updated_at'},
+            { data: 'id'}, 
+            
             ],
             language: {
                 searchPlaceholder: 'Search...',
@@ -344,11 +335,11 @@ crossorigin="anonymous"></script>
             }
         });
     })
-
+    
     function destroy(id) {
         var url = "{{ route('mitra.destroy',":id") }}";
         url = url.replace(':id', id);
-    
+        
         Swal.fire({
             title: "Yakin ingin menghapus data ini?",
             text: "Ketika data terhapus, anda tidak bisa mengembalikan data tersbut!",
