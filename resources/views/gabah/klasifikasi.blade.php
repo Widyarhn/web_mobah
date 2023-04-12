@@ -45,7 +45,7 @@
             </div>
             @endif
 
-            <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <div class="col-6 alert alert-info alert-dismissible fade show" role="alert">
                 Klik <b>...</b> untuk memfilter data yang ingin ditampilkan
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -103,9 +103,12 @@
                                     <td>
                                         @if (empty($p->gabah->klasifikasi))
                                         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2-{{ $p->id }}">Validasi</button>
-                
-                                        @else
+                                        @elseif($p->gabah->klasifikasi=="kering")
                                         <span class="badge bg-success">{{ $p->gabah->klasifikasi }}</span>
+                                        @elseif($p->gabah->klasifikasi=="basah")
+                                        <span class="badge bg-warning">{{ $p->gabah->klasifikasi }}</span>
+                                        @else
+                                        <span class="badge bg-danger">{{ $p->gabah->klasifikasi }}</span>
                                         @endif
                                         
                                         {{-- <span class="badge bg-success">Ideal</span>

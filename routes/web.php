@@ -8,6 +8,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MitraController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GabahController;
+use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\LaporanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +48,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get("/logout", [LoginController::class, 'logout']);
     
     Route::resource("data-gabah", GabahController::class);
+    Route::resource("/profil", ProfilController::class);
 
+    Route::get('/laporan/cetak_pdf', [LaporanController::class, 'cetak_pdf']);
+    Route::resource("/laporan", LaporanController::class);
 });
 
 

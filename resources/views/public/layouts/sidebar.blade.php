@@ -50,7 +50,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{route('data-gabah.index') }}" class=" {{ Request::segment("1") == "data-gabah.index" ? 'active' : '' }}">
+                <a href="{{route('data-gabah.index') }}" class=" {{ Request::segment("1") == "data-gabah" ? 'active' : '' }}">
                     <i class="bi bi-circle"></i><span>Data Gabah</span>
                 </a>
             </li>

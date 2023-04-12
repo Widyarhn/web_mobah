@@ -121,7 +121,18 @@
                 </li>
                 
                 <li>
-                    <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                    {{-- @if (Auth::user()->level == 1)
+                    <a class="dropdown-item d-flex align-items-center" href="{{ url('/admin/profil') }}">
+                        <i class="bi bi-person"></i>
+                        <span>Profil Saya</span>
+                    </a>     
+                    @else
+                    <a class="dropdown-item d-flex align-items-center" href="{{ url('/dokter/profil') }}">
+                        <i class="bi bi-person"></i>
+                        <span>Profil Saya</span>
+                    </a>
+                    @endif --}}
+                    <a class="dropdown-item d-flex align-items-center" href="{{ url('/profil') }}">
                         <i class="bi bi-person"></i>
                         <span>Profil Saya</span>
                     </a>
