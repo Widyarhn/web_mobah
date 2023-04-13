@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -25,20 +26,31 @@ class MitraController extends Controller
      */
     public function create()
     {
-        return view('akun.mitra.cretae');
+        
     }
 
+    public function store(Request $request){
+    // set the default user values
+    $defaultUserValues = [
+        'password' => bcrypt('password'), // hashed password
+        'remember_token' => Str::random(10), // random remember token
+    ];
+
+    // create a new user with the given attributes and default values
+    $user = User::create([
+        'name' => $request->name,
+        'username' => $request->username,
+    ] + $defaultUserValues);
+
+    // assign the 'mitra' role to the new user
+    $user->assignRole('mitra');
+    return redirect()->route('mitra.index')->with("Akun Sudah Dibuat");
+
+    }
 
     public function datatable(Request $request){
         $data = User::get();
 
-        // if(getRoleName() == 'member'){
-        //     $data = $data->where('member_id', auth()->user()->member->id);
-        // }
         return DataTables::of($data)->make();
     }
-
-    //     
-
-    // }
 }

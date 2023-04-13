@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Spatie\Permission\Models\Role as RoleSpatie;
+use App\Models\Validator;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Models\Role as RoleSpatie;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Role extends RoleSpatie
@@ -17,4 +18,9 @@ class Role extends RoleSpatie
     protected $keyType = 'string';
 
     protected $guarded = [];
+
+    public function validator()
+    {
+        return $this->belongsTo(Validator::class);
+    }
 }

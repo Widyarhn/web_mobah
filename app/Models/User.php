@@ -46,5 +46,13 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
+    public function role()
+    {
+        return $this->belongsTo(role::class);
+    }
 
+    public function validator()
+    {
+        return $this->belongsTo(validator::class);
+    }
 }

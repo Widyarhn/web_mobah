@@ -55,13 +55,13 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav mx-auto py-0">
                         <a href="#home" class="nav-item nav-link active">Home</a>
-                        <a href="#about" class="nav-item nav-link">Tentang</a>
-                        <a href="#feature" class="nav-item nav-link">Tim</a>
-                        <a href="#pricing" class="nav-item nav-link">Produk</a>
+                        <a href="#about" class="nav-item nav-link">About</a>
+                        <a href="#partnership" class="nav-item nav-link">Partnership</a>
+                        <a href="#pricing" class="nav-item nav-link">Product</a>
                         <a href="#review" class="nav-item nav-link">Review</a>
                         <a href="#contact" class="nav-item nav-link">Contact</a>
                     </div>
-                    <a href="{{ url('/login') }}" class="btn btn-primary-gradient rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Log In</a>
+                    <a href="{{ url('/login') }}" class="btn btn-primary-gradient rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Berlangganan?</a>
                 </div>
             </nav>
 
@@ -69,10 +69,12 @@
                 <div class="container px-lg-5">
                     <div class="row g-5">
                         <div class="col-lg-8 text-center text-lg-start">
-                            <h1 class="text-white mb-4 animated slideInDown">The Revolutionary App That Helps To Control Your Own Fitness</h1>
-                            <p class="text-white pb-3 animated slideInDown">Tempor rebum no at dolore lorem clita rebum rebum ipsum rebum stet dolor sed justo kasd. Ut dolor sed magna dolor sea diam. Sit diam sit justo amet ipsum vero ipsum clita lorem</p>
-                            <a href="" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill me-3 animated slideInLeft">Read More</a>
-                            <a href="" class="btn btn-secondary-gradient py-sm-3 px-4 px-sm-5 rounded-pill animated slideInRight">Contact Us</a>
+                            <h1 class="text-white mb-4 animated slideInDown">Selamat Datang di Website MANGDAIB</h1>
+                            <p class="text-white pb-3 animated slideInDown">
+                                Mang-Daib merupakan aplikasi web dan mobile Pemantau Tingkat Kadar Air Gabah.
+                            </p>
+                            <a href="/login" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill me-3 animated slideInLeft">Log In</a>
+                            <a href="#about" class="btn btn-secondary-gradient py-sm-3 px-4 px-sm-5 rounded-pill animated slideInRight">Read More</a>
                         </div>
                         <div class="col-lg-4 d-flex justify-content-center justify-content-lg-end wow fadeInUp" data-wow-delay="0.3s">
                             <div class="owl-carousel screenshot-carousel">
@@ -96,10 +98,10 @@
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                         <h5 class="text-primary-gradient fw-medium">About App</h5>
-                        <h1 class="mb-4">#1 App For Your Fitness</h1>
-                        <p class="mb-4">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit clita duo justo eirmod magna dolore erat amet</p>
+                        <h1 class="mb-4">#1 App For Monitor Grain Moisture Levels</h1>
+                        <p class="mb-4">Aplikasi ini digunakan untuk memantau tingkat kadar air gabah para petani.</p>
                         <div class="row g-4 mb-4">
-                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
+                            {{-- <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
                                 <div class="d-flex">
                                     <i class="fa fa-cogs fa-2x text-primary-gradient flex-shrink-0 mt-1"></i>
                                     <div class="ms-3">
@@ -116,9 +118,11 @@
                                         <p class="text-secondary-gradient mb-0">Clients Reviews</p>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
-                        <a href="" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill mt-3">Read More</a>
+                        <h1 class="mb-4">#2 App For Store Grain Data</h1>
+                        <p class="mb-4">Aplikasi ini digunakan untuk menyimpan data gabah agar memudahkan pendataan gabah bagi kelompok tani.</p>
+                        {{-- <a href="" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill mt-3">Read More</a> --}}
                     </div>
                     <div class="col-lg-6">
                         <img class="img-fluid wow fadeInUp" data-wow-delay="0.5s" src="{{ asset('fitapp') }}/img/about.png">
@@ -130,11 +134,11 @@
 
 
         <!-- Features Start -->
-        <div class="container-xxl py-5" id="feature">
+        <div class="container-xxl py-5" id="partnership">
             <div class="container py-5 px-lg-5">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="text-primary-gradient fw-medium">App Features</h5>
-                    <h1 class="mb-5">Awesome Features</h1>
+                    <h5 class="text-primary-gradient fw-medium">Partnership</h5>
+                    <h1 class="mb-5">Kemitraan</h1>
                 </div>
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
