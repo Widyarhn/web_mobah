@@ -40,6 +40,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('mitra/datatable', [MitraController::class, 'datatable'])->name('mitra.datatable');
     Route::resource('mitra', MitraController::class);
 
+    Route::get('validator/datatable', [ValidatorController::class, 'datatable'])->name('validator.datatable');
+    Route::resource('validator', ValidatorController::class);
+    
     // Route::get('tambah-admin', [AdminController::class, 'index'])->name('contents.admin');
     //Gabah
     Route::get('data-gabah/datatable', [GabahController::class, 'datatable'])->name('data-gabah.datatable');
@@ -49,10 +52,11 @@ Route::group(['middleware' => ['auth']], function() {
     
     Route::resource("data-gabah", GabahController::class);
 
-    Route::get('validator/datatable', [ValidatorController::class, 'datatable'])->name('validator.datatable');
-    Route::resource('validator', ValidatorController::class);
 });
-    // Route::get('tambah-admin', [AdminController::class, 'index'])->name('contents.admin');
+
+
+// Route::get('tambah-admin', [AdminController::class, 'index'])->name('contents.admin');
+
     // Route::resource('/profile', ProfileController::class);
     // Route::get('/profile/{id}/ubah_password', [UbahPasswordController::class ,'index'])->name('ubah_password');
     // Route::post('/profile/{id}/ubah_password', [UbahPasswordController::class ,'update'])->name('update_password');
