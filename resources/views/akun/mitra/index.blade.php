@@ -177,7 +177,7 @@
                     <div class="btn-list">
                         <a href="{{ route('mitra.edit', ':id') }}" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></a>
                         <a href="javascript:void(0)" onclick="destroy('${data}')" class="btn btn-sm btn-danger btn-delete"><i class="bi bi-trash"></i></a>
-                    </div>
+                    </div>
                     `;
 
                     btn = btn.replace(':id', data);
