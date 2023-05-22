@@ -3,11 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DataLandingController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MitraController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GabahController;
+use App\Http\Controllers\Data\DataGabahController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\LaporanController;
 
@@ -27,6 +29,7 @@ use App\Http\Controllers\LaporanController;
 
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('gabah-landing/datatable', [DataLandingController::class, 'datatable'])->name('gabah-landing.datatable');
 
 Route::group(['middleware' => ['guest']], function() {
     Route::get('/login', [LoginController::class, 'index'])->name('loginform'); 
@@ -34,7 +37,7 @@ Route::group(['middleware' => ['guest']], function() {
 });
 
 Route::group(['middleware' => ['auth']], function() {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
     Route::get('/tambah-admin', [AdminController::class, 'index']);
     Route::resource('tambah-admin/admin', UserController::class);
     
@@ -42,12 +45,19 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('mitra', MitraController::class);
     
     //Gabah
-    Route::get('data-gabah/datatable', [GabahController::class, 'datatable'])->name('data-gabah.datatable');
+    Route::post('data-gabah/{id?}/update', [DataGabahController::class, 'update'])->name('data-gabah.update');
+    Route::get('data-gabah/datatable', [DataGabahController::class, 'datatable'])->name('data-gabah.datatable');
+    
+    Route::resource('data-gabah', DataGabahController::class);
+    
     Route::get("/pemantauan-gabah", [GabahController::class, 'monitoring']);
-    Route::get("/klasifikasi-gabah", [GabahController::class, 'klasifikasi']);
+    Route::get("/estimasi-gabah", [GabahController::class, 'estimasi']);
+    Route::resource('gabah', GabahController::class);
+    
+    
     Route::get("/logout", [LoginController::class, 'logout']);
     
-    Route::resource("data-gabah", GabahController::class);
+    
     Route::resource("/profil", ProfilController::class);
 
     Route::get('/laporan/cetak_pdf', [LaporanController::class, 'cetak_pdf']);

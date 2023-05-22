@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Gabah;
 
 class Pemilik extends Model
 {
@@ -14,7 +15,7 @@ class Pemilik extends Model
 
 
     public function gabah(){
-        return $this->belongsTo("App\Models\Gabah", "id", "id_pemilik");
+        return $this->belongsTo(Gabah::class, "id", "id_pemilik");
     }
 
 }

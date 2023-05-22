@@ -15,15 +15,16 @@ class GabahController extends Controller
      */
     public function index()
     {
-        $data["pemilik"] = Pemilik::all();
-        return view('gabah.gabah', $data);
+        // $data["pemilik"] = Pemilik::all();
+        
+        // return view('gabah.gabah', $data);
     }
 
 
-    public function klasifikasi()
+    public function estimasi()
     {
         $data["pemilik"] = Pemilik::all();
-        return view('gabah.klasifikasi', $data);
+        return view('gabah.estimasi', $data);
     }
 
     public function monitoring()
@@ -70,16 +71,27 @@ class GabahController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // return response()->json(Pemilik::find($id));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $result = DB::table('pemilik')
+            ->join('gabah', 'pemilik.id', '=', 'gabah.id_pemilik')
+            ->where('gabah.id', '=', $id)
+            ->first();
+    
+        if ($result) {
+            return response()->json(['data' => $result]);
+        } else {
+            return response()->json(['message' => 'Data not found.'], 404);
+        }
     }
+    
+
 
     /**
      * Update the specified resource in storage.
@@ -101,18 +113,28 @@ class GabahController extends Controller
         //
     }
 
-    public function datatable(Request $request)
-    {
-        $data = DB::table('pemilik')
-                    ->join('gabah', 'pemilik.id', '=', 'gabah.id_pemilik')
-                    ->get();
+    // public function perbarui(Request $request, string $id)
+    // {
+    //     Pemilik::where("id", $id)->update([
+            
+    //         "nama" => $request->nama
+    //     ]);
+
+    //     return back()->with('success', 'Data berhasil ditambahkan!');
+    // }
+
+    // public function datatable(Request $request)
+    // {
+    //     $data = DB::table('pemilik')
+    //                 ->join('gabah', 'pemilik.id', '=', 'gabah.id_pemilik')
+    //                 ->get();
     
-        // Jika ingin memfilter data berdasarkan role member, Anda bisa menggunankan code berikut:
-        // if(getRoleName() == 'member'){
-        //     $data = $data->where('member_id', auth()->user()->member->id);
-        // }
+    //     // Jika ingin memfilter data berdasarkan role member, Anda bisa menggunankan code berikut:
+    //     // if(getRoleName() == 'member'){
+    //     //     $data = $data->where('member_id', auth()->user()->member->id);
+    //     // }
     
-        return DataTables::of($data)->make();
-    }
+    //     return DataTables::of($data)->make();
+    // }
     
 }

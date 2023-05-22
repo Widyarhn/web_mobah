@@ -26,7 +26,7 @@
                 <div class="col-xxl-4 col-md-4">
                     <div class="card info-card sales-card">
                         
-                        <div class="filter">
+                        {{-- <div class="filter">
                             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                 <li class="dropdown-header text-start">
@@ -37,14 +37,14 @@
                                 <li><a class="dropdown-item" href="#">This Month</a></li>
                                 <li><a class="dropdown-item" href="#">This Year</a></li>
                             </ul>
-                        </div>
+                        </div> --}}
                         
                         <div class="card-body">
-                            <h5 class="card-title">Tersewa <span>| Today</span></h5>
+                            <h5 class="card-title">Rata-rata Waktu Pengeringan</h5>
                             
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-cart"></i>
+                                    <i class="bi bi-clock-history"></i>
                                 </div>
                                 <div class="ps-3">
                                     <h6>145</h6>
@@ -61,7 +61,7 @@
                 <div class="col-xxl-4 col-md-4">
                     <div class="card info-card revenue-card">
                         
-                        <div class="filter">
+                        {{-- <div class="filter">
                             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                 <li class="dropdown-header text-start">
@@ -72,14 +72,14 @@
                                 <li><a class="dropdown-item" href="#">This Month</a></li>
                                 <li><a class="dropdown-item" href="#">This Year</a></li>
                             </ul>
-                        </div>
+                        </div> --}}
                         
                         <div class="card-body">
-                            <h5 class="card-title">Gabah Kering <span>| This Month</span></h5>
+                            <h5 class="card-title">Jenis Gabah yang Dikeringkan</h5>
                             
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-tv"></i>
+                                    <i class=" bi bi-journal-text bi"></i>
                                 </div>
                                 <div class="ps-3">
                                     <h6>$3,264</h6>
@@ -97,7 +97,7 @@
                     
                     <div class="card info-card customers-card">
                         
-                        <div class="filter">
+                        {{-- <div class="filter">
                             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                 <li class="dropdown-header text-start">
@@ -108,14 +108,15 @@
                                 <li><a class="dropdown-item" href="#">This Month</a></li>
                                 <li><a class="dropdown-item" href="#">This Year</a></li>
                             </ul>
-                        </div>
+                        </div> --}}
                         
                         <div class="card-body">
-                            <h5 class="card-title">Jumlah Gabah <span>| This Year</span></h5>
+                            <h5 class="card-title">Mitra Gapoktan</h5>
                             
                             <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                    <i class=" bi bi-journal-text bi"></i>
+                                    
+                                    <i class="bi bi-people-fill"></i>
                                 </div>
                                 <div class="ps-3">
                                     <h6>1244</h6>

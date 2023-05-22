@@ -110,7 +110,7 @@
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ url('/data-gabah') }}" method="POST" id="formulir-tambah-data">
+                <form action="{{ url('/gabah') }}" method="POST" id="formulir-tambah-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group mb-2">
@@ -143,51 +143,39 @@
         </div>
     </div>
     
-    {{-- Modal Validasi Gabah --}}
+    {{-- Modal Edit Gabah --}}
     @foreach ($pemilik as $item)
-    <div class="modal fade" id="exampleModal2-{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="gabahEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">
-                        <b>Validasi Gabah</b> 
+                        <b>Edit Gabah</b> 
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ url('/data-gabah/'.$item->gabah->id) }}" method="POST" id="validasi">
-                    @method("PUT")
+                <form method="POST" id="editFormID">
                     @csrf
+                    
                     <input type="hidden" name="id" id="id" value="{{ $item->id }}">
                     <div class="modal-body">
                         <div class="form-group mb-2">
                             <label for="nama"> Pemilik </label>
-                            <input type="text" class="form-control" name="nama" id="nama" value="{{ $item->nama }}" readonly>
+                            <input type="text" class="form-control" name="nama" id="nama" value="{{ $item->nama }}">
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="jenis"> Jenis Gabah </label>
+                            <input type="text" class="form-control" name="jenis" disabled id="jenis" placeholder="Masukkan jenis" value="{{ $item->gabah->jenis }}" readonly>
                         </div>
                         <div class="form-group mb-2">
                             <label for="berat"> Berat </label>
-                            <input type="text" class="form-control" name="berat" id="berat" placeholder="Masukkan berat" value="{{ $item->gabah->berat }}" readonly>
+                            <input type="text" class="form-control" name="berat" disabled id="berat" placeholder="Masukkan berat" value="{{ $item->gabah->berat }}" readonly>
                         </div>
-                        <div class="form-group mb-2">
-                            <label for="kadar_air2"> Kadar Air </label>
-                            <input type="text" class="form-control" name="kadar_air2" id="kadar_air2"  value="{{ $item->gabah->kadar_air2 }}" readonly>
-                        </div>
-                        <div class="form-group mb-2">
-                            <label for="suhu2"> Suhu </label>
-                            <input type="text" class="form-control" name="suhu2" id="suhu2"  value="{{ $item->gabah->suhu2 }}" readonly >
-                        </div>
-                        <div class="form-group mb-2">
-                            <label for="klasifikasi"> Klasifikasi Gabah </label>
-                            <select name="klasifikasi" class="form-control" id="klasifikasi">
-                                <option value="">-- Pilih --</option>
-                                <option value="ideal">Ideal</option>
-                                <option value="basah">Basah</option>
-                                <option value="kering">Kering</option>
-                            </select>
-                        </div>
+                    
                     </div>
                     <div class="modal-footer">
-                        <button type="reset" class="btn btn-danger btn-sm">Kembali</button>
-                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Kembali</button>
+                        <button class="btn btn-primary btn-sm" id="btnSave">Simpan Perubahan</button>
                     </div>
                 </form>
             </div>
@@ -309,15 +297,17 @@
                 render: function(data, type, full, meta) {
                     let btn = `
                     <div class="btn-list">
-                        <a href="{{ route('mitra.edit', ':id') }}" class="btn btn-sm btn-secondary"><i class="bi bi-eye"></i></a>
-                        <a href="{{ route('mitra.edit', ':id') }}" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></a>
+                        
+                        <a href="javascript:void(0)" onclick="edit('${data}')" class="btn btn-sm btn-primary btn-edit"><i class="bi bi-pencil"></i></a>
                         <a href="javascript:void(0)" onclick="destroy('${data}')" class="btn btn-sm btn-danger btn-delete"><i class="bi bi-trash"></i></a>
+                        <a href="{{ route('data-gabah.edit', ':id') }}" class="btn btn-sm btn-secondary"><i class="bi bi-eye"></i></a>
                     </div>
                     `;
                     
                     btn = btn.replace(':id', data);
                     
                     return btn;
+                
                 },
             }, ],
             columns: [
@@ -334,8 +324,110 @@
                 sSearch: '',
             }
         });
+
+        $('#btnSave').on('click', function(){
+            submit();
+        })
+
+        $('#editFormID').on('submit', function(e){
+            e.preventDefault();
+
+            submit();
+        })
+
     })
-    
+
+    function edit(id){
+        submit_method = 'edit';
+        
+
+        $('#editFormID')[0].reset();
+        var url = "{{ route('data-gabah.edit',":id") }}";
+        url = url.replace(':id', id);
+        
+        $.get(url, function (response) {
+            response = response.data;
+            console.log(response);
+            
+            $('#id').val(response.id);
+            $('#gabahEditModal').modal('show');
+            $('.modal-title').text('Edit Data Gabah');
+
+            $('#nama').val(response.nama);
+            $('#jenis').val(response.jenis);
+            $('#berat').val(response.berat);
+        });
+    }
+
+    function submit() {
+        var id          = $('#id').val();
+        var nama        = $('#nama').val();
+        console.log(submit_method);
+        console.log("submit");
+
+        if(submit_method == 'edit'){
+            url = "{{ route('data-gabah.update',":id") }}";
+            url = url.replace(':id', id);
+        }
+
+        $.ajax({
+            url: url,
+            type: submit_method == 'create' ? 'POST' : 'PUT',
+            dataType: 'json',
+            data: {
+                id: id,
+                nama: nama
+            },
+            success: function (data) {
+                if(data.status) {
+                    $('#gabahEditModal').modal('hide');
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: data.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    table.ajax.reload();
+
+                    $('#btnSave').text('Simpan');
+                    $('#btnSave').attr('disabled', false);
+                }
+                else{
+                    for (var i = 0; i < data.inputerror.length; i++) 
+                    {
+                        $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error'); //select parent twice to select div form-group class and add has-error class
+                        $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
+                    }
+                }
+                
+                $('#btnSave').text('Simpan');
+                $('#btnSave').attr('disabled',false); //set button enable 
+            }, 
+            error: function(data){
+                var error_message = "";
+                error_message += " ";
+                
+                $.each( data.responseJSON.errors, function( key, value ) {
+                    error_message +=" "+value+" ";
+                });
+
+                error_message +=" ";
+                Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'ERROR !',
+                        text: error_message,
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                $('#btnSave').text('Simpan');
+                $('#btnSave').attr('disabled', false);
+            },
+        });
+    }
     function destroy(id) {
         var url = "{{ route('mitra.destroy',":id") }}";
         url = url.replace(':id', id);
