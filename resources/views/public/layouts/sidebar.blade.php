@@ -13,22 +13,22 @@
     
     <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tambahAkun-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-person-plus"></i><span>Tambah Akun</span><i class="bi bi-chevron-down ms-auto"></i>
+            <i class="bi bi-person-plus"></i><span>Kelola Akun</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="tambahAkun-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
                 <a href="{{ url('/tambah-admin') }}">
-                    <i class="bi bi-circle" ></i><span>Akun Admin</span>
+                    <i class="bi bi-circle" ></i><span>Admin Gapoktan</span>
                 </a>
             </li>
             <li>
                 <a href="{{route('mitra.index') }}">
-                    <i class="bi bi-circle"></i><span>Akun Mitra</span>
+                    <i class="bi bi-circle"></i><span>Gapoktan</span>
                 </a>
             </li>
             <li>
                 <a href="{{url('/validator') }}">
-                    <i class="bi bi-circle"></i><span>Akun Validator</span>
+                    <i class="bi bi-circle"></i><span>Petugas Gapoktan</span>
                 </a>
             </li>
         </ul>
@@ -45,8 +45,8 @@
                 </a>
             </li>
             <li>
-                <a href="{{url('/klasifikasi-gabah') }}" class=" {{ Request::segment("1") == "klasifikasi-gabah" ? 'active' : '' }}">
-                    <i class="bi bi-circle"></i><span>Klasifikasi Gabah</span>
+                <a href="{{url('/estimasi-gabah') }}" class=" {{ Request::segment("1") == "estimasi-gabah" ? 'active' : '' }}">
+                    <i class="bi bi-circle"></i><span>Estimasi Gabah</span>
                 </a>
             </li>
             <li>

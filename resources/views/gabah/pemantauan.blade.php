@@ -53,28 +53,14 @@
             <!-- Data Sensor -->
             <div class="col-12">
                 <div class="card recent-sales overflow-auto">
-                    
-                    <div class="filter">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                            </li>
-                            
-                            <li><a class="dropdown-item" href="#">Today</a></li>
-                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                            <li><a class="dropdown-item" href="#">This Year</a></li>
-                        </ul>
-                    </div>
-                    
                     <div class="card-body">
-                        <h5 class="card-title">Pemantauan Gabah dari Alat <span>| Today</span></h5>
+                        <h5 class="card-title">Pemantauan Gabah dari Alat <span>| Saat ini</span></h5>
                         <div>
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                                 + Tambahkan Data Gabah
                             </button>
-                            <a href="{{url('/klasifikasi-gabah')}}" class="btn btn-success btn-sm">
-                                Klasifikasi Gabah
+                            <a href="{{url('/estimasi-gabah')}}" class="btn btn-success btn-sm">
+                                Estimasi Gabah
                             </a>
                         </div>
                         <br>
@@ -82,11 +68,11 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Jenis Gabah</th>
-                                    <th scope="col">Berat (Kg)</th>
-                                    <th scope="col">Suhu 1 (C)</th>
-                                    <th scope="col">Suhu 2 (C)</th>
-                                    <th scope="col">Kadar Air 1 (%)</th>
-                                    <th scope="col">Kadar Air 2 (%)</th>
+                                    <th scope="col">Massa (Kg)</th>
+                                    <th scope="col">Suhu (C)</th>
+                                    <th scope="col">Kadar Air (%)</th>
+                                    <th scope="col">Durasi</th>
+                                    <th scope="col">Keterangan</th>
                                     {{-- <th scope="col">Waktu</th> --}}
                                 </tr>
                             </thead>
@@ -96,9 +82,9 @@
                                     <th>{{ $p->gabah->jenis }}</th>
                                     <td>{{ $p->gabah->berat }}</td>
                                     <td>{{ $p->gabah->suhu1 }}</td>
-                                    <td>{{ $p->gabah->suhu2 }}</td>
                                     <td>{{ $p->gabah->kadar_air1 }}</td>
-                                    <td>{{ $p->gabah->kadar_air2 }}</td>
+                                    <td>{{ $p->gabah->waktu }}</td>
+                                    <td>{{ $p->gabah->klasifikasi }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -121,7 +107,7 @@
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ url('/data-gabah') }}" method="POST" id="formulir-tambah-data">
+                <form action="{{ url('/gabah') }}" method="POST" id="formulir-tambah-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group mb-2">

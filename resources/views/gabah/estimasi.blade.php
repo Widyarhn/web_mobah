@@ -1,8 +1,8 @@
 @extends("public.layouts.main")
 
-@section("title_content", "Klasifikasi")
+@section("title_content", "Estimasi")
 
-@section("page_title" , "Klasifikasi Gabah")
+@section("page_title" , "Estimasi Gabah")
 
 @section("component_css")
 
@@ -22,7 +22,7 @@
         Home
     </li>
     <li class="breadcrumb-item active">
-        Klasifikasi Gabah
+        Estimasi Gabah
     </li>
 </ol>
 @endsection
@@ -44,63 +44,55 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
-
-            <div class="col-6 alert alert-info alert-dismissible fade show" role="alert">
+            
+            {{-- <div class="col-6 alert alert-info alert-dismissible fade show" role="alert">
                 Klik <b>...</b> untuk memfilter data yang ingin ditampilkan
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+            </div> --}}
             
             <!-- Data Sensor -->
             <div class="col-12">
-                <div class="card recent-sales overflow-auto">
-                    
-                    <div class="filter">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                            </li>
-                            
-                            <li><a class="dropdown-item" href="#">Semua</a></li>
-                            <li><a class="dropdown-item" href="#">Ideal</a></li>
-                            <li><a class="dropdown-item" href="#">Terbaru</a></li>
-
-                        </ul>
-                    </div>
-                    
+                <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Klasifikasi Gabah<span> | Semua</span></h5>
+
+                        <h5 class="card-title">Estimasi Waktu Pada Gabah<span> | Semua</span></h5>
                         <div>
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                                 + Tambahkan Data Gabah
                             </button>
+                            <a href="{{url('/pemantauan-gabah')}}" class="btn btn-success btn-sm">
+                                Pemantauan Gabah
+                            </a>
                         </div>
                         <br>
-                        <table class="table table-borderless datatable">
+                        {{-- text-nowrap --}}
+                        <div class="table-responsive text-nowrap">
+                            <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                                 <tr>
-                                    <th scope="col">Pemilik</th>
-                                    <th scope="col">Jenis</th>
-                                    <th scope="col">Berat</th>
-                                    <th scope="col">Suhu 1 (C)</th>
-                                    <th scope="col">Suhu 2 (C)</th>
-                                    <th scope="col">Kadar Air 1 (%)</th>
-                                    <th scope="col">Kadar Air 2 (%)</th>
-                                    <th scope="col">Klasifikasi</th>
-                                    {{-- <th scope="col">Waktu</th> --}}
+                                    <th scope="col" class="text-center">No.</th>
+                                    <th scope="col" class="text-center">Jenis Gabah</th>
+                                    <th scope="col" class="text-center">Massa (Kg)</th>
+                                    <th scope="col" class="text-center">Durasi</th>
+                                    <th scope="col" class="text-center">Suhu Awal (C)</th>
+                                    <th scope="col" class="text-center">Kadar Air Awal(%)</th>
+                                    <th scope="col" class="text-center">Suhu Akhir (C)</th>
+                                    <th scope="col" class="text-center">Kadar Air Akhir(%)</th>
+                                    <th scope="col" class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($pemilik as $p)
                                 <tr>
-                                    <th>{{ $p->nama }}</th>
+                                    <td>{{ $loop->iteration }}.</td>
                                     <th>{{ $p->gabah->jenis }}</th>
                                     <td>{{ $p->gabah->berat }}</td>
+                                    <td><a href="" class="text-primary">{{ $p->gabah->waktu }}</a></td>
                                     <td>{{ $p->gabah->suhu1 }}</td>
-                                    <td>{{ $p->gabah->suhu2 }}</td>
                                     <td>{{ $p->gabah->kadar_air1 }}</td>
+                                    <td>{{ $p->gabah->suhu2 }}</td>
                                     <td>{{ $p->gabah->kadar_air2 }}</td>
-                                    <td>
+                                    <td class="text-center">
                                         @if (empty($p->gabah->klasifikasi))
                                         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2-{{ $p->id }}">Validasi</button>
                                         @elseif($p->gabah->klasifikasi=="kering")
@@ -110,7 +102,6 @@
                                         @else
                                         <span class="badge bg-danger">{{ $p->gabah->klasifikasi }}</span>
                                         @endif
-                                        
                                         {{-- <span class="badge bg-success">Ideal</span>
                                         <span class="badge bg-warning">Basah</span>
                                         <span class="badge bg-danger">Kering</span> --}}
@@ -120,14 +111,17 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        </div>
+
                         
+
                     </div>
-                    
                 </div>
-            </div><!-- End Data Sensor -->
+            </div>
+            <!-- End Data Sensor -->
         </main>
     </div>
-
+    
     {{-- Modal Tambah Data --}}
     <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -138,7 +132,7 @@
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ url('/data-gabah') }}" method="POST" id="formulir-tambah-data">
+                <form action="{{ url('/gabah') }}" method="POST" id="formulir-tambah-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group mb-2">
@@ -170,7 +164,7 @@
             </div>
         </div>
     </div>
-
+    
     {{-- Modal Validasi Gabah --}}
     @foreach ($pemilik as $item)
     <div class="modal fade" id="exampleModal2-{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -182,7 +176,7 @@
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ url('/data-gabah/'.$item->gabah->id) }}" method="POST" id="validasi">
+                <form action="{{ url('/gabah/'.$item->gabah->id) }}" method="POST" id="validasi">
                     @method("PUT")
                     @csrf
                     <input type="hidden" name="id" id="id" value="{{ $item->id }}">
@@ -268,7 +262,7 @@
         },
         errorElement: "span"
     });
-
+    
     $("#validasi").validate({
         rules: {
             klasifikasi:"required"
