@@ -47,18 +47,27 @@ class GabahController extends Controller
     public function store(Request $request)
     {
         
+        // $this->validate($request, [
+        //     'nama'     => 'required|string|max:255',
+        //     'no_hp'     => 'required|min:12|max:13|number',
+        //     'alamat'     => 'required|string|max:255',
+        //     'jenis'     => 'required|string|min:3',
+        //     'berat'   => 'required|min:2|number'
+
+        // ]);
+
         $pemilik = Pemilik::create([
-            "nama" => $request-> nama,
-            "no_hp" => $request->no_hp,
-            "alamat" => $request-> alamat,
+            "nama" => $request-> namaC,
+            "no_hp" => $request->no_hpC,
+            "alamat" => $request-> alamatC,
             "created_at" => now(),
             "updated_at" => now()
         ]);
         
         Gabah::create([
             "id_pemilik" => $pemilik->id,
-            "jenis" => $request->jenis,
-            "berat" => $request-> berat,
+            "jenis" => $request->jenisC,
+            "berat" => $request-> beratC,
             "created_at" => now(),
             "updated_at" => now()
         ]);

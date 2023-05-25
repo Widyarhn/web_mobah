@@ -45,10 +45,10 @@
             </div>
             @endif
 
-            <div class="col-6 alert alert-info alert-dismissible fade show" role="alert">
+            {{-- <div class="col-6 alert alert-info alert-dismissible fade show" role="alert">
                 Klik <b>...</b> untuk memfilter data yang ingin ditampilkan
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+            </div> --}}
             
             <!-- Data Sensor -->
             <div class="col-12">
@@ -141,6 +141,8 @@
     </div>
     
 </section>
+
+
 @endsection
 
 @section("component_js")
