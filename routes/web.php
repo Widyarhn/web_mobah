@@ -42,7 +42,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('tambah-admin/admin', UserController::class);
     
     Route::get('mitra/datatable', [MitraController::class, 'datatable'])->name('mitra.datatable');
-    Route::resource('mitra', MitraController::class);
+    Route::get('/mitra', [MitraController::class, 'index']);
+    Route::resource('tambah-mitra/mitra', UserController::class);
     
     //Gabah
     Route::post('data-gabah/{id?}/update', [DataGabahController::class, 'update'])->name('data-gabah.update');
