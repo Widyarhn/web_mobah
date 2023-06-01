@@ -26,7 +26,7 @@ class UserController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('aksi', function ($data) {
-                return view('akun.admin.tombol', ['data' => $data]);
+                return view('akun.tombol', ['data' => $data]);
             })
             ->make(true);
     }
