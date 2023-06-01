@@ -162,7 +162,7 @@ crossorigin="anonymous"></script>
             processing: true,
             serverSide: true,
             autoWidth: false,
-            ajax: "{{ route('data-gabah.detailtable',":id") }}",
+            ajax: "{{ route('data-gabah.detailtable') }}",
             columnDefs: [
             {
                 targets: 0,

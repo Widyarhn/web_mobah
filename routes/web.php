@@ -47,7 +47,7 @@ Route::group(['middleware' => ['auth']], function() {
     //Gabah
     // Route::post('data-gabah/{id?}/update', [DataGabahController::class, 'update'])->name('data-gabah.update');
     Route::get('data-gabah/datatable', [DataGabahController::class, 'datatable'])->name('data-gabah.datatable');
-    Route::get('data-gabah/{id?}/detailtable', [DataGabahController::class, 'detailtable'])->name('data-gabah.detailtable');
+    Route::get('data-gabah/detailtable', [DataGabahController::class, 'detailtable'])->name('data-gabah.detailtable');
     
     Route::resource('data-gabah', DataGabahController::class);
     

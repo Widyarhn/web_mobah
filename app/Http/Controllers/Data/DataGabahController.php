@@ -28,6 +28,8 @@ class DataGabahController extends Controller
             "gabah" => Gabah::where('id', $id)->first(),
             "pemilik" => Pemilik::where('id', $id)->get()
         ];
+        
+        $this->detailtable();
 
         return view('gabah.detail', $data);
     }
@@ -84,9 +86,13 @@ class DataGabahController extends Controller
     
         return DataTables::of($data)->make();
     }
-    public function detailtable(Request $request, $id)
+    public function detailtable()
     {
+        // dd($id);
+            $id = request()->segment(2);
         
+        
+        // dd($id);
         $data = Pemilik::with('gabah')->where('id', $id)->get();
         // Jika ingin memfilter data berdasarkan role member, Anda bisa menggunankan code berikut:
         // if(getRoleName() == 'member'){
