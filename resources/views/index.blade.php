@@ -501,40 +501,6 @@
             });
         })
         
-        function destroy(id) {
-            var url = "{{ route('mitra.destroy',":id") }}";
-            url = url.replace(':id', id);
-            
-            Swal.fire({
-                title: "Yakin ingin menghapus data ini?",
-                text: "Ketika data terhapus, anda tidak bisa mengembalikan data tersbut!",
-                icon: "warning",
-                showCancelButton  : true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor : "#d33",
-                confirmButtonText : "Ya, Hapus!"
-            }).then((result) => {
-                if (result.value) {
-                    $.ajax({
-                        url    : url,
-                        type   : "delete",
-                        data: { "id":id },
-                        dataType: "JSON",
-                        success: function(data) {
-                            table.ajax.reload();
-                            Swal.fire({
-                                toast: true,
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Data berhasil dihapus',
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                        }
-                    })
-                }
-            })
-        } 
     </script>
 </body>
 

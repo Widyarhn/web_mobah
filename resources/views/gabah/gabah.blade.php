@@ -114,24 +114,24 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group mb-2">
-                            <label for="nama"> Nama </label>
-                            <input type="text" class="form-control" name="nama" id="nama" placeholder="Masukkan Nama">
+                            <label for="namaC"> Nama </label>
+                            <input type="text" class="form-control" name="namaC" id="namaC" placeholder="Masukkan Nama">
                         </div>
                         <div class="form-group mb-2">
-                            <label for="no_hp"> Nomer Handphone </label>
-                            <input type="number" class="form-control" name="no_hp" id="no_hp" placeholder="0" min="1">
+                            <label for="no_hpC"> Nomer Handphone </label>
+                            <input type="number" class="form-control" name="no_hpC" id="no_hpC" placeholder="0" min="1">
                         </div>
                         <div class="form-group mb-2">
-                            <label for="alamat"> Alamat </label>
-                            <textarea name="alamat" class="form-control" id="alamat" rows="5"></textarea>
+                            <label for="alamatC"> Alamat </label>
+                            <textarea name="alamatC" class="form-control" id="alamatC" rows="5"></textarea>
                         </div>
                         <div class="form-group mb-2">
-                            <label for="berat"> Berat Gabah </label>
-                            <input type="text" class="form-control" name="berat" id="berat" placeholder="Masukkan Berat Gabah" >
+                            <label for="beratC"> Berat Gabah </label>
+                            <input type="text" class="form-control" name="beratC" id="beratC" placeholder="Masukkan Berat Gabah" >
                         </div>
                         <div class="form-group mb-2">
-                            <label for="jenis"> Jenis Gabah </label>
-                            <input type="text" class="form-control" name="jenis" id="jenis" placeholder="Masukkan Jenis Gabah" >
+                            <label for="jenisC"> Jenis Gabah </label>
+                            <input type="text" class="form-control" name="jenisC" id="jenisC" placeholder="Masukkan Jenis Gabah" >
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -155,21 +155,22 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form method="POST" id="editFormID">
+                    @method('PUT')
                     @csrf
                     
                     <input type="hidden" name="id" id="id" value="{{ $item->id }}">
                     <div class="modal-body">
                         <div class="form-group mb-2">
                             <label for="nama"> Pemilik </label>
-                            <input type="text" class="form-control" name="nama" id="nama" value="{{ $item->nama }}">
+                            <input type="text" class="form-control" name="nama" id="nama">
                         </div>
                         <div class="form-group mb-2">
                             <label for="jenis"> Jenis Gabah </label>
-                            <input type="text" class="form-control" name="jenis" disabled id="jenis" placeholder="Masukkan jenis" value="{{ $item->gabah->jenis }}" readonly>
+                            <input type="text" class="form-control" name="jenis" disabled id="jenis" placeholder="Masukkan jenis"  readonly>
                         </div>
                         <div class="form-group mb-2">
                             <label for="berat"> Berat </label>
-                            <input type="text" class="form-control" name="berat" disabled id="berat" placeholder="Masukkan berat" value="{{ $item->gabah->berat }}" readonly>
+                            <input type="text" class="form-control" name="berat" disabled id="berat" placeholder="Masukkan berat"  readonly>
                         </div>
                     
                     </div>
@@ -187,50 +188,45 @@
 @endsection
 
 @section("component_js")
-{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
-</script> --}}
-<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
-    crossorigin="anonymous"></script>
-<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 
-<script type="text/javascript">
-    $(document).ready( function () {
-        $('#myTable').DataTable();
-    });
-</script>
+
 
 <script>
     $("#formulir-tambah-data").validate({
         rules: {
-            nama:"required",
-            no_hp: {
+            namaC:"required",
+            no_hpC: {
                 required: true,
                 number: true,
                 minlength: 12,
                 maxlength: 14
             },
-            alamat:"required",
-            jenis:"required",
-            berat:"required"
+            alamatC:"required",
+            jenisC:"required",
+            beratC:"required"
         },
         messages: {
-            nama: "<span class='teks-span'> Nama Tidak Boleh Kosong </span>",
-            no_hp:
+            namaC: "<span class='teks-span'> Nama Tidak Boleh Kosong </span>",
+            no_hpC:
             {
                 required: "<span class='teks-span'> Nomor Telepon Tidak Boleh Kosong </span>",
                 number: "<span class='teks-span'> Nomor Telepon Harus menggunakan Angka </span>",
                 minlength: "<span class='teks-span'> Nomor Telepon Kurang dari 12 Angka</span>",
                 maxlength: "<span class='teks-span'> Nomor Telepon Tidak boleh Lebih dari 14 Angka</span>"
             },
-            alamat: "<span class='teks-span'> Alamat Tidak Boleh Kosong </span>",
-            jenis: "<span class='teks-span'> Jenis Gabah Tidak Boleh Kosong </span>",
-            berat: "<span class='teks-span'> Berat Gabah Tidak Boleh Kosong </span>"
+            alamatC: "<span class='teks-span'> Alamat Tidak Boleh Kosong </span>",
+            jenisC: "<span class='teks-span'> Jenis Gabah Tidak Boleh Kosong </span>",
+            beratC: "<span class='teks-span'> Berat Gabah Tidak Boleh Kosong </span>"
         },
+        
         errorElement: "span"
     });
-    
-    
+
+
 </script>
 
 <script>
@@ -300,7 +296,7 @@
                         
                         <a href="javascript:void(0)" onclick="edit('${data}')" class="btn btn-sm btn-primary btn-edit"><i class="bi bi-pencil"></i></a>
                         <a href="javascript:void(0)" onclick="destroy('${data}')" class="btn btn-sm btn-danger btn-delete"><i class="bi bi-trash"></i></a>
-                        <a href="{{ route('data-gabah.edit', ':id') }}" class="btn btn-sm btn-secondary"><i class="bi bi-eye"></i></a>
+                        <a href="{{ route('data-gabah.show', ':id') }}" class="btn btn-sm btn-secondary"><i class="bi bi-eye"></i></a>
                     </div>
                     `;
                     
@@ -354,19 +350,19 @@
             $('.modal-title').text('Edit Data Gabah');
 
             $('#nama').val(response.nama);
-            $('#jenis').val(response.jenis);
-            $('#berat').val(response.berat);
+            $('#jenis').val(response.gabah.jenis);
+            $('#berat').val(response.gabah.berat);
         });
     }
 
-    function submit() {
-        var id          = $('#id').val();
-        var nama        = $('#nama').val();
+    function submit(){
+        var id = $('#id').val();
+        var nama = $('#nama').val();
         console.log(submit_method);
         console.log("submit");
 
-        if(submit_method == 'edit'){
-            url = "{{ route('data-gabah.update',":id") }}";
+        if (submit_method == 'edit') {
+            url = "{{ route('data-gabah.update', ':id') }}";
             url = url.replace(':id', id);
         }
 
@@ -375,15 +371,16 @@
             type: submit_method == 'create' ? 'POST' : 'PUT',
             dataType: 'json',
             data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
                 id: id,
                 nama: nama
             },
-            success: function (data) {
-                if(data.status) {
+            success: function(data) {
+                if (data.status) {
                     $('#gabahEditModal').modal('hide');
                     Swal.fire({
-                        toast: true,
-                        position: 'top-end',
+                        toast: false,
+                    
                         icon: 'success',
                         title: data.message,
                         showConfirmButton: false,
@@ -393,43 +390,42 @@
 
                     $('#btnSave').text('Simpan');
                     $('#btnSave').attr('disabled', false);
-                }
-                else{
-                    for (var i = 0; i < data.inputerror.length; i++) 
-                    {
-                        $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error'); //select parent twice to select div form-group class and add has-error class
-                        $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
+                } else {
+                    for (var i = 0; i < data.inputerror.length; i++) {
+                        $('[name="' + data.inputerror[i] + '"]').parent().parent().addClass('has-error');
+                        $('[name="' + data.inputerror[i] + '"]').next().text(data.error_string[i]);
                     }
                 }
-                
-                $('#btnSave').text('Simpan');
-                $('#btnSave').attr('disabled',false); //set button enable 
-            }, 
-            error: function(data){
-                var error_message = "";
-                error_message += " ";
-                
-                $.each( data.responseJSON.errors, function( key, value ) {
-                    error_message +=" "+value+" ";
-                });
 
-                error_message +=" ";
-                Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'error',
-                        title: 'ERROR !',
-                        text: error_message,
-                        showConfirmButton: false,
-                        timer: 2000
-                    });
                 $('#btnSave').text('Simpan');
                 $('#btnSave').attr('disabled', false);
             },
+            error: function(data) {
+                var error_message = "";
+                error_message += " ";
+
+                $.each(data.responseJSON.errors, function(key, value) {
+                    error_message += " " + value + " ";
+                });
+
+                error_message += " ";
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'ERROR!',
+                    text: error_message,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                $('#btnSave').text('Simpan');
+                $('#btnSave').attr('disabled', false);
+            }
         });
     }
+
     function destroy(id) {
-        var url = "{{ route('mitra.destroy',":id") }}";
+        var url = "{{ route('data-gabah.destroy',":id") }}";
         url = url.replace(':id', id);
         
         Swal.fire({
@@ -447,11 +443,15 @@
                     type   : "delete",
                     data: { "id":id },
                     dataType: "JSON",
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        id: id
+                    },
                     success: function(data) {
                         table.ajax.reload();
                         Swal.fire({
-                            toast: true,
-                            position: 'top-end',
+                            toast: false,
+                            // position: 'top-end',
                             icon: 'success',
                             title: 'Data berhasil dihapus',
                             showConfirmButton: false,

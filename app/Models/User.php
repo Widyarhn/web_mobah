@@ -48,9 +48,18 @@ class User extends Authenticatable
      * @var array<string, string>
      */
 
-     public function admin()
-     {
+    public function admin()
+    {
         return $this->hasOne(Admin::class, 'user_id');
-     }
+    }
 
+    public function mitra()
+    {
+        return $this->hasOne(Mitra::class, 'user_id');
+    }
+
+    // public function validator()
+    // {
+    //     return $this->hasOne(Validator::class, 'user_id');
+    // }
 }

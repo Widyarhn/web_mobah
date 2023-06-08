@@ -22,10 +22,16 @@ class DataGabahController extends Controller
     {
     }
 
-    public function show(string $id)
+    public function show( $id)
     {
+        $data = [
+            "gabah" => Gabah::where('id', $id)->first(),
+            "pemilik" => Pemilik::where('id', $id)->get()
+        ];
         
-        return response()->json(Pemilik::find($id));
+        $this->detailtable();
+
+        return view('gabah.detail', $data);
     }
     public function edit($id)
     {
@@ -47,7 +53,7 @@ class DataGabahController extends Controller
             
             "nama" => $request->nama
         ]);
-       
+
         // return back()->with('success', 'Data berhasil ditambahkan!');
         return response()->json([
             'status' => true,
@@ -55,7 +61,17 @@ class DataGabahController extends Controller
         ]);
 
     }
+    public function destroy(string $id)
+    {
 
+        Pemilik::where("id", $id)->delete();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Data berhasil dihapus'
+        ]);
+    }
+    
     public function datatable(Request $request)
     {
         $data = DB::table('pemilik')
@@ -68,5 +84,22 @@ class DataGabahController extends Controller
         // }
     
         return DataTables::of($data)->make();
+    }
+    public function detailtable()
+    {
+        // dd($id);
+            $id = request()->segment(2);
+        
+        
+        // dd($id);
+        $data = Pemilik::with('gabah')->where('id', $id)->get();
+        // Jika ingin memfilter data berdasarkan role member, Anda bisa menggunankan code berikut:
+        // if(getRoleName() == 'member'){
+        //     $data = $data->where('member_id', auth()->user()->member->id);
+        // }
+    
+        return DataTables::of($data)->make();
+
+        
     }
 }

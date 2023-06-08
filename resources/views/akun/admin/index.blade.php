@@ -1,109 +1,110 @@
-@extends('public.layouts.main')
+@extends("public.layouts.main")
 
-@section('title', 'Roadmap')
+@section("title_content", "Kelola Admin")
 
-@section('css')
-    {{-- Custom CSS --}}
-@endsection
+@section("page_title" , "Admin Gapoktan")
 
-@section('breadcumb')
-<!-- PAGE-HEADER Breadcrumbs -->
-<div class="breadcrumb-header justify-content-between">
-    <div>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a   href="javascript:void(0);"></a></li>
-                <li class="breadcrumb-item active" aria-current="page">Roadmap</li>
-            </ol>
-        </nav>
-    </div>
-</div>
-<!-- PAGE-HEADER Breadcumbs END -->
+@section("breadcrumb")
+<ol class="breadcrumb">
+    <li class="breadcrumb-item ">
+        Home
+    </li>
+    <li class="breadcrumb-item active">
+        Kelola Akun Admin Gapoktan
+    </li>
+</ol>
 @endsection
 
 @section('content')
-<!-- Row -->
-<div class="row">
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Admin</h3>
-            </div>
-            <div class="card-body">
-                <a class="btn btn-primary modal-effect mb-3 data-table-btn ms-4" data-bs-effect="effect-super-scaled" onclick="create()">
-                    <span class="fe fe-plus"> </span>Add new data
-                </a>
-                <table id="datatable" class="table table-bordered text-nowrap border-bottom">
-                    <thead>
-                        <tr>
-                            <th style="width: 5%">No</th>
-                            <th>Nama</th>
-                            <th>Username</th>
-                            <th>Image</th>
-                            <th>No Hp</th>
-                            <th>Alamat</th>
-                            <th>Option</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <!-- COL END -->
-
-    <div class="modal fade" id="modal_form">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-header">
-                    <h6 class="modal-title">Add new data</h6>
-                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+<section class="section dashboard">
+    <!-- Row -->
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="card">
+                
+                <div class="card-body">
+                    <h5 class="card-title" style="margin-bottom: 0px;">Admin Gapoktan</h5>
+                    <div>
+                        <a class="btn btn-primary modal-effect mb-3 data-table-btn" data-bs-effect="effect-super-scaled" onclick="create()">
+                            <span class="fe fe-plus"> </span>Tambah Data Baru
+                        </a>
+                    </div>
+                    <br>
+                    <div class="table-responsive text-nowrap">
+                        <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%">No</th>
+                                    <th>Nama</th>
+                                    <th>Username</th>
+                                    <th style="width: 1%">Image</th>
+                                    <th>No Hp</th>
+                                    <th>Alamat</th>
+                                    <th>Option</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    
                 </div>
-                <div class="modal-body">
-                        <form id="form" method="POST" enctype="multipart/form-data">
-                            @csrf
-                        <div class="form-group">
-                            <input type="hidden" id="id" name="id">
-                            <div class="mb-3">
-                                <label for="nama" class="form-label">Nama</label>
-                                <input type="text"  value="" name="nama" class="form-control" id="nama" value="{{ old('nama') }}">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="mb-3">
-                                <label for="username" id="username_label" class="form-label">Username</label>
-                                <input type="text" name="username" class="form-control" id="username" value="{{ old('username') }}">
-                            </div>
-                        </div>
-                        <div class="p-4 border mb-4 form-group">
-                            <label class="form-label text-dark">Image</label>
-                            <div>
-                                <input id="image" class="dropify" type="file" name="image[]" data-max-file-size="2M" data-allowed-file-extensions="jpeg jpg png webp svg" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="mb-3">
-                                <label for="no_hp" class="form-label">No Hp</label>
-                                <input type="number" id="no_hp" name="no_hp"value="{{ old('no_hp') }}">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="mb-3">
-                                <label for="alamat" class="form-label">Alamat</label>
-                                <input type="text" value="" name="alamat" class="form-control" id="alamat" value="{{ old('alamat') }}">
-                            </div>
-                        </div>
+            </div>
+        </div>
+        <!-- COL END -->
+
+        <div class="modal fade" id="modal_form">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content modal-content-demo">
+                    <div class="modal-header">
+                        <h6 class="modal-title">Add new data</h6>
+                        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
                     </div>
-                </form>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        <button  id="btnSave" class="btn btn-primary">Simpan</button>
-                    </div>
+                    <div class="modal-body">
+                            <form id="form" method="POST" enctype="multipart/form-data">
+                                @csrf
+                            <div class="form-group">
+                                <input type="hidden" id="id" name="id">
+                                <div class="mb-3">
+                                    <label for="nama" class="form-label">Nama</label>
+                                    <input type="text"  value="" name="nama" class="form-control" id="nama" value="{{ old('nama') }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="mb-3">
+                                    <label for="username" id="username_label" class="form-label">Username</label>
+                                    <input type="text" name="username" class="form-control" id="username" value="{{ old('username') }}">
+                                </div>
+                            </div>
+                            <div class="p-4 border mb-4 form-group">
+                                <label class="form-label text-dark">Image</label>
+                                <div>
+                                    <input id="image" class="dropify" type="file" name="image[]" data-max-file-size="2M" data-allowed-file-extensions="jpeg jpg png webp svg" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="mb-3">
+                                    <label for="no_hp" class="form-label">No Hp</label>
+                                    <input type="number" id="no_hp" name="no_hp"value="{{ old('no_hp') }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="mb-3">
+                                    <label for="alamat" class="form-label">Alamat</label>
+                                    <input type="text" value="" name="alamat" class="form-control" id="alamat" value="{{ old('alamat') }}">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                            <button  id="btnSave" class="btn btn-primary">Simpan</button>
+                        </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- End Row -->
+    <!-- End Row -->
+</section>
 @endsection
 
 @section('component_js')
@@ -142,7 +143,7 @@
             {
                 targets: 3,
                 render: function(data, type, full, meta) {
-                    return data ? `<img class="img-thumbnail wd-100p wd-sm-200" src="${data}">` : `<img class="img-thumbnail wd-100p wd-sm-200" src="virtual/assets/img/default.png">`;
+                    return data ? `<img class="img-thumbnail wd-50p wd-sm-100" src="${data}">` : `<img class="img-thumbnail wd-50p wd-sm-100" src="/admin/assets/img/default_gambar.png" >`;
                 }
             },
 
@@ -184,10 +185,14 @@
                 render: function(data, type, full, meta) {
                     return `
                     <div class="btn-list">
-                        <a href="javascript:void(0)" onclick="edit('${data}')" class="btn btn-sm btn-primary modal-effect btn-edit" data-bs-effect="effect-super-scaled"><span class="fe fe-edit"> </span></a>
-                        <a href="javascript:void(0)" onclick="destroy('${data}')" class="btn btn-sm btn-danger btn-delete"><span class="fe fe-trash-2"> </span></a>
+                        <a href="javascript:void(0)" onclick="edit('${data}')" class="btn btn-sm btn-primary modal-effect btn-edit" data-bs-effect="effect-super-scaled"><i class="bi bi-pencil"></i></a>
+                        <a href="javascript:void(0)" onclick="destroy('${data}')" class="btn btn-sm btn-danger btn-delete"><i class="bi bi-trash"></i></a>
                     </div>
                     `;
+
+                    btn = btn.replace(':id', data);
+                    
+                    return btn;
                 },
             }, ],
             columns: [
@@ -210,7 +215,7 @@
 
             submit();
         })
-   
+
     });
 
     function create(){
@@ -221,7 +226,7 @@
 
 
         $('#modal_form').modal('show');
-         
+        
         $('.dropify').dropify();
         $('.modal-title').text('Add Data Roadmap');
         $('#btnSave').on('click', function(){

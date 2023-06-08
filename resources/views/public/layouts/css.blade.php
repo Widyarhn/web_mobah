@@ -23,6 +23,7 @@
 
 <!-- Template Main CSS File -->
 <link href="{{ asset('admin') }}/assets/css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="sweetalert2.min.css">
 
 <link rel="stylesheet" href="sweetalert2.min.css">
 
