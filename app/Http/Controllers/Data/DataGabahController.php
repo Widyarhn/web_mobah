@@ -24,6 +24,7 @@ class DataGabahController extends Controller
 
     public function show(string $id)
     {
+        
         return response()->json(Pemilik::find($id));
     }
     public function edit($id)
@@ -40,19 +41,17 @@ class DataGabahController extends Controller
             return response()->json(['message' => 'Data not found.'], 404);
         }
     }
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         Pemilik::where("id", $id)->update([
             
             "nama" => $request->nama
         ]);
-
-        dd($id);
-
+       
         // return back()->with('success', 'Data berhasil ditambahkan!');
         return response()->json([
             'status' => true,
-            'message' => 'Data berhasil diubah'
+            'message' => 'Data berhasil diubahhhhh'
         ]);
 
     }

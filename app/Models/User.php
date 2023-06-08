@@ -25,6 +25,7 @@ class User extends Authenticatable
      */
     protected $guarded = ['id'];
 
+
     protected $fillable = [
         'name',
         'username',
@@ -46,5 +47,10 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
+
+     public function admin()
+     {
+        return $this->hasOne(Admin::class, 'user_id');
+     }
 
 }
