@@ -1,6 +1,12 @@
 <!-- Favicons -->
 <link href="{{ asset('assets') }}/img/LOGO.png" rel="icon">
 <link href="{{ asset('assets') }}/img/LOGO.png" rel="apple-touch-icon">
+<style>
+.ff_fileupload_wrap table.ff_fileupload_uploads button.ff_fileupload_start_upload {
+    display: none !important;
+}
+</style>
+
 
 <!-- Google Fonts -->
 <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -19,4 +25,7 @@
 <link href="{{ asset('admin') }}/assets/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="sweetalert2.min.css">
 
+<link rel="stylesheet" href="sweetalert2.min.css">
 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dropify/dist/css/dropify.min.css">

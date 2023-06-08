@@ -12,8 +12,13 @@ class Admin extends Model
 
     protected $guarded = ['id'];
     protected $table = 'admin';
+    protected $primaryKey = 'id';
+
+
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->onDelete('cascade');
     }
+
+    
 }
