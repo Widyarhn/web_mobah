@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Mitra;
 use App\Models\User;
 use App\Models\Admin;
 use Illuminate\Support\Str;
@@ -36,6 +37,7 @@ class UserRolePermissionSeeder extends Seeder
                 'username' => 'mitra@gmail.com',
                 'name'  => 'mitra',
             ], $default_user_value));
+        
 
             $validator = User::create(array_merge([
                 'username' => 'validator@gmail.com',

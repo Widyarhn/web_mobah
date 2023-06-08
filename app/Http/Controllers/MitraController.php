@@ -16,6 +16,7 @@ class MitraController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
+        
         return view('akun.mitra.mitra');
     }
 
@@ -93,8 +94,20 @@ class MitraController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    // public function destroy($id)
+    // {
+    //     User::where('id', $id)->delete();
+    // }
+
+    public function datatable(Request $request)
     {
-        User::where('id', $id)->delete();
+        $data = DB::table('users')
+        ->join('mitra', 'users.id', '=', 'mitra.user_id')
+        ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+        ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+        ->where('roles.name', 'mitra')
+        ->get();
+
+    return DataTables::of($data)->make();
     }
 }

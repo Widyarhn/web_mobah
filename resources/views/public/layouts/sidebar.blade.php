@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{url('/mitra') }}">
+                <a href="{{ route('tambah-mitra.index') }}">
                     <i class="bi bi-circle"></i><span>Gapoktan</span>
                 </a>
             </li>
