@@ -17,7 +17,7 @@
         </a>
         <ul id="tambahAkun-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
-                <a href="{{ url('/tambah-admin') }}">
+                <a href="{{ route('tambah-admin.index') }}">
                     <i class="bi bi-circle" ></i><span>Admin Gapoktan</span>
                 </a>
             </li>

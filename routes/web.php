@@ -38,8 +38,8 @@ Route::group(['middleware' => ['guest']], function() {
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
-    Route::get('/tambah-admin', [AdminController::class, 'index']);
-    Route::resource('tambah-admin/admin', UserController::class);
+    Route::get('tambah-admin/datatable', [AdminController::class, 'datatable'])->name('tambah-admin.datatable');
+    Route::resource('tambah-admin', AdminController::class);
     
     Route::get('mitra/datatable', [MitraController::class, 'datatable'])->name('mitra.datatable');
     Route::get('/mitra', [MitraController::class, 'index']);
