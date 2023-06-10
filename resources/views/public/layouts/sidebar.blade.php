@@ -17,17 +17,17 @@
         </a>
         <ul id="tambahAkun-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
-                <a href="{{ route('tambah-admin.index') }}">
+                <a href="{{ route('kelola-admin.index') }}" class=" {{ Request::segment("1") == "kelola-admin" ? 'active' : '' }}">
                     <i class="bi bi-circle" ></i><span>Admin Gapoktan</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('tambah-mitra.index') }}">
+                <a href="{{ route('kelola-gapoktan.index') }}" class=" {{ Request::segment("1") == "kelola-gapoktan" ? 'active' : '' }}">
                     <i class="bi bi-circle"></i><span>Gapoktan</span>
                 </a>
             </li>
             <li>
-                <a href="{{url('/validator') }}">
+                <a href="{{ route('petugas.index') }}" class=" {{ Request::segment("1") == "petugas" ? 'active' : '' }}">
                     <i class="bi bi-circle"></i><span>Petugas Gapoktan</span>
                 </a>
             </li>

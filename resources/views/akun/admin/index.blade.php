@@ -23,7 +23,7 @@
             <div class="card">
                 
                 <div class="card-body">
-                    <h5 class="card-title" style="margin-bottom: 0px;">Admin Gapoktan</h5>
+                    <h5 class="card-title" style="margin-bottom: 0px;">Data Admin Gapoktan</h5>
                     <div>
                         <a class="btn btn-primary modal-effect mb-3 data-table-btn" data-bs-effect="effect-super-scaled" onclick="create()">
                             <span class="fe fe-plus"> </span>Tambah Data Baru
@@ -56,54 +56,75 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content modal-content-demo">
                     <div class="modal-header">
-                        <h6 class="modal-title">Add new data</h6>
-                        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                        <b><h5 class="modal-title"></h5></b>
+                        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                            <form id="form" method="POST" enctype="multipart/form-data">
-                                @csrf
-                            <div class="form-group">
-                                <input type="hidden" id="id" name="id">
-                                <div class="mb-3">
-                                    <label for="nama" class="form-label">Nama</label>
-                                    <input type="text"  value="" name="nama" class="form-control" id="nama" value="{{ old('nama') }}">
+                        <form id="form" method="POST" enctype="multipart/form-data">
+                        
+                            @csrf
+                            <input type="hidden" id="id" name="id">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        
+                                        <div class="mb-3">
+                                            <label for="nama" class="form-label">Nama</label>
+                                            <input type="text"  value="" name="nama" class="form-control" id="nama" value="{{ old('nama') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="mb-3">
+                                            <label for="no_hp" class="form-label">No Hp</label>
+                                            <input type="number" id="no_hp" class="form-control" name="no_hp"value="{{ old('no_hp') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="mb-3">
+                                            <label for="username" id="username_label" class="form-label">Username</label>
+                                            <input type="text" name="username" class="form-control" id="username" value="{{ old('username') }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label text-dark">Image</label>
+                                        <div class="p-4 border mb-4">
+                                            
+                                            @if(empty($admin->image))
+                                                <input type="file" class="dropify" name="image" id="image" multiple data-max-file-size="2M" data-allowed-file-extensions="jpeg jpg png webp svg" value="{{ old('image') }}">
+                                            @else
+                                                <img src="{{ url('/storage/'. $admin->image) }}" class="img-fluid gambar-preview mb-3" >
+                                                <div class="pt-2">
+                                                    <input onchange="previewImage2()" type="file" class="form-control" name="image" id="image" multiple data-max-file-size="2M" data-allowed-file-extensions="jpeg jpg png webp svg" value="{{ old('image') }}">
+                                                </div>
+                                            @endif
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <div class="mb-3 ">
+                                            <label for="alamat" class="col-lg-12 form-label">Alamat</label>
+                                            <div class="col-lg-12">
+                                                <textarea name="alamat" id="alamat" class="form-control" >{{ old('alamat') }}</textarea>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="mb-3">
-                                    <label for="username" id="username_label" class="form-label">Username</label>
-                                    <input type="text" name="username" class="form-control" id="username" value="{{ old('username') }}">
-                                </div>
-                            </div>
-                            <div class="p-4 border mb-4 form-group">
-                                <label class="form-label text-dark">Image</label>
-                                <div>
-                                    <input id="image" class="dropify" type="file" name="image[]" data-max-file-size="2M" data-allowed-file-extensions="jpeg jpg png webp svg" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="mb-3">
-                                    <label for="no_hp" class="form-label">No Hp</label>
-                                    <input type="number" id="no_hp" name="no_hp"value="{{ old('no_hp') }}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="mb-3">
-                                    <label for="alamat" class="form-label">Alamat</label>
-                                    <input type="text" value="" name="alamat" class="form-control" id="alamat" value="{{ old('alamat') }}">
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                            <button  id="btnSave" class="btn btn-primary">Simpan</button>
-                        </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                        <button  id="btnSave" class="btn btn-primary">Simpan</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- End Row -->
+    </div>  <!-- End Row -->
 </section>
 @endsection
 
@@ -120,7 +141,37 @@
 
 
 <!-- INTERNAL Summernote Editor js -->
-
+<script>
+    function previewImage() {
+        const image = document.querySelector("#image");
+        const imgPreview = document.querySelector(".image-preview");
+        imgPreview.style.display = "block";
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+        oFReader.onload = function(oFREvent) {
+            imgPreview.src = oFREvent.target.result;
+            $("#tampilGambar").addClass('mb-3');
+            $("#tampilGambar").width("100%");
+            $("#tampilGambar").height("300");
+        }
+    }
+</script>
+{{-- <script>
+    function previewImage2() {
+        var input = document.getElementById('image');
+        var preview = document.querySelector('.gambar-preview');
+    
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+    
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+            }
+    
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script> --}}
 
 <script>
     var $table;
@@ -132,7 +183,7 @@
             processing: true,
             serverSide: true,
             autoWidth: false,
-            ajax: "{{ route('tambah-admin.datatable') }}",
+            ajax: "{{ route('kelola-admin.datatable') }}",
             columnDefs: [
             {
                 targets: 0,
@@ -141,10 +192,14 @@
                 }
             },
             {
+                
                 targets: 3,
                 render: function(data, type, full, meta) {
-                    return data ? `<img class="img-thumbnail wd-50p wd-sm-100" src="${data}">` : `<img class="img-thumbnail wd-50p wd-sm-100" src="/admin/assets/img/default_gambar.png" >`;
+                    var imagePath = full.image;
+                    var imageUrl = imagePath ? "{{ url('/storage/') }}/" + imagePath : "/admin/assets/img/default_gambar.png";
+                    return `<img class="img-thumbnail wd-50p wd-sm-100" src="${imageUrl}">`;
                 }
+
             },
 
             {
@@ -206,9 +261,6 @@
             ]
         });
 
-        // $('#btnSave').on('click', function () {
-        //     submit();
-        // })
         
         $('#form').on('submit', function(e){
             e.preventDefault();
@@ -228,7 +280,7 @@
         $('#modal_form').modal('show');
         
         $('.dropify').dropify();
-        $('.modal-title').text('Add Data Roadmap');
+        $('.modal-title').text('Tambah Data Admin');
         $('#btnSave').on('click', function(){
             submit();
         })
@@ -236,25 +288,28 @@
     }
     
     function edit(id) {
-    submit_method = 'edit';
-    var url = "{{ route('tambah-admin.edit', ':user_id') }}";
-    url = url.replace(':user_id', id);
-    
-    $.get(url, function (response) {
-        var data = response.data;
-        console.log(data);
+        submit_method = 'edit';
+        var url = "{{ route('kelola-admin.edit', ':user_id') }}";
+        url = url.replace(':user_id', id);
         
-        $('#id').val(data.id);
-        $('#modal_form').modal('show');
-        $('.dropify').dropify();
-        $('.modal-title').text('Edit Data Admin');
-        $('#nama').val(data.nama);
-        $('#username').val(data.username).hide(); 
-        $('#username_label').hide();
-        $('#image').attr('src', data.image ? data.image : '{{ asset('virtual/assets/img/default.png') }}');
-        $('#no_hp').val(data.no_hp);
-        $('#alamat').val(data.alamat);
-    });
+        $.get(url, function (response) {
+            var data = response.data;
+            console.log(data);
+            
+            $('#id').val(data.id);
+            $('#modal_form').modal('show');
+            $('.dropify').dropify();
+            $('.modal-title').text('Edit Data Admin');
+            $('#nama').val(data.nama);
+            $('#username').val(data.username).hide(); 
+            $('#username_label').hide();
+            $('#image').attr('src', data.image ? "{{ url('/storage/') }}/" + data.image : "{{ asset('admin/assets/img/default_gambar.png') }}");
+            $('#no_hp').val(data.no_hp);
+            $('#alamat').val(data.alamat);
+        });
+        $('#btnSave').on('click', function(){
+            submit();
+        })
     }
 
 
@@ -275,13 +330,13 @@
         formData.append('no_hp', no_hp);
         formData.append('alamat', alamat);
 
-        var url = "{{ route('tambah-admin.store') }}";
+        var url = "{{ route('kelola-admin.store') }}";
 
         $('#btnSave').text('Menyimpan...');
         $('#btnSave').attr('disabled', true);
 
         if (submit_method == 'edit') {
-            url = "{{ route('tambah-admin.update', ":user_id") }}";
+            url = "{{ route('kelola-admin.update', ":user_id") }}";
             url = url.replace(':user_id', id);
         }
 
@@ -290,7 +345,13 @@
             type: submit_method == 'create' ? 'POST' : 'PUT',
             dataType: 'json',
             headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                id: id,
+                nama: nama,
+                username: username,
+                image: image,
+                no_hp: no_hp,
+                alamat: alamat
             },
             processData: false,
             contentType: false,
@@ -299,8 +360,8 @@
             if (data.status) {
                 $('#modal_form').modal('hide');
                 Swal.fire({
-                toast: true,
-                position: 'top-end',
+                toast: false,
+                // position: 'top-end',
                 icon: 'success',
                 title: data.message,
                 showConfirmButton: false,
@@ -341,10 +402,10 @@
             $('#btnSave').attr('disabled', false);
             },
         });
-}
+    }
 
     function destroy(id) {
-        var url = "{{ route('tambah-admin.destroy',":user_id") }}";
+        var url = "{{ route('kelola-admin.destroy',":user_id") }}";
         url = url.replace(':user_id', id);
     
         Swal.fire({

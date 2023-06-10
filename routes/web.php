@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MitraController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GabahController;
+use App\Http\Controllers\ValidatorController;
 use App\Http\Controllers\Data\DataGabahController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\LaporanController;
@@ -38,12 +39,14 @@ Route::group(['middleware' => ['guest']], function() {
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
-    Route::get('tambah-admin/datatable', [AdminController::class, 'datatable'])->name('tambah-admin.datatable');
-    Route::resource('tambah-admin', AdminController::class);
+    Route::get('kelola-admin/datatable', [AdminController::class, 'datatable'])->name('kelola-admin.datatable');
+    Route::resource('kelola-admin', AdminController::class);
     
-    Route::get('tambah-mitra/datatable', [MitraController::class, 'datatable'])->name('tambah-mitra.datatable');
-    Route::resource('tambah-mitra', MitraController::class);
+    Route::get('kelola-gapoktan/datatable', [MitraController::class, 'datatable'])->name('kelola-gapoktan.datatable');
+    Route::resource('kelola-gapoktan', MitraController::class);
     
+    Route::resource('/petugas', ValidatorController::class);
+
     //Gabah
     // Route::post('data-gabah/{id?}/update', [DataGabahController::class, 'update'])->name('data-gabah.update');
     Route::get('data-gabah/datatable', [DataGabahController::class, 'datatable'])->name('data-gabah.datatable');
