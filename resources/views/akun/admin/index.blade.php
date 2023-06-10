@@ -63,14 +63,16 @@
                         <form id="form" method="POST" enctype="multipart/form-data">
                         
                             @csrf
-                            <input type="hidden" id="id" name="id">
+                            <input type="hidden" name="image_lama" id="image_lama">
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         
                                         <div class="mb-3">
+                                            <input type="hidden" id="id" name="id">
                                             <label for="nama" class="form-label">Nama</label>
-                                            <input type="text"  value="" name="nama" class="form-control" id="nama" value="{{ old('nama') }}">
+                                            <input type="text"  name="nama" class="form-control" id="nama" value="{{ old('nama') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +87,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="mb-3">
-                                            <label for="username" id="username_label" class="form-label">Username</label>
+                                            <label for="username" class="form-label">Username</label>
                                             <input type="text" name="username" class="form-control" id="username" value="{{ old('username') }}">
                                         </div>
                                     </div>
@@ -98,7 +100,7 @@
                                             @else
                                                 <img src="{{ url('/storage/'. $admin->image) }}" class="img-fluid gambar-preview mb-3" >
                                                 <div class="pt-2">
-                                                    <input onchange="previewImage2()" type="file" class="form-control" name="image" id="image" multiple data-max-file-size="2M" data-allowed-file-extensions="jpeg jpg png webp svg" value="{{ old('image') }}">
+                                                    <input type="file" class="form-control" name="image" id="images" multiple data-max-file-size="2M" data-allowed-file-extensions="jpeg jpg png webp svg" value="{{ old('image') }}">
                                                 </div>
                                             @endif
                                             
@@ -287,6 +289,31 @@
 
     }
     
+    // function edit(id) {
+    //     submit_method = 'edit';
+    //     var url = "{{ route('kelola-admin.edit', ':user_id') }}";
+    //     url = url.replace(':user_id', id);
+        
+    //     $.get(url, function (response) {
+    //         var data = response.data;
+    //         console.log(data);
+            
+    //         $('#id').val(data.id);
+    //         $('#modal_form').modal('show');
+    //         $('.dropify').dropify();
+    //         $('.modal-title').text('Edit Data Admin');
+    //         $('#nama').val(data.nama);
+    //         $('#username').val(data.username).hide(); 
+    //         $('#username_label').hide();
+    //         $('#image').attr('src', data.image ? "{{ url('/storage/') }}/" + data.image : "{{ asset('admin/assets/img/default_gambar.png') }}");
+    //         $('#no_hp').val(data.no_hp);
+    //         $('#alamat').val(data.alamat);
+    //     });
+    //     $('#btnSave').on('click', function(){
+    //         submit();
+    //     })
+    // }
+    
     function edit(id) {
         submit_method = 'edit';
         var url = "{{ route('kelola-admin.edit', ':user_id') }}";
@@ -300,18 +327,209 @@
             $('#modal_form').modal('show');
             $('.dropify').dropify();
             $('.modal-title').text('Edit Data Admin');
-            $('#nama').val(data.nama);
-            $('#username').val(data.username).hide(); 
-            $('#username_label').hide();
-            $('#image').attr('src', data.image ? "{{ url('/storage/') }}/" + data.image : "{{ asset('admin/assets/img/default_gambar.png') }}");
-            $('#no_hp').val(data.no_hp);
-            $('#alamat').val(data.alamat);
+            $('#nama').val(data.admin.nama);
+            $('#username').val(data.username); 
+            // $('#username_label').hide();
+            // Tampilkan gambar lama jika ada
+            var imageName = data.admin.image;
+            if (imageName) {
+                var imageUrl = "{{ url('storage') }}/" + imageName;
+                $('#image').attr('src', imageUrl);
+            } else {
+                $('#image').attr('src', "{{ asset('admin/assets/img/default_gambar.png') }}");
+            }
+            $('#no_hp').val(data.admin.no_hp);
+            $('#alamat').val(data.admin.alamat);
+            
         });
+        
         $('#btnSave').on('click', function(){
             submit();
         })
     }
 
+
+    // function submit() {
+    //     var id = $('#id').val();
+    //     var form = $('#form')[0];
+    //     var nama = $('#nama').val();
+    //     var username = $('#username').val();
+    //     var image = $('#image').prop('files')[0];
+    //     var no_hp = $('#no_hp').val();
+    //     var alamat = $('#alamat').val();
+
+    //     var formData = new FormData(form);
+    //     formData.append('id', id);
+    //     formData.append('nama', nama);
+    //     formData.append('username', username);
+    //     formData.append('image', image);
+    //     formData.append('no_hp', no_hp);
+    //     formData.append('alamat', alamat);
+
+    //     var url = "{{ route('kelola-admin.store') }}";
+
+    //     $('#btnSave').text('Menyimpan...');
+    //     $('#btnSave').attr('disabled', true);
+
+    //     if (submit_method == 'edit') {
+    //         url = "{{ route('kelola-admin.update', ":user_id") }}";
+    //         url = url.replace(':user_id', id);
+    //     }
+
+    //     $.ajax({
+    //         url: url,
+    //         type: submit_method == 'create' ? 'POST' : 'PUT',
+    //         dataType: 'json',
+    //         headers: {
+    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //         },
+    //         processData: false,
+    //         contentType: false,
+    //         data: formData,
+    //         success: function(data) {
+    //         if (data.status) {
+    //             $('#modal_form').modal('hide');
+    //             Swal.fire({
+    //             toast: false,
+    //             // position: 'top-end',
+    //             icon: 'success',
+    //             title: data.message,
+    //             showConfirmButton: false,
+    //             timer: 1500
+    //             });
+    //             table.ajax.reload();
+
+    //             $('#btnSave').text('Simpan');
+    //             $('#btnSave').attr('disabled', false);
+    //         } else {
+    //             for (var i = 0; i < data.inputerror.length; i++) {
+    //             $('[name="' + data.inputerror[i] + '"]').parent().parent().addClass('has-error');
+    //             $('[name="' + data.inputerror[i] + '"]').next().text(data.error_string[i]);
+    //             }
+    //         }
+
+    //         $('#btnSave').text('Simpan');
+    //         $('#btnSave').attr('disabled', false);
+    //         },
+    //         error: function(data) {
+    //         var error_message = "";
+
+    //         $.each(data.responseJSON.errors, function(key, value) {
+    //             error_message += value + " ";
+    //         });
+
+    //         Swal.fire({
+    //             toast: true,
+    //             position: 'top-end',
+    //             icon: 'error',
+    //             title: 'ERROR!',
+    //             text: error_message,
+    //             showConfirmButton: false,
+    //             timer: 2000
+    //         });
+    //         $('#btnSave').text('Simpan');
+
+    //         $('#btnSave').attr('disabled', false);
+    //         },
+    //     });
+    // }
+
+    // function submit() {
+    //     var id = $('#id').val();
+    //     var form = $('#form')[0];
+    //     var nama = $('#nama').val();
+    //     var username = $('#username').val();
+    //     var image = $('#image').prop('files')[0];
+    //     var no_hp = $('#no_hp').val();
+    //     var alamat = $('#alamat').val();
+
+    //     var formData = new FormData(form);
+    //     formData.append('nama', nama);
+    //     formData.append('no_hp', no_hp);
+    //     formData.append('alamat', alamat);
+
+    //     var url = "{{ route('kelola-admin.store') }}";
+    //     var requestType = 'POST'; // Set default request type to create (POST)
+        
+    //     console.log(submit_method);
+    //     console.log("submit");
+        
+    //     if (submit_method === 'edit') {
+    //         var id = $('#id').val();
+    //         url = "{{ route('kelola-admin.update', ':user_id') }}";
+    //         url = url.replace(':user_id', id); 
+    //         formData.append('_method', 'PUT');
+    //         requestType = 'PUT';
+    //     }
+
+    //     // Add condition to append username to formData only if input is provided
+    //     if (username.trim() !== '') {
+    //         formData.append('username', username);
+    //     }
+
+    //     // Add condition to append image to formData only if an image is selected
+    //     if (image) {
+    //         formData.append('image', image);
+    //     }
+
+    //     $.ajax({
+    //         url: url,
+    //         type: requestType,
+    //         dataType: 'json',
+    //         headers: {
+    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //         },
+    //         processData: false,
+    //         contentType: false,
+    //         data: formData,
+    //         success: function(data) {
+    //             if (data.status) {
+    //                 var admin = data.admin;
+    //                 console.log("Admin:", admin);
+    //                 $('#modal_form').modal('hide');
+    //                 Swal.fire({
+    //                     toast: false,
+    //                     icon: 'success',
+    //                     title: data.message,
+    //                     showConfirmButton: false,
+    //                     timer: 1500
+    //                 });
+    //                 table.ajax.reload();
+
+    //                 $('#btnSave').text('Simpan');
+    //                 $('#btnSave').attr('disabled', false);
+    //             } else {
+    //                 for (var i = 0; i < data.inputerror.length; i++) {
+    //                     $('[name="' + data.inputerror[i] + '"]').parent().parent().addClass('has-error');
+    //                     $('[name="' + data.inputerror[i] + '"]').next().text(data.error_string[i]);
+    //                 }
+
+    //                 $('#btnSave').text('Simpan');
+    //                 $('#btnSave').attr('disabled', false);
+    //             }
+    //         },
+    //         error: function(data) {
+    //             var error_message = "";
+
+    //             $.each(data.responseJSON.errors, function(key, value) {
+    //                 error_message += value + " ";
+    //             });
+
+    //             Swal.fire({
+    //                 toast: true,
+    //                 position: 'top-end',
+    //                 icon: 'error',
+    //                 title: 'ERROR!',
+    //                 text: error_message,
+    //                 showConfirmButton: false,
+    //                 timer: 2000
+    //             });
+
+    //             $('#btnSave').text('Simpan');
+    //             $('#btnSave').attr('disabled', false);
+    //         },
+    //     });
+    // }
 
     function submit() {
         var id = $('#id').val();
@@ -322,87 +540,92 @@
         var no_hp = $('#no_hp').val();
         var alamat = $('#alamat').val();
 
+        console.log("ID:", id);
+        console.log("Nama:", nama);
+        console.log("Username:", username);
+        console.log("Image:", image);
+        console.log("No HP:", no_hp);
+        console.log("Alamat:", alamat);
+
         var formData = new FormData(form);
-        formData.append('id', id);
         formData.append('nama', nama);
-        formData.append('username', username);
-        formData.append('image', image);
         formData.append('no_hp', no_hp);
+        formData.append('username', username);
         formData.append('alamat', alamat);
 
-        var url = "{{ route('kelola-admin.store') }}";
+        console.log("FormData:", formData);
 
-        $('#btnSave').text('Menyimpan...');
-        $('#btnSave').attr('disabled', true);
+        var url = "";
 
-        if (submit_method == 'edit') {
-            url = "{{ route('kelola-admin.update', ":user_id") }}";
+        if (submit_method === 'create') {
+            url = "{{ route('kelola-admin.store') }}";
+        } else if (submit_method === 'edit') {
+            url = "{{ route('kelola-admin.update', ':user_id') }}";
             url = url.replace(':user_id', id);
+            formData.append('_method', 'PUT');
         }
 
         $.ajax({
             url: url,
-            type: submit_method == 'create' ? 'POST' : 'PUT',
+            type: 'POST',
             dataType: 'json',
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                id: id,
-                nama: nama,
-                username: username,
-                image: image,
-                no_hp: no_hp,
-                alamat: alamat
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             processData: false,
             contentType: false,
             data: formData,
             success: function(data) {
-            if (data.status) {
-                $('#modal_form').modal('hide');
-                Swal.fire({
-                toast: false,
-                // position: 'top-end',
-                icon: 'success',
-                title: data.message,
-                showConfirmButton: false,
-                timer: 1500
+                if (data.status) {
+                    var admin = data.admin;
+                    console.log("Admin:", admin);
+                    $('#modal_form').modal('hide');
+                    Swal.fire({
+                        toast: false,
+                        icon: 'success',
+                        title: data.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    table.ajax.reload();
+
+                    $('#btnSave').text('Simpan');
+                    $('#btnSave').attr('disabled', false);
+                } else {
+                    for (var i = 0; i < data.inputerror.length; i++) {
+                        $('[name="' + data.inputerror[i] + '"]').parent().parent().addClass('has-error');
+                        $('[name="' + data.inputerror[i] + '"]').next().text(data.error_string[i]);
+                    }
+
+                    $('#btnSave').text('Simpan');
+                    $('#btnSave').attr('disabled', false);
+                }
+            },
+            error: function(data) {
+                var error_message = "";
+
+                $.each(data.responseJSON.errors, function(key, value) {
+                    error_message += value + " ";
                 });
-                table.ajax.reload();
+
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'ERROR!',
+                    text: error_message,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
 
                 $('#btnSave').text('Simpan');
                 $('#btnSave').attr('disabled', false);
-            } else {
-                for (var i = 0; i < data.inputerror.length; i++) {
-                $('[name="' + data.inputerror[i] + '"]').parent().parent().addClass('has-error');
-                $('[name="' + data.inputerror[i] + '"]').next().text(data.error_string[i]);
-                }
-            }
-
-            $('#btnSave').text('Simpan');
-            $('#btnSave').attr('disabled', false);
-            },
-            error: function(data) {
-            var error_message = "";
-
-            $.each(data.responseJSON.errors, function(key, value) {
-                error_message += value + " ";
-            });
-
-            Swal.fire({
-                toast: true,
-                position: 'top-end',
-                icon: 'error',
-                title: 'ERROR!',
-                text: error_message,
-                showConfirmButton: false,
-                timer: 2000
-            });
-            $('#btnSave').text('Simpan');
-
-            $('#btnSave').attr('disabled', false);
             },
         });
     }
+
+
+
 
     function destroy(id) {
         var url = "{{ route('kelola-admin.destroy',":user_id") }}";
