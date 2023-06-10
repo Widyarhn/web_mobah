@@ -1,8 +1,8 @@
 @extends("public.layouts.main")
 
-@section("title_content", "Akun Mitra")
+@section("title_content", "Kelola Gapoktan")
 
-@section("page_title", "Akun Mitra")
+@section("page_title", "Gapoktan")
 
 {{-- @section("component_css")
 <link src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
@@ -22,46 +22,34 @@
         Home
     </li>
     <li class="breadcrumb-item active">
-        Data Akun Mitra
+        Kelola Akun Gapoktan
     </li>
 </ol>
 @endsection
 
 @section('content')
 <section class="section dashboard">
-    <div class="row">
-        
-        {{-- @if (session()->has('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session('success') }}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endif
-        @if (session()->has('updateGagal'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>{{ session('updateGagal') }}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endif --}}
-        
+    <div class="row"> 
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Data Mitra</h5>
+                    <h5 class="card-title">Data Gapoktan</h5>
                     <div>
-                        
                         <a class="btn btn-primary modal-effect mb-3 data-table-btn" data-bs-effect="effect-super-scaled" onclick="create()">
-                            <span class="fe fe-plus"> Tambah Akun Baru</span>
+                            <span class="fe fe-plus"> Tambah Data Baru</span>
                         </a>
                     </div>
                     <br>
                     <table class="table table-striped" id="myTable" data-toggle="table">
                         <thead>
                             <tr>
-                                <th class="col-md-1">No</th>
-                                <th class="col-md-3">Nama</th>
-                                <th class="col-md-2">Username</th>
-                                <th class="col-md-4">Action</th>
+                                <th style="width: 5%">No</th>
+                                <th>Nama</th>
+                                <th>Username</th>
+                                <th style="width: 1%">Image</th>
+                                <th>No Hp</th>
+                                <th>Alamat</th>
+                                <th>Option</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -71,43 +59,70 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="modalTambahMitra" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
+        
+        <div class="modal fade " id="modalTambahMitra">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content modal-content-demo">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Form</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <b><h5 class="modal-tittle"></h5></b>
+                        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        <!-- START FORM -->
                         <form id="formTambahMitra" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <div class="alert alert-danger d-none"></div>
-                        <div class="alert alert-success d-none"></div>
-                        
-                        <div class="mb-3 row">
-                            <label for="nama" class="col-sm-2 col-form-label">Nama</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name='name' id="name">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="hidden" id="id" name="id">
+                                        <div class="mb-3">
+                                            <label for="nama" class="form-label">Nama</label>
+                                            <input type="text"  value="" name="nama" class="form-control" id="nama" value="{{ old('nama') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="mb-3">
+                                            <label for="no_hp" class="form-label">No Hp</label>
+                                            <input type="number" id="no_hp" class="form-control" name="no_hp"value="{{ old('no_hp') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="mb-3">
+                                            <label for="username" id="username_label" class="form-label">Username</label>
+                                            <input type="text" name="username" class="form-control" id="username" value="{{ old('username') }}">
+                                        </div>
+                                    </div>
+                                    <div clas="form-group">
+                                        <label class="form-label text-dark">Image</label>
+                                        <div class="p-4 border mb-4">
+                                            <input id="image" class="dropify" type="file" name="image[]" data-max-file-size="2M" data-allowed-file-extensions="jpeg jpg png webp svg" />
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group ">
+                                        <div class="mb-3 ">
+                                            <label for="alamat" class="col-lg-12 form-label">Alamat</label>
+                                            <div class="col-lg-12">
+                                                <textarea name="alamat" id="alamat" class="form-control" ></textarea>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="username" class="col-sm-2 col-form-label">Username</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name='username' id="uname">
-                            </div>
-                        </div>
+                            
                         </form>
-                        <!-- AKHIR FORM -->
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary tombol-tambah">Simpan</button>
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                        <button  id="btnSave" class="btn btn-primary">Simpan</button>
                     </div>
                 </div>
             </div>
         </div>
-
 
     </div>
 </section>
@@ -118,164 +133,24 @@
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/dropify/dist/js/dropify.min.js"></script>
 
 <script>
-    // $(document).ready(function() {
-    //     $('#myTable').DataTable({
-    //         processing: true,
-    //         serverSide: true,
-    //         autoWidth: false,
-    //         ajax: "{{ url('tambah-mitra/mitra') }}",
-    //         columns: [
-    //             {
-    //                 data: 'DT_RowIndex',
-    //                 name: 'DT_RowIndex',
-    //                 orderable: false,
-    //                 searchable: false
-    //             },
-    //             {
-    //                 data: 'name',
-    //                 name: 'Nama'
-    //             },
-    //             {
-    //                 data: 'username',
-    //                 name: 'Username'
-    //             },
-    //             {
-    //                 data: 'aksi',
-    //                 name: 'Aksi'
-    //             }
-    //         ]
-    //     });
-
-    //     // GLOBAL SETUP 
-    //     $.ajaxSetup({
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         }
-    //     });
-
-    //     // 02_PROSES SIMPAN 
-    //     $('body').on('click', '.tombol-tambah', function(e) {
-    //         e.preventDefault();
-    //         $('#exampleModal').modal('show');
-    //         $('.tombol-simpan').click(function() {
-    //             simpan();
-    //         });
-    //     });
-
-    //     // 03_PROSES EDIT 
-    //     $('body').on('click', '.tombol-edit', function(e) {
-    //         var id = $(this).data('id');
-    //         $.ajax({
-    //             url: 'tambah-mitra/mitra/' + id + '/edit',
-    //             type: 'GET',
-    //             success: function(response) {
-    //                 $('#exampleModal').modal('show');
-    //                 $('#name').val(response.result.nama);
-    //                 $('#uname').val(response.result.username);
-    //                 console.log(response.result);
-    //                 $('.tombol-simpan').click(function() {
-    //                     simpan(id);
-    //                 });
-    //             }
-    //         });
-    //     });
-
-    //     // 04_PROSES Delete 
-    //     $('body').on('click', '.tombol-del', function(e) {
-    //         Swal.fire({
-    //             title: "Yakin ingin menghapus data ini?",
-    //             text: "Ketika data terhapus, anda tidak bisa mengembalikan data tersebut!",
-    //             icon: "warning",
-    //             showCancelButton: true,
-    //             confirmButtonColor: "#3085d6",
-    //             cancelButtonColor: "#d33",
-    //             confirmButtonText: "Ya, Hapus!"
-    //         }).then((result) => {
-    //             if (result.value) {
-    //                 var id = $(this).data('id');
-    //                 $.ajax({
-    //                     url: 'tambah-mitra/mitra/' + id,
-    //                     type: 'DELETE',
-    //                     success: function() {
-    //                         $('#myTable').DataTable().ajax.reload();
-    //                         Swal.fire({
-    //                             toast: true,
-    //                             position: 'top-end',
-    //                             icon: 'success',
-    //                             title: 'Data berhasil dihapus',
-    //                             showConfirmButton: false,
-    //                             timer: 1500
-    //                         });
-    //                     }
-    //                 });
-    //             }
-    //         });
-    //     });
-
-    //     // fungsi simpan dan update
-    //     function simpan(id = '') {
-    //         if (id == '') {
-    //             var var_url = 'tambah-mitra/mitra';
-    //             var var_type = 'POST';
-    //         } else {
-    //             var var_url = 'tambahmitra/mitra/' + id;
-    //             var var_type = 'PUT';
-    //         }
-    //         $.ajax({
-    //             url: var_url,
-    //             type: var_type,
-    //             data: {
-    //                 nama: $('#name').val(),
-    //                 username: $('#uname').val()
-    //             },
-    //             success: function(response) {
-    //                 if (response.errors) {
-    //                     console.log(response.errors);
-    //                     $('.alert-danger').removeClass('d-none');
-    //                     $('.alert-danger').html("<ul>");
-    //                     $.each(response.errors, function(key, value) {
-    //                         $('.alert-danger').find('ul').append("<li>" + value +
-    //                             "</li>");
-    //                     });
-    //                     $('.alert-danger').append("</ul>");
-    //                 } else {
-    //                     $('.alert-success').removeClass('d-none');
-    //                     $('.alert-success').html(response.success);
-    //                 }
-    //                 $('#myTable').DataTable().ajax.reload();
-    //             }
-    //         });
-    //     }
-
-    //     $('#exampleModal').on('hidden.bs.modal', function() {
-    //         $('#name').val('');
-    //         $('#uname').val('');
-
-    //         $('.alert-danger').addClass('d-none');
-    //         $('.alert-danger').html('');
-
-    //         $('.alert-success').addClass('d-none');
-    //         $('.alert-success').html('');
-    //     });
-    // });
-
-    $(document).ready(function() {
+    $(document).ready(function(){
         
         table = $("#myTable").DataTable({
             responsive: true,
             processing: true,
             serverSide: true,
             autoWidth: false,
-            ajax: "{{ route('tambah-mitra.datatable') }}",
+            ajax: "{{ route('kelola-gapoktan.datatable') }}",
             columnDefs: [
             {
                 targets: 0,
                 render: function(data, type, full, meta) {
                     return (meta.row + 1);
                 }
-            }, 
+            },
             {
                 targets: 1,
                 createdCell: function(td, cellData, rowData, row, col) {
@@ -296,36 +171,58 @@
                 },
                 
             },
-            
+            {
+                targets: 3,
+                render: function(data, type, full, meta) {
+                    return data ? `<img class="img-thumbnail wd-50p wd-sm-100" src="${data}">` : `<img class="img-thumbnail wd-50p wd-sm-100" src="/admin/assets/img/default_gambar.png" >`;
+                }
+            },
+            {
+                targets: 4,
+                createdCell: function(td, cellData, rowData, row, col) {
+                    $(td).html($(td).text())
+                    if($(td).text().length > 150) {
+                        let txt = $(td).text()
+                        $(td).text(txt.substr(0, 150) + '...')
+                    }
+                },
+
+            },
+            {
+                targets: 5,
+                createdCell: function(td, cellData, rowData, row, col) {
+                    $(td).html($(td).text())
+                    if($(td).text().length > 150) {
+                        let txt = $(td).text()
+                        $(td).text(txt.substr(0, 150) + '...')
+                    }
+                },
+
+            },
             {
                 targets: -1,
                 render: function(data, type, full, meta) {
-                    let btn = `
+                    return `
                     <div class="btn-list">
-                        
-                        <a href="javascript:void(0)" onclick="edit('${data}')" class="btn btn-sm btn-primary btn-edit"><i class="bi bi-pencil"></i></a>
+                        <a href="javascript:void(0)" onclick="edit('${data}')" class="btn btn-sm btn-primary modal-effect btn-edit" data-bs-effect="effect-super-scaled"><i class="bi bi-pencil"></i></a>
                         <a href="javascript:void(0)" onclick="destroy('${data}')" class="btn btn-sm btn-danger btn-delete"><i class="bi bi-trash"></i></a>
-                        
                     </div>
                     `;
-                    
+
                     btn = btn.replace(':id', data);
                     
                     return btn;
-                
                 },
             }, ],
             columns: [
-            { data: null },
-            { data: 'nama'},
-            { data: 'username'},
-            { data: 'id'}, 
-            
-            ],
-            language: {
-                searchPlaceholder: 'Search...',
-                sSearch: '',
-            }
+                { data: null },
+                { data: 'nama'},
+                { data: 'username'},
+                { data: 'image'},
+                { data: 'no_hp'},
+                { data: 'alamat'},
+                { data: 'user_id'}, 
+            ]
         });
 
         //nama form di modal
@@ -340,13 +237,13 @@
         submit_method = 'create';
 
         $('#id').val('');
-        $('#form')[0].reset();
+        $('#formTambahMitra')[0].reset();
 
-        //nama modal
+
         $('#modalTambahMitra').modal('show');
         
         $('.dropify').dropify();
-        $('.modal-title').text('Tambah Data Mitra');
+        $('.modal-tittle').text('Tambah Data Akun Mitra');
         $('#btnSave').on('click', function(){
             submit();
         })

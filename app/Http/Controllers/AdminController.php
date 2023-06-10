@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -16,7 +17,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('akun.admin.index');
+        $data["admin"] = Admin::all();
+        
+        return view('akun.admin.index', $data);
     }
 
     /**
@@ -35,63 +38,124 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // public function store(Request $request)
+    // {
+
+    //     // dd($request->all());
+    //     // Menyiapkan nilai default untuk pengguna
+    //     $default_user_value = [
+    //         'password' => bcrypt('password'),
+    //         'remember_token' => Str::random(10),
+    //     ];
+    
+    //     // Membuat pengguna baru
+    //     $user = User::create([
+    //         'username' => $request->username,
+    //         'password' => $default_user_value['password'],
+    //         'remember_token' => $default_user_value['remember_token'],
+    //     ]);
+    
+    //     // Memberikan peran "admin" kepada pengguna
+    //     $user->assignRole('admin');
+    
+    //     // Mengelola gambar
+    //     $imagePaths = [];
+    
+    //     if ($request->hasFile('image')) {
+    //         $path = 'files/admin/image/';
+
+    //         if (!is_dir($path)) {
+    //             // Membuat direktori jika belum ada
+    //             mkdir($path, 0777, true);
+    
+    //             // Mengatur izin pada direktori
+    //             chmod($path, 0777);
+    //         }
+    
+    //         foreach ($request->file('image') as $key => $file) {
+    //             $nameFile = md5($file->getClientOriginalName() . rand(rand(231, 992), 123882)) . "." . $file->getClientOriginalExtension();
+    
+    //             $file->move($path, $nameFile);
+    
+    //             $imagePaths[] = $path.$nameFile;
+    //         }
+    //     }
+    
+    //     // Membuat data admin baru
+    //     $admin = Admin::create([
+    //         'user_id' => $user->id,
+    //         'nama' => $request->nama,
+    //         'no_hp' => $request->no_hp,
+    //         'alamat' => $request->alamat,
+    //         'image' => json_encode($imagePaths),
+    //     ]);
+    
+    //     return response()->json([
+    //         'status' => true,
+    //         'message' => 'Success Add Data Admin!',
+    //     ]);
+    // }
     public function store(Request $request)
     {
-
-        dd($request->all());
         // Menyiapkan nilai default untuk pengguna
         $default_user_value = [
             'password' => bcrypt('password'),
             'remember_token' => Str::random(10),
         ];
-    
+
         // Membuat pengguna baru
         $user = User::create([
             'username' => $request->username,
             'password' => $default_user_value['password'],
             'remember_token' => $default_user_value['remember_token'],
         ]);
-    
+
         // Memberikan peran "admin" kepada pengguna
         $user->assignRole('admin');
-    
-        // Mengelola gambar
-        $imagePaths = [];
-    
-        if ($request->hasFile('image')) {
-            $path = 'files/admin/image/';
-    
-            if (!is_dir($path)) {
-                // Membuat direktori jika belum ada
-                mkdir($path, 0777, true);
-    
-                // Mengatur izin pada direktori
-                chmod($path, 0777);
-            }
-    
-            foreach ($request->file('image') as $key => $file) {
-                $nameFile = md5($file->getClientOriginalName() . rand(rand(231, 992), 123882)) . "." . $file->getClientOriginalExtension();
-    
-                $file->move($path, $nameFile);
-    
-                $imagePaths[] = $path . $nameFile;
-            }
+
+        if ($request->hasfile("image"))
+        {
+            $data = $request->file("image")->store("admin");
         }
-    
+        // Mengelola gambar
+        // $imagePaths = [];
+
+        // if ($request->hasFile('image')) {
+        //     $path = 'files/admin/image/';
+
+        //     if (!is_dir($path)) {
+        //         // Membuat direktori jika belum ada
+        //         mkdir($path, 0777, true);
+
+        //         // Mengatur izin pada direktori
+        //         chmod($path, 0777);
+        //     }
+
+        //     foreach ($request->file('image') as $key => $file) {
+        //         $nameFile = md5($file->getClientOriginalName() . rand(rand(231, 992), 123882)) . "." . $file->getClientOriginalExtension();
+
+        //         $file->move($path, $nameFile);
+
+        //         $imagePaths[] = $path . $nameFile;
+        //     }
+        // }
+
         // Membuat data admin baru
         $admin = Admin::create([
             'user_id' => $user->id,
             'nama' => $request->nama,
             'no_hp' => $request->no_hp,
             'alamat' => $request->alamat,
-            'image' => json_encode($imagePaths),
+            'image' => $data,
         ]);
-    
+
+        
         return response()->json([
             'status' => true,
             'message' => 'Success Add Data Admin!',
         ]);
     }
+
     
     
     
@@ -136,36 +200,63 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $image = [];
+        // $image = [];
     
-        if ($request->hasFile('image')) {
-            $files = $request->file('image');
+        // if ($request->hasFile('image')) {
+        //     $files = $request->file('image');
     
-            foreach ($files as $key => $file) {
-                $path = 'files/admin/image/';
-                $nameFile = md5($file->getClientOriginalName() . rand(rand(231, 992), 123882)) . "." . $file->getClientOriginalExtension();
+        //     foreach ($files as $key => $file) {
+        //         $path = 'files/admin/image/';
+        //         $nameFile = md5($file->getClientOriginalName() . rand(rand(231, 992), 123882)) . "." . $file->getClientOriginalExtension();
     
-                $file->move($path, $nameFile);
+        //         $file->move($path, $nameFile);
     
-                $image[$key] = $path . $nameFile;
-            }
-        }
+        //         $image[$key] = $path . $nameFile;
+        //     }
+        // }
         
-        $admin = Admin::find($id);
-        if (!$admin) {
-            return response()->json(['message' => 'Data not found.'], 404);
-        }
-    
-        $admin->nama = $request->nama;
-        $admin->no_hp = $request->no_hp;
-        $admin->alamat = $request->alamat;
 
-        if ($image) {
-            $admin->image = $image;
-        }
+        DB::transaction(function () use ($request, $id) {
+            // Update tabel pertama
+            User::where("id", $id)->update([
+                'name' => $request->nama
+            ]);
+
+            if ($request->file("image")) {
+                if ($request->image_lama) {
+                    Storage::delete($request->image_lama);
+                }
+            
+            $image = $request->file("image")->store("image");
+    
+            }else{
+                $image= $request->image_lama;
+            }
+            // Update tabel kedua
+            Admin::where("user_id", $id)->update([
+                'nama' => $request->nama,
+                'no_hp' => $request->no_hp,
+                'alamat' => $request->alamat,
+                'image' => $image,
+            ]);
         
-        // Simpan perubahan
-        $admin->save();
+            // Jika tidak ada exception yang dilempar, transaksi akan di-commit secara otomatis
+        });
+        // $admin = Admin::find($id);
+        // if (!$admin) {
+        //     return response()->json(['message' => 'Data not found.'], 404);
+        // }
+    
+        // $admin->nama = $request->nama;
+        // $admin->no_hp = $request->no_hp;
+        // $admin->alamat = $request->alamat;
+
+        // if ($image) {
+        //     $admin->image = $image;
+        // }
+        
+        // // Simpan perubahan
+        // $admin->save();
     
         return response()->json([
             'status' => true,

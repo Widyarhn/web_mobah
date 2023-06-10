@@ -20,5 +20,8 @@ class Admin extends Model
         return $this->belongsTo(User::class)->onDelete('cascade');
     }
 
-    
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 }
