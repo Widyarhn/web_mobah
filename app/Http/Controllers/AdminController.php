@@ -183,7 +183,7 @@ class AdminController extends Controller
         $result = User::with('admin')->find($id);
     
         if ($result) {
-            return response()->json(['data' => $result->admin]);
+            return response()->json(['data' => $result]);
         } else {
             return response()->json(['message' => 'Data not found.'], 404);
         }
@@ -198,72 +198,104 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // public function update(Request $request, $id)
+    // {
+    //     // $image = [];
+    
+    //     // if ($request->hasFile('image')) {
+    //     //     $files = $request->file('image');
+    
+    //     //     foreach ($files as $key => $file) {
+    //     //         $path = 'files/admin/image/';
+    //     //         $nameFile = md5($file->getClientOriginalName() . rand(rand(231, 992), 123882)) . "." . $file->getClientOriginalExtension();
+    
+    //     //         $file->move($path, $nameFile);
+    
+    //     //         $image[$key] = $path . $nameFile;
+    //     //     }
+    //     // }
+        
+
+    //     DB::transaction(function () use ($request, $id) {
+    //         // Update tabel pertama
+    //         User::where("id", $id)->update([
+    //             'name' => $request->nama
+    //         ]);
+
+    //         if ($request->file("image")) {
+    //             if ($request->image_lama) {
+    //                 Storage::delete($request->image_lama);
+    //             }
+            
+    //         $image = $request->file("image")->store("image");
+    
+    //         }else{
+    //             $image= $request->image_lama;
+    //         }
+    //         // Update tabel kedua
+    //         Admin::where("user_id", $id)->update([
+    //             'nama' => $request->nama,
+    //             'no_hp' => $request->no_hp,
+    //             'alamat' => $request->alamat,
+    //             'image' => $image,
+    //         ]);
+        
+    //         // Jika tidak ada exception yang dilempar, transaksi akan di-commit secara otomatis
+    //     });
+    //     // $admin = Admin::find($id);
+    //     // if (!$admin) {
+    //     //     return response()->json(['message' => 'Data not found.'], 404);
+    //     // }
+    
+    //     // $admin->nama = $request->nama;
+    //     // $admin->no_hp = $request->no_hp;
+    //     // $admin->alamat = $request->alamat;
+
+    //     // if ($image) {
+    //     //     $admin->image = $image;
+    //     // }
+        
+    //     // // Simpan perubahan
+    //     // $admin->save();
+    
+    //     return response()->json([
+    //         'status' => true,
+    //         'message' => 'Success Update Data Admin!',
+    //     ]);
+    // }
+    
+    
+
     public function update(Request $request, $id)
     {
-        // $image = [];
-    
-        // if ($request->hasFile('image')) {
-        //     $files = $request->file('image');
-    
-        //     foreach ($files as $key => $file) {
-        //         $path = 'files/admin/image/';
-        //         $nameFile = md5($file->getClientOriginalName() . rand(rand(231, 992), 123882)) . "." . $file->getClientOriginalExtension();
-    
-        //         $file->move($path, $nameFile);
-    
-        //         $image[$key] = $path . $nameFile;
-        //     }
-        // }
-        
+        $admin = Admin::find($id);
 
-        DB::transaction(function () use ($request, $id) {
-            // Update tabel pertama
-            User::where("id", $id)->update([
-                'name' => $request->nama
-            ]);
+        if (!$admin) {
+            return response()->json(['message' => 'Data not found.'], 404);
+        }
 
-            if ($request->file("image")) {
-                if ($request->image_lama) {
-                    Storage::delete($request->image_lama);
-                }
-            
-            $image = $request->file("image")->store("image");
-    
-            }else{
-                $image= $request->image_lama;
-            }
-            // Update tabel kedua
-            Admin::where("user_id", $id)->update([
-                'nama' => $request->nama,
-                'no_hp' => $request->no_hp,
-                'alamat' => $request->alamat,
-                'image' => $image,
-            ]);
-        
-            // Jika tidak ada exception yang dilempar, transaksi akan di-commit secara otomatis
-        });
-        // $admin = Admin::find($id);
-        // if (!$admin) {
-        //     return response()->json(['message' => 'Data not found.'], 404);
-        // }
-    
-        // $admin->nama = $request->nama;
-        // $admin->no_hp = $request->no_hp;
-        // $admin->alamat = $request->alamat;
+        // Mengupdate atribut-atribut admin kecuali username
+        $admin->nama = $request->nama;
+        $admin->image = $request->hasFile('image') ? $request->file('image')->store('admin') : $admin->image;
+        $admin->no_hp = $request->no_hp;
+        $admin->alamat = $request->alamat;
 
-        // if ($image) {
-        //     $admin->image = $image;
-        // }
-        
-        // // Simpan perubahan
-        // $admin->save();
-    
+        // Simpan perubahan
+        $admin->save();
+
+        // Mengupdate atribut pada tabel 'user'
+        $user = User::find($id);
+        if ($user) {
+            $user->username = $request->username;
+            $user->save();
+        }
+
         return response()->json([
             'status' => true,
             'message' => 'Success Update Data Admin!',
         ]);
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
