@@ -58,8 +58,8 @@ class User extends Authenticatable
         return $this->hasOne(Mitra::class, 'user_id');
     }
 
-    // public function validator()
-    // {
-    //     return $this->hasOne(Validator::class, 'user_id');
-    // }
+    public function validator()
+    {
+        return $this->hasOne(Validator::class, 'user_id');
+    }
 }
