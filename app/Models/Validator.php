@@ -3,19 +3,25 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Image;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Mitra extends Model
+class Validator extends Model
 {
+    
+    
     use HasFactory;
 
     protected $guarded = ['id'];
-    protected $table = 'mitra';
+    protected $table = 'validator';
+    protected $primaryKey = 'id';
+
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->onDelete('cascade');
     }
+
     public function images()
     {
         return $this->hasMany(Image::class);

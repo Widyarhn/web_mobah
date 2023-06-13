@@ -3,23 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Mitra;
+use App\Models\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class MitraController extends Controller
+class ValidatorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data["mitra"] = Mitra::all();
+        $data["validator"] = Validator::all();
         
-        return view('akun.mitra.index', $data);
+        return view('akun.validator.index', $data);
     }
 
     /**
@@ -54,16 +54,16 @@ class MitraController extends Controller
             'remember_token' => $default_user_value['remember_token'],
         ]);
 
-        // Memberikan peran "mitra" kepada pengguna
-        $user->assignRole('mitra');
+        // Memberikan peran "Validator" kepada pengguna
+        $user->assignRole('validator');
 
         if ($request->hasfile("image"))
         {
-            $data = $request->file("image")->store("mitra");
+            $data = $request->file("image")->store("validator");
         }
 
         // Membuat data Validator baru
-        $mitra = Mitra::create([
+        $validator = Validator::create([
             'user_id' => $user->id,
             'nama' => $request->nama,
             'no_hp' => $request->no_hp,
@@ -97,7 +97,7 @@ class MitraController extends Controller
      */
     public function edit($id)
     {
-        $result = User::with('mitra')->find($id);
+        $result = User::with('validator')->find($id);
     
         if ($result) {
             return response()->json(['data' => $result]);
@@ -116,20 +116,20 @@ class MitraController extends Controller
         
     public function update(Request $request, $id)
     {
-        $mitra = Mitra::find($id);
+        $validator = Validator::find($id);
 
-        if (!$mitra) {
+        if (!$validator) {
             return response()->json(['message' => 'Data not found.'], 404);
         }
 
         // Mengupdate atribut-atribut Validator kecuali username
-        $mitra->nama = $request->nama;
-        $mitra->image = $request->hasFile('image') ? $request->file('image')->store('mitra') : $mitra->image;
-        $mitra->no_hp = $request->no_hp;
-        $mitra->alamat = $request->alamat;
+        $validator->nama = $request->nama;
+        $validator->image = $request->hasFile('image') ? $request->file('image')->store('validator') : $validator->image;
+        $validator->no_hp = $request->no_hp;
+        $validator->alamat = $request->alamat;
 
         // Simpan perubahan
-        $mitra->save();
+        $validator->save();
 
         // Mengupdate atribut pada tabel 'user'
         $user = User::find($id);
@@ -159,10 +159,10 @@ class MitraController extends Controller
             // Find the user by ID
             $user = User::findOrFail($id);
             
-            // Find the mitra by user ID and delete
-            $mitra = Mitra::where('user_id', $id)->first();
-            if ($mitra) {
-                $mitra->delete();
+            // Find the validator by user ID and delete
+            $validator = Validator::where('user_id', $id)->first();
+            if ($validator) {
+                $validator->delete();
             }
             
             // Delete the user
@@ -187,10 +187,10 @@ class MitraController extends Controller
     public function datatable(Request $request)
     {
         $data = DB::table('users')
-            ->join('mitra', 'users.id', '=', 'mitra.user_id')
+            ->join('validator', 'users.id', '=', 'validator.user_id')
             ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
             ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
-            ->where('roles.name', 'mitra')
+            ->where('roles.name', 'validator')
             ->get();
     
         return DataTables::of($data)->make();

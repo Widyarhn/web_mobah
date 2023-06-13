@@ -27,7 +27,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('petugas.index') }}" class=" {{ Request::segment("1") == "petugas" ? 'active' : '' }}">
+                <a href="{{ route('kelola-petugas.index') }}" class=" {{ Request::segment("1") == "petugas" ? 'active' : '' }}">
                     <i class="bi bi-circle"></i><span>Petugas Gapoktan</span>
                 </a>
             </li>

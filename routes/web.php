@@ -45,7 +45,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('kelola-gapoktan/datatable', [MitraController::class, 'datatable'])->name('kelola-gapoktan.datatable');
     Route::resource('kelola-gapoktan', MitraController::class);
     
-    Route::resource('/petugas', ValidatorController::class);
+    Route::get('kelola-petugas/datatable', [ValidatorController::class, 'datatable'])->name('kelola-petugas.datatable');
+    Route::resource('kelola-petugas', ValidatorController::class);
 
     //Gabah
     // Route::post('data-gabah/{id?}/update', [DataGabahController::class, 'update'])->name('data-gabah.update');
