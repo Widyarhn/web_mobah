@@ -116,29 +116,8 @@ class AdminController extends Controller
         if ($request->hasfile("image"))
         {
             $data = $request->file("image")->store("admin");
-        }
-        // Mengelola gambar
-        // $imagePaths = [];
-
-        // if ($request->hasFile('image')) {
-        //     $path = 'files/admin/image/';
-
-        //     if (!is_dir($path)) {
-        //         // Membuat direktori jika belum ada
-        //         mkdir($path, 0777, true);
-
-        //         // Mengatur izin pada direktori
-        //         chmod($path, 0777);
-        //     }
-
-        //     foreach ($request->file('image') as $key => $file) {
-        //         $nameFile = md5($file->getClientOriginalName() . rand(rand(231, 992), 123882)) . "." . $file->getClientOriginalExtension();
-
-        //         $file->move($path, $nameFile);
-
-        //         $imagePaths[] = $path . $nameFile;
-        //     }
-        // }
+        }         
+        
 
         // Membuat data admin baru
         $admin = Admin::create([

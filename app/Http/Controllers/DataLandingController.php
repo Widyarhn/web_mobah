@@ -13,12 +13,19 @@ class DataLandingController extends Controller
         $data = DB::table('pemilik')
 
                     ->join('gabah', 'pemilik.id', '=', 'gabah.id_pemilik')
+                    ->where('gabah.klasifikasi', 'kering')
                     ->get();
     
-        // Jika ingin memfilter data berdasarkan role member, Anda bisa menggunankan code berikut:
-        // if(getRoleName() == 'member'){
-        //     $data = $data->where('member_id', auth()->user()->member->id);
-        // }
+        return DataTables::of($data)->make();
+    }
+
+    public function datatable2(Request $request)
+    {
+        $data = DB::table('pemilik')
+
+                    ->join('gabah', 'pemilik.id', '=', 'gabah.id_pemilik')
+                    ->where('gabah.klasifikasi', 'basah')
+                    ->get();
     
         return DataTables::of($data)->make();
     }

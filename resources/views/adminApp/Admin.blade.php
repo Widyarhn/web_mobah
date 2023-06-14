@@ -47,8 +47,9 @@
                                     <i class="bi bi-clock-history"></i>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>145</h6>
-                                    <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                                    <h6>{{ $avg }}</h6>
+                                    <span class="text-success small pt-1 fw-bold">Menit</span> 
+                                    {{-- <span class="text-muted small pt-2 ps-1">increase</span> --}}
                                     
                                 </div>
                             </div>
@@ -82,7 +83,7 @@
                                     <i class=" bi bi-journal-text bi"></i>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>$3,264</h6>
+                                    <h6>{{ $jenis }}</h6>
                                     <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
                                     
                                 </div>
@@ -119,8 +120,8 @@
                                     <i class="bi bi-people-fill"></i>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>1244</h6>
-                                    <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                                    <h6>{{ $mitra }}</h6>
+                                    <span class="text-danger small pt-1 fw-bold">Gapoktan</span> <span class="text-muted small pt-2 ps-1">terdaftar</span>
                                     
                                 </div>
                             </div>
@@ -134,7 +135,7 @@
         </div>
         
         <!-- Reports -->
-        <div class="col-8">
+        <div class="col-12">
             <div class="card">
                 
                 <div class="filter">
@@ -217,7 +218,7 @@
         <!-- End Left side columns -->
         
         <!-- Right side columns -->
-        <div class="col-lg-4">
+        {{-- <div class="col-lg-4">
             
             <!-- Website Traffic -->
             <div class="card">
@@ -297,7 +298,7 @@
                 </div>
             </div><!-- End Website Traffic -->
             
-        </div><!-- End Right side columns -->
+        </div><!-- End Right side columns --> --}}
         
     </div>
 </section>

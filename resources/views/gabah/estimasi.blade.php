@@ -57,9 +57,11 @@
 
                         <h5 class="card-title">Estimasi Waktu Pada Gabah<span> | Semua</span></h5>
                         <div>
+                            @can("validator")
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                                 + Tambahkan Data Gabah
                             </button>
+                            @endcan
                             <a href="{{url('/pemantauan-gabah')}}" class="btn btn-success btn-sm">
                                 Pemantauan Gabah
                             </a>
@@ -78,7 +80,10 @@
                                     <th scope="col" class="text-center">Kadar Air Awal(%)</th>
                                     <th scope="col" class="text-center">Suhu Akhir (C)</th>
                                     <th scope="col" class="text-center">Kadar Air Akhir(%)</th>
+                                    @can("validator")
                                     <th scope="col" class="text-center">Action</th>
+                                    @endcan
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -92,6 +97,7 @@
                                     <td>{{ $p->gabah->kadar_air1 }}</td>
                                     <td>{{ $p->gabah->suhu2 }}</td>
                                     <td>{{ $p->gabah->kadar_air2 }}</td>
+                                    @can("validator")
                                     <td class="text-center">
                                         @if (empty($p->gabah->klasifikasi))
                                         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2-{{ $p->id }}">Validasi</button>
@@ -107,6 +113,7 @@
                                         <span class="badge bg-danger">Kering</span> --}}
                                         {{-- {{ $p->gabah->klasifikasi }} --}}
                                     </td>
+                                    @endcan
                                 </tr>
                                 @endforeach
                             </tbody>

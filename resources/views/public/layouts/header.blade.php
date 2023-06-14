@@ -1,22 +1,22 @@
 <div class="d-flex align-items-center justify-content-center">
     <a href="index.html" class="logo d-flex align-items-center justify-content-center">
-        <img src="{{ asset('admin') }}/assets/img/logo.png" alt="" style="max-height: 35px">
+        {{-- <img src="{{ asset('admin') }}/assets/img/logo.png" alt="" style="max-height: 35px"> --}}
         <span class="d-none d-lg-block">MangDaib</span>
     </a>
     <i class="bi bi-list toggle-sidebar-btn" ></i>
 </div><!-- End Logo -->
 
 <div class="search-bar">
-    <form class="search-form d-flex align-items-center" method="POST" action="#">
+    {{-- <form class="search-form d-flex align-items-center" method="POST" action="#">
         <input type="text" name="query" placeholder="Search" title="Enter search keyword">
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-    </form>
+    </form> --}}
 </div><!-- End Search Bar -->
 
 <nav class="header-nav ms-auto">
     <ul class="d-flex align-items-center">
         
-        <li class="nav-item d-block d-lg-none">
+        {{-- <li class="nav-item d-block d-lg-none">
             <a class="nav-link nav-icon search-bar-toggle " href="#">
                 <i class="bi bi-search"></i>
             </a>
@@ -95,16 +95,16 @@
                 
             </ul>
             
-        </li>
+        </li> --}}
         
         <li class="nav-item dropdown pe-3">
                 
             <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                @if (empty(Auth::user()->gambar)) 
+                @if (empty(Auth::user()->image)) 
                 <img src="{{ url('/admin/assets/img/default_gambar.png') }}" alt="Profile" class="rounded-circle" 
                 style="width: 38px; height: 120px; border-radius: 50%">
                 @else
-                    <img src="{{ url('/storage/'.Auth::user()->gambar) }}" alt="Profile" class="rounded-circle" 
+                    <img src="{{ url('/storage/'.Auth::user()->image) }}" alt="Profile" class="rounded-circle" 
                     style="width: 38px; height: 100px; border-radius: 40%">
                 @endif
                 <span class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->user()->name }}</span>

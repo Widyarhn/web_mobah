@@ -16,6 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fontawesome.com/icons" />
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&family=Jost:wght@500;600;700&display=swap" rel="stylesheet"> 
+    <link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/af-2.5.3/fc-4.2.2/fh-3.3.2/r-2.4.1/rg-1.3.1/rr-1.3.3/sc-2.1.1/sb-1.4.2/sp-2.1.2/datatables.min.css" rel="stylesheet"/>
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -58,10 +59,9 @@
                         <a href="#home" class="nav-item nav-link active">Home</a>
                         <a href="#about" class="nav-item nav-link">About</a>
                         <a href="#partnership" class="nav-item nav-link">Partnership</a>
-                        <a href="#app" class="nav-item nav-link">App</a>
                         <a href="#data-gabah" class="nav-item nav-link">Data Gabah</a>
                     </div>
-                    <a href="{{ url('/login') }}" class="btn btn-primary-gradient rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Berlangganan?</a>
+                    <a href="#app" class="btn btn-primary-gradient rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Download Aplikasi?</a>
                 </div>
             </nav>
 
@@ -78,11 +78,11 @@
                         </div>
                         <div class="col-lg-4 d-flex justify-content-center justify-content-lg-end wow fadeInUp" data-wow-delay="0.3s">
                             <div class="owl-carousel screenshot-carousel">
-                                <img class="img-fluid" src="{{ asset('fitapp') }}/img/screenshot-1.png" alt="">
-                                <img class="img-fluid" src="{{ asset('fitapp') }}/img/screenshot-2.png" alt="">
-                                <img class="img-fluid" src="{{ asset('fitapp') }}/img/screenshot-3.png" alt="">
-                                <img class="img-fluid" src="{{ asset('fitapp') }}/img/screenshot-4.png" alt="">
-                                <img class="img-fluid" src="{{ asset('fitapp') }}/img/screenshot-5.png" alt="">
+                                <img class="img-fluid" src="{{ asset('fitapp') }}/img/halut.jpeg" alt="">
+                                <img class="img-fluid" src="{{ asset('fitapp') }}/img/login.jpeg" alt="">
+                                <img class="img-fluid" src="{{ asset('fitapp') }}/img/datagabah.jpeg" alt="">
+                                <img class="img-fluid" src="{{ asset('fitapp') }}/img/prediksi.jpeg" alt="">
+                                {{-- <img class="img-fluid" src="{{ asset('fitapp') }}/img/screenshot-5.png" alt=""> --}}
                             </div>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                         {{-- <a href="" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill mt-3">Read More</a> --}}
                     </div>
                     <div class="col-lg-6">
-                        <img class="img-fluid wow fadeInUp" data-wow-delay="0.5s" src="{{ asset('fitapp') }}/img/about.png">
+                        <img class="img-fluid wow fadeInUp" data-wow-delay="0.5s" src="{{ asset('fitapp') }}/img/ss.png">
                     </div>
                 </div>
             </div>
@@ -138,7 +138,7 @@
             <div class="container py-5 px-lg-5">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
-                        <img class="img-fluid wow fadeInUp" data-wow-delay="0.1s" src="{{ asset('fitapp') }}/img/about.png">
+                        <img class="img-fluid wow fadeInUp" data-wow-delay="0.1s" src="{{ asset('fitapp') }}/img/ss.png">
                     </div>
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                         <h5 class="text-primary-gradient fw-medium">Partnership</h5>
@@ -172,11 +172,11 @@
                     </div>
                     <div class="col-lg-4 d-flex justify-content-center justify-content-lg-end wow fadeInUp" data-wow-delay="0.3s">
                         <div class="owl-carousel screenshot-carousel">
-                            <img class="img-fluid" src="{{ asset('fitapp') }}/img/screenshot-1.png" alt="">
-                            <img class="img-fluid" src="{{ asset('fitapp') }}/img/screenshot-2.png" alt="">
-                            <img class="img-fluid" src="{{ asset('fitapp') }}/img/screenshot-3.png" alt="">
-                            <img class="img-fluid" src="{{ asset('fitapp') }}/img/screenshot-4.png" alt="">
-                            <img class="img-fluid" src="{{ asset('fitapp') }}/img/screenshot-5.png" alt="">
+                            <img class="img-fluid" src="{{ asset('fitapp') }}/img/halut.jpeg" alt="">
+                            <img class="img-fluid" src="{{ asset('fitapp') }}/img/login.jpeg" alt="">
+                            <img class="img-fluid" src="{{ asset('fitapp') }}/img/datagabah.jpeg" alt="">
+                            <img class="img-fluid" src="{{ asset('fitapp') }}/img/prediksi.jpeg" alt="">
+                            {{-- <img class="img-fluid" src="{{ asset('fitapp') }}/img/screenshot-5.png" alt=""> --}}
                         </div>
                     </div>
                 </div>
@@ -350,9 +350,9 @@
                 <div class="row g-5">
                     <div class="col-md-6 col-lg-3">
                         <h4 class="text-white mb-4">Address</h4>
-                        <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                        <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                        <p><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                        <p><i class="fa fa-map-marker-alt me-3"></i>Indramayu, Jawa Barat</p>
+                        <p><i class="fa fa-phone-alt me-3"></i>Telp. (0234) 5746464</p>
+                        <p><i class="fa fa-envelope me-3"></i>info@mangdaib.com</p>
                         <div class="d-flex pt-2">
                             <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
@@ -362,19 +362,19 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <h4 class="text-white mb-4">Quick Link</h4>
-                        <a class="btn btn-link" href="">About Us</a>
-                        <a class="btn btn-link" href="">Contact Us</a>
-                        <a class="btn btn-link" href="">Privacy Policy</a>
-                        <a class="btn btn-link" href="">Terms & Condition</a>
-                        <a class="btn btn-link" href="">Career</a>
+                        <a class="btn btn-link" href="#about">About App</a>
+                        {{-- <a class="btn btn-link" href="">Contact Us</a> --}}
+                        <a class="btn btn-link" href="#partnership">Partnership</a>
+                        <a class="btn btn-link" href="#data-gabah">Data Gabah</a>
+                        <a class="btn btn-link" href="#app">Download Aplikasi</a>
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <h4 class="text-white mb-4">Popular Link</h4>
                         <a class="btn btn-link" href="">About Us</a>
-                        <a class="btn btn-link" href="">Contact Us</a>
-                        <a class="btn btn-link" href="">Privacy Policy</a>
+                        <a class="btn btn-link" href="#steps">How to Use</a>
+                        {{-- <a class="btn btn-link" href="">Privacy Policy</a>
                         <a class="btn btn-link" href="">Terms & Condition</a>
-                        <a class="btn btn-link" href="">Career</a>
+                        <a class="btn btn-link" href="">Career</a> --}}
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <h4 class="text-white mb-4">Newsletter</h4>
@@ -390,7 +390,7 @@
                 <div class="copyright">
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved. 
+                            &copy; <a class="border-bottom" href="">MangDaib</a>, All Right Reserved. 
 							
 							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
 							Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
@@ -400,9 +400,9 @@
                         <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
                                 <a href="">Home</a>
-                                <a href="">Cookies</a>
+                                {{-- <a href="">Cookies</a> --}}
                                 <a href="">Help</a>
-                                <a href="">FQAs</a>
+                                {{-- <a href="">FQAs</a> --}}
                             </div>
                         </div>
                     </div>
@@ -421,8 +421,10 @@
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
     crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    
+    {{-- <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    --}}
+
+    <script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/af-2.5.3/fc-4.2.2/fh-3.3.2/r-2.4.1/rg-1.3.1/rr-1.3.3/sc-2.1.1/sb-1.4.2/sp-2.1.2/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('fitapp') }}/lib/wow/wow.min.js"></script>
     <script src="{{ asset('fitapp') }}/lib/easing/easing.min.js"></script>
@@ -443,7 +445,7 @@
         
         $(document).ready(function() {
             
-            table = $("#datatable").DataTable({
+            table = $("#dataGabah").DataTable({
                 responsive: true,
                 processing: true,
                 serverSide: true,
@@ -486,11 +488,66 @@
                     },
                     
                 },
+                {
+                    targets: 4,
+                    createdCell: function(td, cellData, rowData, row, col) {
+                        if($(td).text().length > 50) {
+                            let txt = $(td).text()
+                            $(td).text(txt.substr(0, 50) + '...')
+                        }
+                    },
+                    
+                },
+                {
+                    targets: 5,
+                    createdCell: function(td, cellData, rowData, row, col) {
+                        if($(td).text().length > 50) {
+                            let txt = $(td).text()
+                            $(td).text(txt.substr(0, 50) + '...')
+                        }
+                    },
+                    
+                },
+                {
+                    targets: 6,
+                    createdCell: function(td, cellData, rowData, row, col) {
+                        if($(td).text().length > 50) {
+                            let txt = $(td).text()
+                            $(td).text(txt.substr(0, 50) + '...')
+                        }
+                    },
+                    
+                },
+                {
+                    targets: 7,
+                    createdCell: function(td, cellData, rowData, row, col) {
+                        if($(td).text().length > 50) {
+                            let txt = $(td).text()
+                            $(td).text(txt.substr(0, 50) + '...')
+                        }
+                    },
+                    
+                },
+                {
+                    targets: 8,
+                    createdCell: function(td, cellData, rowData, row, col) {
+                        if($(td).text().length > 50) {
+                            let txt = $(td).text()
+                            $(td).text(txt.substr(0, 50) + '...')
+                        }
+                    },
+                    
+                },
                 ],
                 columns: [
                 { data: null },
                 { data: 'jenis'},
                 { data: 'berat'},
+                { data: 'suhu1'},
+                { data: 'kadar_air1'},
+                { data: 'suhu2'},
+                { data: 'kadar_air2'},
+                { data: 'waktu'},
                 { data: 'klasifikasi'},
                 
                 ],
@@ -500,7 +557,120 @@
                 }
             });
         })
-        
+        $(document).ready(function() {
+            
+            table = $("#datatable2").DataTable({
+                responsive: true,
+                processing: true,
+                serverSide: true,
+                autoWidth: true,
+                ajax: "{{ route('gabah-landing.datatable2') }}",
+                columnDefs: [
+                {
+                    targets: 0,
+                    render: function(data, type, full, meta) {
+                        return (meta.row + 1);
+                    }
+                }, 
+                {
+                    targets: 1,
+                    createdCell: function(td, cellData, rowData, row, col) {
+                        if($(td).text().length > 50) {
+                            let txt = $(td).text()
+                            $(td).text(txt.substr(0, 50) + '...')
+                        }
+                    },
+                    
+                },
+                {
+                    targets: 2,
+                    createdCell: function(td, cellData, rowData, row, col) {
+                        if($(td).text().length > 50) {
+                            let txt = $(td).text()
+                            $(td).text(txt.substr(0, 50) + '...')
+                        }
+                    },
+                    
+                },
+                {
+                    targets: 3,
+                    createdCell: function(td, cellData, rowData, row, col) {
+                        if($(td).text().length > 50) {
+                            let txt = $(td).text()
+                            $(td).text(txt.substr(0, 50) + '...')
+                        }
+                    },
+                    
+                },
+                {
+                    targets: 4,
+                    createdCell: function(td, cellData, rowData, row, col) {
+                        if($(td).text().length > 50) {
+                            let txt = $(td).text()
+                            $(td).text(txt.substr(0, 50) + '...')
+                        }
+                    },
+                    
+                },
+                {
+                    targets: 5,
+                    createdCell: function(td, cellData, rowData, row, col) {
+                        if($(td).text().length > 50) {
+                            let txt = $(td).text()
+                            $(td).text(txt.substr(0, 50) + '...')
+                        }
+                    },
+                    
+                },
+                {
+                    targets: 6,
+                    createdCell: function(td, cellData, rowData, row, col) {
+                        if($(td).text().length > 50) {
+                            let txt = $(td).text()
+                            $(td).text(txt.substr(0, 50) + '...')
+                        }
+                    },
+                    
+                },
+                {
+                    targets: 7,
+                    createdCell: function(td, cellData, rowData, row, col) {
+                        if($(td).text().length > 50) {
+                            let txt = $(td).text()
+                            $(td).text(txt.substr(0, 50) + '...')
+                        }
+                    },
+                    
+                },
+                {
+                    targets: 8,
+                    createdCell: function(td, cellData, rowData, row, col) {
+                        if($(td).text().length > 50) {
+                            let txt = $(td).text()
+                            $(td).text(txt.substr(0, 50) + '...')
+                        }
+                    },
+                    
+                },
+                ],
+                columns: [
+                { data: null },
+                { data: 'jenis'},
+                { data: 'berat'},
+                { data: 'suhu1'},
+                { data: 'kadar_air1'},
+                { data: 'suhu2'},
+                { data: 'kadar_air2'},
+                { data: 'waktu'},
+                { data: 'klasifikasi'},
+                
+                ],
+                language: {
+                    searchPlaceholder: 'Search...',
+                    sSearch: '',
+                }
+            });
+        })
     </script>
 </body>
 

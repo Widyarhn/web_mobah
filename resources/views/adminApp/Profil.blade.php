@@ -25,7 +25,7 @@
                     @if (empty(Auth::user()->gambar))
                         <img src="{{ url('/admin/assets/img/default_gambar.png') }}" style="width: 100%; height: 120px; border-radius: 50%"> 
                     @else
-                    <img src="{{ url('/storage/'.Auth::user()->gambar) }}" alt="Profile" style="width: 100%; height: 120px; border-radius: 50%">
+                    <img src="{{ url('/storage/'.Auth::user()->image) }}" alt="Profile" style="width: 100%; height: 120px; border-radius: 50%">
                     @endif
                     <h2>{{ auth()->user()->name }}</h2>
                     <h3>admin</h3>
@@ -54,16 +54,16 @@
                         
                         <div class="tab-pane fade show active profile-overview" id="profile-overview">
                             
-                            <form action="{{ url('/admin/profil/' . $edit->id ) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ url('/profil/' . $edit->id ) }}" method="POST" enctype="multipart/form-data">
                                 @method("PUT")
                                 @csrf
-                                <input type="hidden" name="gambar_lama" id="gambar_lama" value="{{ $edit->gambar }}">
+                                <input type="hidden" name="image_lama" id="image_lama" value="{{ $edit->image }}">
                                 <div class="row mb-3">
                                     <label for="gambar" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                                     <div class="col-md-8 col-lg-9">
-                                    <img src="{{ url('/storage/'. $edit->gambar) }}" alt="Profile" height="75" >
+                                    <img src="{{ url('/storage/'. $edit->image) }}" alt="Profile" height="75" >
                                     <div class="pt-2">
-                                        <input onchange="previewImage()" type="file" class="form-control" name="gambar" id="gambar">
+                                        <input onchange="previewImage()" type="file" class="form-control" name="image" id="image">
                                     </div>
                                     </div>
                                 </div>
@@ -76,16 +76,16 @@
                                 </div>
                                 
                                 <div class="row mb-3">
-                                    <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                                    <label for="username" class="col-md-4 col-lg-3 col-form-label">Username</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="email" type="text" class="form-control" id="email" value="{{ $edit->email }}">
+                                        <input name="username" type="text" class="form-control" id="username" value="{{ $edit->username }}">
                                     </div>
                                 </div>
                                 
                                 <div class="row mb-3">
-                                    <label for="nomer_telepon" class="col-md-4 col-lg-3 col-form-label">Nomer Telepon</label>
+                                    <label for="no_hp" class="col-md-4 col-lg-3 col-form-label">Nomer Handphone</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="nomer_telepon" type="text" class="form-control" id="nomer_telepon" value="{{ $edit->nomer_telepon }}">
+                                        <input name="no_hp" type="text" class="form-control" id="no_hp" value="{{ $edit->no_hp }}">
                                     </div>
                                 </div>
                                 
@@ -96,7 +96,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="row mb-3">
+                                {{-- <div class="row mb-3">
                                     <label for="jenis_kelamin" class="col-md-4 col-lg-3 col-form-label">Jenis Kelamin</label>
                                     <div class="col-md-8 col-lg-9">
                                         <select name="jenis_kelamin" class="form-control" id="jenis_kelamin">
@@ -105,7 +105,7 @@
                                             <option value="P" {{ $edit->jenis_kelamin == "P" ? 'selected' : '' }}>Perempuan</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> --}}
                                 
                                 <div class="text-center">
                                     <button type="reset" class="btn btn-danger">Batal</button>
@@ -120,7 +120,7 @@
                         <div class="tab-pane fade pt-3" id="profile-change-password" >
                             <!-- Change Password Form -->
                             
-                            <form action="{{ url('/admin/profil/'.$edit->id). '/change_password' }}" method="POST">
+                            <form action="{{ url('/profil/'.$edit->id). '/change_password' }}" method="POST">
                                 @method("PUT")
                                 @csrf
                                 <div class="row mb-3">

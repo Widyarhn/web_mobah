@@ -11,7 +11,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GabahController;
 use App\Http\Controllers\ValidatorController;
 use App\Http\Controllers\Data\DataGabahController;
-use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\Profil\ProfilAdminController;
 use App\Http\Controllers\LaporanController;
 
 /*
@@ -31,6 +31,7 @@ use App\Http\Controllers\LaporanController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('gabah-landing/datatable', [DataLandingController::class, 'datatable'])->name('gabah-landing.datatable');
+Route::get('gabah-landing/datatable2', [DataLandingController::class, 'datatable2'])->name('gabah-landing.datatable2');
 
 Route::group(['middleware' => ['guest']], function() {
     Route::get('/login', [LoginController::class, 'index'])->name('loginform'); 
@@ -62,14 +63,45 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get("/logout", [LoginController::class, 'logout']);
     
     
-    Route::resource("/profil", ProfilController::class);
-
-    Route::get('/laporan/cetak_pdf', [LaporanController::class, 'cetak_pdf']);
+    Route::resource("/profil", ProfilAdminController::class);
+    Route::put("/profil/{id}/change_password", [ProfilAdminController::class, "change_password"]);
+    Route::get('laporan/detailtable', [LaporanController::class, 'datatable'])->name('laporan.datatable');
+    
     Route::resource("/laporan", LaporanController::class);
 });
 
+// Route::group(["middleware" => ["auth"]], function() {
+//     Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
+    
+//     Route::group(["middleware" => ["can:admin"]], function() {
+//         Route::resource("/profil", ProfilAdminController::class);
+//         Route::get('kelola-admin/datatable', [AdminController::class, 'datatable'])->name('kelola-admin.datatable');
+//         Route::resource('kelola-admin', AdminController::class);
+        
+//         Route::get('kelola-gapoktan/datatable', [MitraController::class, 'datatable'])->name('kelola-gapoktan.datatable');
+//         Route::resource('kelola-gapoktan', MitraController::class);
 
-// Route::get('tambah-admin', [AdminController::class, 'index'])->name('contents.admin');
-    // Route::resource('/profile', ProfileController::class);
-    // Route::get('/profile/{id}/ubah_password', [UbahPasswordController::class ,'index'])->name('ubah_password');
-    // Route::post('/profile/{id}/ubah_password', [UbahPasswordController::class ,'update'])->name('update_password');
+//     });
+
+//     // Route::group(["middleware" => ["can:mitra"]], function() {
+//         // Route::resource("/profil", ProfilAdminController::class);
+//     //     Route::resource('/petugas', ValidatorController::class);
+//     // });
+
+//     // Route::group(["middleware" => ["can:validator"]], function() {
+//         // Route::resource("/profil", ProfilAdminController::class);
+        
+//     // });
+    
+//     Route::get('data-gabah/datatable', [DataGabahController::class, 'datatable'])->name('data-gabah.datatable');
+//     Route::get('data-gabah/detailtable', [DataGabahController::class, 'detailtable'])->name('data-gabah.detailtable');
+    
+//     Route::resource('data-gabah', DataGabahController::class);
+    
+//     Route::get('laporan/detailtable', [LaporanController::class, 'datatable'])->name('laporan.datatable');
+//     Route::resource("/laporan", LaporanController::class);    
+    
+//     Route::get("/logout", [LoginController::class, 'logout']);
+
+    
+// });
