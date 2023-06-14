@@ -70,9 +70,11 @@
                     <div class="card-body">
                         <h5 class="card-title">Data Gabah <span>| All Data</span></h5>
                         <div>
+                            @can("validator")
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                                 + Tambahkan Data Gabah
                             </button>
+                            @endcan
                             {{-- <a href="{{url('/klasifikasi-gabah')}}" class="btn btn-success btn-sm">
                                 Klasifikasi Gabah
                             </a> --}}
@@ -87,7 +89,9 @@
                                     <th class="col-md-2">Jenis Gabah</th>
                                     <th class="col-md-1">Berat</th>
                                     <th class="col-md-3">Tanggal</th>
+                                    @can("validator")
                                     <th class="col-md-4">Action</th>
+                                    @endcan
                                 </tr>
                             </thead>
                         </table>
@@ -179,6 +183,7 @@
                         <button class="btn btn-primary btn-sm" id="btnSave">Simpan Perubahan</button>
                     </div>
                 </form>
+                
             </div>
         </div>
     </div>
@@ -296,7 +301,7 @@
                         
                         <a href="javascript:void(0)" onclick="edit('${data}')" class="btn btn-sm btn-primary btn-edit"><i class="bi bi-pencil"></i></a>
                         <a href="javascript:void(0)" onclick="destroy('${data}')" class="btn btn-sm btn-danger btn-delete"><i class="bi bi-trash"></i></a>
-                        <a href="{{ route('data-gabah.show', ':id') }}" class="btn btn-sm btn-secondary"><i class="bi bi-eye"></i></a>
+                        <a href="javascript:void(0)" onclick="show('${data}')" class="btn btn-sm btn-secondary btn-show"><i class="bi bi-eye"></i></a>
                     </div>
                     `;
                     
@@ -461,6 +466,22 @@
                 })
             }
         })
+    } 
+
+    function show(id) {
+        $('#editFormID')[0].reset();
+        var url = "{{ route('data-gabah.show',":id") }}";
+        url = url.replace(':id', id);
+        
+        $.get(url, function (response) {
+            response = response.data;
+            console.log(response);
+            
+            $('#id').val(response.id);
+            $('#gabahEditModal').modal('show');
+            $('.modal-title').text('Detail Pemilik');
+
+        });
     } 
 </script>
 

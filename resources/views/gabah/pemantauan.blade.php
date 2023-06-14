@@ -56,9 +56,11 @@
                     <div class="card-body">
                         <h5 class="card-title">Pemantauan Gabah dari Alat <span>| Saat ini</span></h5>
                         <div>
+                            @can("@validator")
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                                 + Tambahkan Data Gabah
                             </button>
+                            @endcan
                             <a href="{{url('/estimasi-gabah')}}" class="btn btn-success btn-sm">
                                 Estimasi Gabah
                             </a>

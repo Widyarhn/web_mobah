@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth2Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +14,5 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::post('/register', [Auth2Controller::class, 'register']);
+// Route::post('/login', [Auth2Controller::class, 'login']);

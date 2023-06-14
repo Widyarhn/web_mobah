@@ -83,10 +83,10 @@
         </a>
     </li><!-- End Setting Page Nav --> --}}
 
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="/bantuan">
             <i class="bi bi-question-circle"></i>
             <span>Bantuan?</span>
         </a>
-    </li>
+    </li> --}}
 </ul>

@@ -24,14 +24,21 @@ class DataGabahController extends Controller
 
     public function show( $id)
     {
-        $data = [
-            "gabah" => Gabah::where('id', $id)->first(),
-            "pemilik" => Pemilik::where('id', $id)->get()
-        ];
+        $result = Pemilik::with('gabah')->find($id);
+    
+        if ($result) {
+            return response()->json(['data' => $result]);
+        } else {
+            return response()->json(['message' => 'Data not found.'], 404);
+        }
+        // $data = [
+        //     "gabah" => Gabah::where('id', $id)->first(),
+        //     "pemilik" => Pemilik::where('id', $id)->get()
+        // ];
         
-        $this->detailtable();
+        // $this->detailtable();
 
-        return view('gabah.detail', $data);
+        // return view('gabah.detail', $data);
     }
     public function edit($id)
     {
