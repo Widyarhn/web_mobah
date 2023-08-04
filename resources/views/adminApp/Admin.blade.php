@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="ps-3">
                                     <h6>{{ $jenis }}</h6>
-                                    <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                                    <span class="text-success small pt-1 fw-bold">Jenis</span> <span class="text-muted small pt-2 ps-1">gabah</span>
                                     
                                 </div>
                             </div>
@@ -135,7 +135,7 @@
         </div>
         
         <!-- Reports -->
-        <div class="col-12">
+        {{-- <div class="col-12">
             <div class="card">
                 
                 <div class="filter">
@@ -214,7 +214,7 @@
                 </div>
                 
             </div>
-        </div><!-- End Reports -->
+        </div><!-- End Reports --> --}}
         <!-- End Left side columns -->
         
         <!-- Right side columns -->

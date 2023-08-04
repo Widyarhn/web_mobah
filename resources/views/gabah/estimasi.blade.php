@@ -57,11 +57,11 @@
 
                         <h5 class="card-title">Estimasi Waktu Pada Gabah<span> | Semua</span></h5>
                         <div>
-                            @can("validator")
+                            @role("validator")
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                                 + Tambahkan Data Gabah
                             </button>
-                            @endcan
+                            @endrole
                             <a href="{{url('/pemantauan-gabah')}}" class="btn btn-success btn-sm">
                                 Pemantauan Gabah
                             </a>
@@ -80,41 +80,37 @@
                                     <th scope="col" class="text-center">Kadar Air Awal(%)</th>
                                     <th scope="col" class="text-center">Suhu Akhir (C)</th>
                                     <th scope="col" class="text-center">Kadar Air Akhir(%)</th>
-                                    @can("validator")
+                                    @role("validator")
                                     <th scope="col" class="text-center">Action</th>
-                                    @endcan
+                                    @endrole
                                     
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($pemilik as $p)
-                                <tr>
-                                    <td>{{ $loop->iteration }}.</td>
-                                    <th>{{ $p->gabah->jenis }}</th>
-                                    <td>{{ $p->gabah->berat }}</td>
-                                    <td><a href="" class="text-primary">{{ $p->gabah->waktu }}</a></td>
-                                    <td>{{ $p->gabah->suhu1 }}</td>
-                                    <td>{{ $p->gabah->kadar_air1 }}</td>
-                                    <td>{{ $p->gabah->suhu2 }}</td>
-                                    <td>{{ $p->gabah->kadar_air2 }}</td>
-                                    @can("validator")
-                                    <td class="text-center">
-                                        @if (empty($p->gabah->klasifikasi))
-                                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2-{{ $p->id }}">Validasi</button>
-                                        @elseif($p->gabah->klasifikasi=="kering")
-                                        <span class="badge bg-success">{{ $p->gabah->klasifikasi }}</span>
-                                        @elseif($p->gabah->klasifikasi=="basah")
-                                        <span class="badge bg-warning">{{ $p->gabah->klasifikasi }}</span>
-                                        @else
-                                        <span class="badge bg-danger">{{ $p->gabah->klasifikasi }}</span>
-                                        @endif
-                                        {{-- <span class="badge bg-success">Ideal</span>
-                                        <span class="badge bg-warning">Basah</span>
-                                        <span class="badge bg-danger">Kering</span> --}}
-                                        {{-- {{ $p->gabah->klasifikasi }} --}}
-                                    </td>
-                                    @endcan
-                                </tr>
+                                @foreach($gabah as $singleGabah)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}.</td>
+                                        <th>{{ $singleGabah->jenis }}</th>
+                                        <td>{{ $singleGabah->berat }}</td>
+                                        <td><a href="{{ route('estimasi.show', ['id' => $singleGabah->id_pemilik]) }}" class="text-primary">{{ $singleGabah->waktu }}</a></td>
+                                        <td>{{ $singleGabah->suhu1 }}</td>
+                                        <td>{{ $singleGabah->kadar_air1 }}</td>
+                                        <td>{{ $singleGabah->suhu2 }}</td>
+                                        <td>{{ $singleGabah->kadar_air2 }}</td>
+                                        @role("validator")
+                                            <td class="text-center">
+                                                @if (empty($singleGabah->klasifikasi))
+                                                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2-{{ $singleGabah->id_pemilik }}">Validasi</button>
+                                                @elseif($singleGabah->klasifikasi=="kering")
+                                                    <span class="badge bg-success">{{ $singleGabah->klasifikasi }}</span>
+                                                @elseif($singleGabah->klasifikasi=="basah")
+                                                    <span class="badge bg-warning">{{ $singleGabah->klasifikasi }}</span>
+                                                @else
+                                                    <span class="badge bg-danger">{{ $singleGabah->klasifikasi }}</span>
+                                                @endif
+                                            </td>
+                                        @endrole
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -143,24 +139,24 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group mb-2">
-                            <label for="nama"> Nama </label>
-                            <input type="text" class="form-control" name="nama" id="nama" placeholder="Masukkan Nama">
+                            <label for="namaC"> Nama </label>
+                            <input type="text" class="form-control" name="namaC" id="namaC" placeholder="Masukkan Nama">
                         </div>
                         <div class="form-group mb-2">
-                            <label for="no_hp"> Nomer Handphone </label>
-                            <input type="number" class="form-control" name="no_hp" id="no_hp" placeholder="0" min="1">
+                            <label for="no_hpC"> Nomer Handphone </label>
+                            <input type="number" class="form-control" name="no_hpC" id="no_hpC" placeholder="0" min="1">
                         </div>
                         <div class="form-group mb-2">
-                            <label for="alamat"> Alamat </label>
-                            <textarea name="alamat" class="form-control" id="alamat" rows="5"></textarea>
+                            <label for="alamatC"> Alamat </label>
+                            <textarea name="alamatC" class="form-control" id="alamatC" rows="5"></textarea>
                         </div>
                         <div class="form-group mb-2">
-                            <label for="berat"> Berat Gabah </label>
-                            <input type="text" class="form-control" name="berat" id="berat" placeholder="Masukkan Berat Gabah" >
+                            <label for="beratC"> Berat Gabah </label>
+                            <input type="text" class="form-control" name="beratC" id="beratC" placeholder="Masukkan Berat Gabah" >
                         </div>
                         <div class="form-group mb-2">
-                            <label for="jenis"> Jenis Gabah </label>
-                            <input type="text" class="form-control" name="jenis" id="jenis" placeholder="Masukkan Jenis Gabah" >
+                            <label for="jenisC"> Jenis Gabah </label>
+                            <input type="text" class="form-control" name="jenisC" id="jenisC" placeholder="Masukkan Jenis Gabah" >
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -171,58 +167,61 @@
             </div>
         </div>
     </div>
-    
+
     {{-- Modal Validasi Gabah --}}
     @foreach ($pemilik as $item)
-    <div class="modal fade" id="exampleModal2-{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                        <b>Validasi Gabah</b> 
-                    </h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        @foreach ($item->gabah as $gabah)
+            <div class="modal fade" id="exampleModal2-{{ $gabah->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                <b>Validasi Gabah</b>
+                            </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ url('/gabah/'.$gabah->id) }}" method="POST" id="validasi">
+                            @method("PUT")
+                            @csrf
+                            <input type="hidden" name="id" id="id" value="{{ $gabah->id }}">
+                            <div class="modal-body">
+                                <div class="form-group mb-2">
+                                    <label for="nama"> Pemilik </label>
+                                    <input type="text" class="form-control" name="nama" id="nama" value="{{ $item->nama }}" readonly>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="berat"> Berat </label>
+                                    <input type="text" class="form-control" name="berat" id="berat" placeholder="Masukkan berat" value="{{ $gabah->berat }}" readonly>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="kadar_air2"> Kadar Air </label>
+                                    <input type="text" class="form-control" name="kadar_air2" id="kadar_air2"  value="{{ $gabah->kadar_air2 }}" readonly>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="suhu2"> Suhu </label>
+                                    <input type="text" class="form-control" name="suhu2" id="suhu2"  value="{{ $gabah->suhu2 }}" readonly >
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="klasifikasi"> Klasifikasi Gabah </label>
+                                    <select name="klasifikasi" class="form-control" id="klasifikasi">
+                                        <option value="">-- Pilih --</option>
+                                        <option value="ideal">Ideal</option>
+                                        <option value="basah">Basah</option>
+                                        <option value="kering">Kering</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="reset" class="btn btn-danger btn-sm">Kembali</button>
+                                <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <form action="{{ url('/gabah/'.$item->gabah->id) }}" method="POST" id="validasi">
-                    @method("PUT")
-                    @csrf
-                    <input type="hidden" name="id" id="id" value="{{ $item->id }}">
-                    <div class="modal-body">
-                        <div class="form-group mb-2">
-                            <label for="nama"> Pemilik </label>
-                            <input type="text" class="form-control" name="nama" id="nama" value="{{ $item->nama }}" readonly>
-                        </div>
-                        <div class="form-group mb-2">
-                            <label for="berat"> Berat </label>
-                            <input type="text" class="form-control" name="berat" id="berat" placeholder="Masukkan berat" value="{{ $item->gabah->berat }}" readonly>
-                        </div>
-                        <div class="form-group mb-2">
-                            <label for="kadar_air2"> Kadar Air </label>
-                            <input type="text" class="form-control" name="kadar_air2" id="kadar_air2"  value="{{ $item->gabah->kadar_air2 }}" readonly>
-                        </div>
-                        <div class="form-group mb-2">
-                            <label for="suhu2"> Suhu </label>
-                            <input type="text" class="form-control" name="suhu2" id="suhu2"  value="{{ $item->gabah->suhu2 }}" readonly >
-                        </div>
-                        <div class="form-group mb-2">
-                            <label for="klasifikasi"> Klasifikasi Gabah </label>
-                            <select name="klasifikasi" class="form-control" id="klasifikasi">
-                                <option value="">-- Pilih --</option>
-                                <option value="ideal">Ideal</option>
-                                <option value="basah">Basah</option>
-                                <option value="kering">Kering</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="reset" class="btn btn-danger btn-sm">Kembali</button>
-                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                    </div>
-                </form>
             </div>
-        </div>
-    </div>
+        @endforeach
     @endforeach
+
 </section>
 @endsection
 

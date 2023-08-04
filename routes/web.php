@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth']], function() {
     
     Route::get("/pemantauan-gabah", [GabahController::class, 'monitoring']);
     Route::get("/estimasi-gabah", [GabahController::class, 'estimasi']);
+    Route::get('estimasi-gabah/detail/{id}', [GabahController::class, 'show'])->name('estimasi.show');
     Route::resource('gabah', GabahController::class);
     
     

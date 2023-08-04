@@ -45,10 +45,10 @@
             </div>
             @endif
             
-            <div class="col-6 alert alert-info alert-dismissible fade show" role="alert">
+            {{-- <div class="col-6 alert alert-info alert-dismissible fade show" role="alert">
                 Klik <b>...</b> untuk memfilter data yang ingin ditampilkan
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+            </div> --}}
             
             <!-- Data Sensor -->
             <div class="col-12">
@@ -70,11 +70,11 @@
                     <div class="card-body">
                         <h5 class="card-title">Data Gabah <span>| All Data</span></h5>
                         <div>
-                            @can("validator")
+                            @role("validator")
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                                 + Tambahkan Data Gabah
                             </button>
-                            @endcan
+                            @endrole
                             {{-- <a href="{{url('/klasifikasi-gabah')}}" class="btn btn-success btn-sm">
                                 Klasifikasi Gabah
                             </a> --}}
@@ -89,9 +89,9 @@
                                     <th class="col-md-2">Jenis Gabah</th>
                                     <th class="col-md-1">Berat</th>
                                     <th class="col-md-3">Tanggal</th>
-                                    @can("validator")
+                                
                                     <th class="col-md-4">Action</th>
-                                    @endcan
+                                    
                                 </tr>
                             </thead>
                         </table>
@@ -176,7 +176,7 @@
                             <label for="berat"> Berat </label>
                             <input type="text" class="form-control" name="berat" disabled id="berat" placeholder="Masukkan berat"  readonly>
                         </div>
-                    
+                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Kembali</button>
@@ -188,12 +188,88 @@
         </div>
     </div>
     @endforeach
-
+    
+    
+    {{-- Modal Detail Gabah --}}
+    @foreach ($pg as $item)
+    <div class="modal fade" id="gabahDetailModal{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        <b>Detail Gabah</b> 
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="" id="detailFormID">
+                    @method('PUT')
+                    @csrf
+                    <input type="hidden" name="idD" id="idD" value="{{ $item->id }}">
+                    <div class="modal-body">
+                        
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 label " style="color: rgb(3 30 76 / 60%)" for="namaD">Nama</div>
+                            <div class="col-lg-8 col-md-8" name="namaD" id="namaD"></div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 label" style="color: rgb(3 30 76 / 60%)" for="alamatD">Alamat</div>
+                            <div class="col-lg-8 col-md-8" name="alamatD" id="alamatD"></div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 label" style="color: rgb(3 30 76 / 60%)" for="noHPD">No. Handphone</div>
+                            <div class="col-lg-8 col-md-8" name="noHPD" id="noHPD"></div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 label" style="color: rgb(3 30 76 / 60%)" for="jenisD">Jenis Gabah</div>
+                            <div class="col-lg-8 col-md-8" name="jenisD" id="jenisD"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 label" style="color: rgb(3 30 76 / 60%)" for="beratD">Massa Gabah (Kg)</div>
+                            <div class="col-lg-8 col-md-8" name="beratD" id="beratD"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 label" style="color: rgb(3 30 76 / 60%)" for="suhu1D">Suhu Awal (C)</div>
+                            <div class="col-lg-8 col-md-8" name="suhu1D" id="suhu1D"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 label" style="color: rgb(3 30 76 / 60%)" for="suhu2D">Suhu Akhir (C)</div>
+                            <div class="col-lg-8 col-md-8" name="suhu2D" id="suhu2D"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 label" style="color: rgb(3 30 76 / 60%)" for="ka1D">Kadar Air Awal (%)</div>
+                            <div class="col-lg-8 col-md-8" name="ka1D" id="ka1D"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 label" style="color: rgb(3 30 76 / 60%)" for="ka2D">Kadar Air Akhir (%)</div>
+                            <div class="col-lg-8 col-md-8" name="ka2D" id="ka2D"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 label" style="color: rgb(3 30 76 / 60%)" for="waktuD">Durasi</div>
+                            <div class="col-lg-8 col-md-8" name="waktuD" id="waktuD"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 label" style="color: rgb(3 30 76 / 60%)" for="klasifikasiD">Keterangan</div>
+                            <div class="col-lg-8 col-md-8" name="klasifikasiD" id="klasifikasiD"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 label" style="color: rgb(3 30 76 / 60%)" for="updatedD">Tanggal</div>
+                            <div class="col-lg-8 col-md-8" name="updatedD" id="updatedD"></div>
+                        </div>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+    @endforeach
 </section>
 @endsection
 
 @section("component_js")
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
 <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
@@ -230,8 +306,11 @@
         
         errorElement: "span"
     });
-
-
+    
+    
+</script>
+<script>
+    var userRole = "{{ Auth::user()->name }}"; // Gantikan dengan cara Anda mendapatkan peran pengguna
 </script>
 
 <script>
@@ -292,25 +371,57 @@
                 },
                 
             },
-            
+
             {
                 targets: -1,
                 render: function(data, type, full, meta) {
                     let btn = `
                     <div class="btn-list">
-                        
+                        `;
+
+                    if (userRole === 'validator') {
+                        btn += `
                         <a href="javascript:void(0)" onclick="edit('${data}')" class="btn btn-sm btn-primary btn-edit"><i class="bi bi-pencil"></i></a>
                         <a href="javascript:void(0)" onclick="destroy('${data}')" class="btn btn-sm btn-danger btn-delete"><i class="bi bi-trash"></i></a>
                         <a href="javascript:void(0)" onclick="show('${data}')" class="btn btn-sm btn-secondary btn-show"><i class="bi bi-eye"></i></a>
+                        `;
+                    } else {
+                        // Jika bukan role 'validator', Anda dapat menampilkan hanya tombol show
+                        btn += `
+                        <a href="javascript:void(0)" onclick="show('${data}')" class="btn btn-sm btn-secondary btn-show"><i class="bi bi-eye"></i></a>
+                        `;
+                    }
+
+                    btn += `
                     </div>
                     `;
-                    
+
                     btn = btn.replace(':id', data);
-                    
+
                     return btn;
-                
                 },
-            }, ],
+            },
+
+
+            // {
+            //     targets: -1,
+            //     render: function(data, type, full, meta) {
+            //         let btn = `
+            //         <div class="btn-list">
+                        
+            //             <a href="javascript:void(0)" onclick="edit('${data}')" class="btn btn-sm btn-primary btn-edit"><i class="bi bi-pencil"></i></a>
+            //             <a href="javascript:void(0)" onclick="destroy('${data}')" class="btn btn-sm btn-danger btn-delete"><i class="bi bi-trash"></i></a>
+            //             <a href="javascript:void(0)" onclick="show('${data}')" class="btn btn-sm btn-secondary btn-show"><i class="bi bi-eye"></i></a>
+            //         </div>
+            //         `;
+                    
+            //         btn = btn.replace(':id', data);
+                    
+            //         return btn;
+                    
+            //     },
+            // },
+            ],
             columns: [
             { data: null },
             { data: 'nama'},
@@ -325,23 +436,20 @@
                 sSearch: '',
             }
         });
-
-        $('#btnSave').on('click', function(){
-            submit();
-        })
-
+        
+        
         $('#editFormID').on('submit', function(e){
             e.preventDefault();
-
+            
             submit();
         })
-
+        
     })
-
+    
     function edit(id){
         submit_method = 'edit';
         
-
+        
         $('#editFormID')[0].reset();
         var url = "{{ route('data-gabah.edit',":id") }}";
         url = url.replace(':id', id);
@@ -353,24 +461,29 @@
             $('#id').val(response.id);
             $('#gabahEditModal').modal('show');
             $('.modal-title').text('Edit Data Gabah');
-
+            
             $('#nama').val(response.nama);
-            $('#jenis').val(response.gabah.jenis);
-            $('#berat').val(response.gabah.berat);
+            // Assuming that 'response.gabah' is an array, you can iterate through it
+            for (const gabah of response.gabah) {
+                $('#jenis').val(gabah.jenis);
+                $('#berat').val(gabah.berat);
+                // You might want to break the loop if needed, or choose which data to display
+                break;
+            }
         });
     }
-
+    
     function submit(){
         var id = $('#id').val();
         var nama = $('#nama').val();
         console.log(submit_method);
         console.log("submit");
-
+        
         if (submit_method == 'edit') {
             url = "{{ route('data-gabah.update', ':id') }}";
             url = url.replace(':id', id);
         }
-
+        
         $.ajax({
             url: url,
             type: submit_method == 'create' ? 'POST' : 'PUT',
@@ -385,14 +498,14 @@
                     $('#gabahEditModal').modal('hide');
                     Swal.fire({
                         toast: false,
-                    
+                        
                         icon: 'success',
                         title: data.message,
                         showConfirmButton: false,
                         timer: 1500
                     });
                     table.ajax.reload();
-
+                    
                     $('#btnSave').text('Simpan');
                     $('#btnSave').attr('disabled', false);
                 } else {
@@ -401,18 +514,18 @@
                         $('[name="' + data.inputerror[i] + '"]').next().text(data.error_string[i]);
                     }
                 }
-
+                
                 $('#btnSave').text('Simpan');
                 $('#btnSave').attr('disabled', false);
             },
             error: function(data) {
                 var error_message = "";
                 error_message += " ";
-
+                
                 $.each(data.responseJSON.errors, function(key, value) {
                     error_message += " " + value + " ";
                 });
-
+                
                 error_message += " ";
                 Swal.fire({
                     toast: true,
@@ -428,7 +541,7 @@
             }
         });
     }
-
+    
     function destroy(id) {
         var url = "{{ route('data-gabah.destroy',":id") }}";
         url = url.replace(':id', id);
@@ -467,22 +580,33 @@
             }
         })
     } 
-
+    
     function show(id) {
-        $('#editFormID')[0].reset();
-        var url = "{{ route('data-gabah.show',":id") }}";
+        var url = "{{ route('data-gabah.show', ':id') }}";
         url = url.replace(':id', id);
-        
-        $.get(url, function (response) {
-            response = response.data;
-            console.log(response);
-            
-            $('#id').val(response.id);
-            $('#gabahEditModal').modal('show');
-            $('.modal-title').text('Detail Pemilik');
 
+        $.get(url, function(response) {
+            var data = response.data;
+
+            $('#gabahDetailModal' + data.id).modal('show');
+            $('.modal-title', '#gabahDetailModal' + data.id).text('Detail Gabah');
+            $('#namaD', '#gabahDetailModal' + data.id).text(data.nama);
+            $('#alamatD', '#gabahDetailModal' + data.id).text(data.alamat);
+            $('#noHPD', '#gabahDetailModal' + data.id).text(data.no_hp);
+            $('#jenisD', '#gabahDetailModal' + data.id).text(data.gabah[0].jenis);
+            $('#beratD', '#gabahDetailModal' + data.id).text(data.gabah[0].berat);
+            $('#suhu1D', '#gabahDetailModal' + data.id).text(data.gabah[0].suhu1);
+            $('#suhu2D', '#gabahDetailModal' + data.id).text(data.gabah[0].suhu2);
+            $('#ka1D', '#gabahDetailModal' + data.id).text(data.gabah[0].kadar_air1);
+            $('#ka2D', '#gabahDetailModal' + data.id).text(data.gabah[0].kadar_air2);
+            $('#waktuD', '#gabahDetailModal' + data.id).text(data.gabah[0].waktu);
+            $('#klasifikasiD', '#gabahDetailModal' + data.id).text(data.gabah[0].klasifikasi);
+            $('#updatedD', '#gabahDetailModal' + data.id).text(data.gabah[0].updated_at);
+            
         });
-    } 
+    }
+
+
 </script>
 
 @endsection

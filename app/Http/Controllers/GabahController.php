@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Gabah;
 use App\Models\Pemilik;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
@@ -24,12 +25,31 @@ class GabahController extends Controller
     public function estimasi()
     {
         $data["pemilik"] = Pemilik::all();
+        
+        $data["gabah"] = collect(); // Kumpulan gabah hasil pemantauan
+        
+        foreach ($data["pemilik"] as $pemilik) {
+            $gabahTerbaru = Gabah::where('id_pemilik', $pemilik->id)
+                ->orderBy('created_at', 'desc')
+                ->first();
+                
+            if ($gabahTerbaru) {
+                $data["gabah"]->push($gabahTerbaru);
+            }
+        }
+        
         return view('gabah.estimasi', $data);
     }
 
+
     public function monitoring()
     {
-        $data["pemilik"] = Pemilik::all();
+        $currentDate = Carbon::now()->toDateString();
+        
+        $data["pemilik"] = Pemilik::with(['gabah' => function ($query) use ($currentDate) {
+            $query->whereDate('updated_at', $currentDate);
+        }])->get();
+
         return view('gabah.pemantauan', $data);
     }
 
@@ -78,10 +98,26 @@ class GabahController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id_pemilik)
     {
-        // return response()->json(Pemilik::find($id));
+        $pemilik = Pemilik::find($id_pemilik);
+        // dd($pemilik);
+        if ($pemilik) {
+            $gabah = $pemilik->gabah->groupBy(function ($gabah) {
+                return $gabah->created_at->toDateString();
+            })->filter(function ($group) {
+                return $group->count() > 1;
+            })->map(function ($group) {
+                return $group->first();
+            });
+    
+            return view('gabah.detailMonitoring', compact('pemilik', 'gabah'));
+        } else {
+            return response()->json(['message' => 'Data not found.'], 404);
+        }
     }
+    
+
 
     /**
      * Show the form for editing the specified resource.

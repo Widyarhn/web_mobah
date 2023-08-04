@@ -10,11 +10,10 @@ class Gabah extends Model
     use HasFactory;
 
     protected $table = "gabah";
-    protected $guarded = [''];
-    
+    protected $guarded = [];
 
     public function pemilik()
     {
-        return $this->belongsTo("App\Models\Pemilik", "id_pemilik", "id");
+        return $this->belongsTo(Pemilik::class, "id_pemilik", "id");
     }
 }
