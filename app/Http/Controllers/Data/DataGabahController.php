@@ -14,7 +14,9 @@ class DataGabahController extends Controller
     public function index()
     {
         $data["pemilik"] = Pemilik::all();
-        
+        $data["pg"] = DB::table('pemilik')
+                    ->join('gabah', 'pemilik.id', '=', 'gabah.id_pemilik')
+                    ->get();
         return view('gabah.gabah', $data);
     }
 

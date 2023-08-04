@@ -1,8 +1,8 @@
 @extends("public.layouts.main")
 
-@section("title_content", "Pemantauan")
+@section("title_content", "Detail Pemantauan")
 
-@section("page_title" , "Pemantauan Gabah")
+@section("page_title" , "Detail Pemantauan Gabah")
 
 @section("component_css")
 
@@ -16,16 +16,18 @@
 </style>
 @endsection
 
+
 @section("breadcrumb")
 <ol class="breadcrumb">
     <li class="breadcrumb-item ">
         Home
     </li>
     <li class="breadcrumb-item active">
-        Pemantauan Gabah
+        Detail Pemantauan Gabah Milik {{ $pemilik->nama }}
     </li>
 </ol>
 @endsection
+
 
 @section('content')
 <section class="section dashboard">
@@ -54,7 +56,7 @@
             <div class="col-12">
                 <div class="card recent-sales overflow-auto">
                     <div class="card-body">
-                        <h5 class="card-title">Pemantauan Gabah dari Alat <span>| Saat ini</span></h5>
+                        <h5 class="card-title">Pemantauan Gabah dari Alat <span>| {{ $pemilik->updated_at }} </span></h5>
                         <div>
                             @role("validator")
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1">
@@ -75,34 +77,32 @@
                                     <th scope="col">Kadar Air (%)</th>
                                     <th scope="col">Durasi (Min)</th>
                                     <th scope="col">Keterangan</th>
-                                    {{-- <th scope="col">Waktu</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($pemilik as $p)
-                                    @foreach($p->gabah as $gabah)
-                                        <tr>
-                                            <td>{{ $gabah->jenis }}</td>
-                                            <td>{{ $gabah->berat }}</td>
-                                            <td>{{ $gabah->suhu1 }}</td>
-                                            <td>{{ $gabah->kadar_air1 }}</td>
-                                            <td>{{ $gabah->waktu }}</td>
-                                            <td>
-                                                @if (empty($gabah->klasifikasi))
-                                                    @if ($gabah->kadar_air1 > 14)
-                                                    <span>Basah</span>
-                                                    @else
-                                                    <span>Kering</span>
-                                                    @endif 
-                                                @else
-                                                {{ $gabah->klasifikasi }}
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                @foreach($pemilik->gabah as $gabah)
+                                <tr>
+                                    <td>{{ $gabah->jenis }}</td>
+                                    <td>{{ $gabah->berat }}</td>
+                                    <td>{{ $gabah->suhu1 }}</td>
+                                    <td>{{ $gabah->kadar_air1 }}</td>
+                                    <td>{{ $gabah->waktu }}</td>
+                                    <td>
+                                        @if (empty($gabah->klasifikasi))
+                                            @if ($gabah->kadar_air1 > 14)
+                                            <span>Basah</span>
+                                            @else
+                                            <span>Kering</span>
+                                            @endif 
+                                        @else
+                                        {{ $gabah->klasifikasi }}
+                                        @endif
+                                    </td>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        
                         
                     </div>
                     

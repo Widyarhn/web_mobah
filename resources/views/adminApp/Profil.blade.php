@@ -28,7 +28,7 @@
                     <img src="{{ url('/storage/'.Auth::user()->image) }}" alt="Profile" style="width: 100%; height: 120px; border-radius: 50%">
                     @endif
                     <h2>{{ auth()->user()->name }}</h2>
-                    <h3>admin</h3>
+                    <h3>{{ auth()->user()->name }}</h3>
                 </div>
             </div>
             
@@ -41,18 +41,18 @@
                     <!-- Bordered Tabs -->
                     <ul class="nav nav-tabs nav-tabs-bordered">
                         
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview" >Edit Profil</button>
-                        </li>
+                        </li> --}}
                         
                         <li class="nav-item">
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password" >Change Password</button>
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-change-password" >Change Password</button>
                         </li>
                         
                     </ul>
                     <div class="tab-content pt-3">
                         
-                        <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                        {{-- <div class="tab-pane fade show active profile-overview" id="profile-overview">
                             
                             <form action="{{ url('/profil/' . $edit->id ) }}" method="POST" enctype="multipart/form-data">
                                 @method("PUT")
@@ -95,17 +95,7 @@
                                         <input name="alamat" type="text" class="form-control" id="alamat" value="{{ $edit->alamat }}">
                                     </div>
                                 </div>
-                                
-                                {{-- <div class="row mb-3">
-                                    <label for="jenis_kelamin" class="col-md-4 col-lg-3 col-form-label">Jenis Kelamin</label>
-                                    <div class="col-md-8 col-lg-9">
-                                        <select name="jenis_kelamin" class="form-control" id="jenis_kelamin">
-                                            <option value="">- Pilih -</option>
-                                            <option value="L" {{ $edit->jenis_kelamin == "L" ? 'selected' : '' }}>Laki - Laki</option>
-                                            <option value="P" {{ $edit->jenis_kelamin == "P" ? 'selected' : '' }}>Perempuan</option>
-                                        </select>
-                                    </div>
-                                </div> --}}
+                            
                                 
                                 <div class="text-center">
                                     <button type="reset" class="btn btn-danger">Batal</button>
@@ -115,9 +105,9 @@
 
                             </form> 
                             
-                        </div> 
+                        </div>  --}}
                         
-                        <div class="tab-pane fade pt-3" id="profile-change-password" >
+                        <div class="tab-pane fade pt-3 show active profile-overview" id="profile-change-password" >
                             <!-- Change Password Form -->
                             
                             <form action="{{ url('/profil/'.$edit->id). '/change_password' }}" method="POST">
