@@ -1,7 +1,7 @@
 <div class="d-flex align-items-center justify-content-center">
     <a href="index.html" class="logo d-flex align-items-center justify-content-center">
         {{-- <img src="{{ asset('admin') }}/assets/img/logo.png" alt="" style="max-height: 35px"> --}}
-        <span class="d-none d-lg-block">MangDaib</span>
+        <span class="d-none d-lg-block">IoT TaniKula</span>
     </a>
     <i class="bi bi-list toggle-sidebar-btn" ></i>
 </div><!-- End Logo -->

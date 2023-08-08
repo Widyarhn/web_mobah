@@ -48,7 +48,7 @@
         <div class="container-xxl position-relative p-0" id="home">
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="" class="navbar-brand p-0">
-                    <h1 class="m-0">MangDaib</h1>
+                    <h1 class="m-0">IoT TaniKula</h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -69,7 +69,7 @@
                 <div class="container px-lg-5">
                     <div class="row g-5">
                         <div class="col-lg-8 text-center text-lg-start">
-                            <h1 class="text-white mb-4 animated slideInDown">Selamat Datang di Website MANGDAIB</h1>
+                            <h1 class="text-white mb-4 animated slideInDown">Selamat Datang di Website IoT TaniKula</h1>
                             <p class="text-white pb-3 animated slideInDown">
                                 Mang-Daib merupakan aplikasi web dan mobile Pemantau Tingkat Kadar Air Gabah.
                             </p>
@@ -160,8 +160,8 @@
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
                         <h5 class="text-primary-gradient fw-medium">Screenshots App</h5>
-                        <h1 class="mb-4">User Friendly interface And Very Easy To Use MangDaib App</h1>
-                        <p class="mb-4">Mudah digunakan dengan tampilan yang menarik. Aplikasi MangDaib bertujuan:</p>
+                        <h1 class="mb-4">User Friendly interface And Very Easy To Use IoT TaniKula App</h1>
+                        <p class="mb-4">Mudah digunakan dengan tampilan yang menarik. Aplikasi IoT TaniKula bertujuan:</p>
                         <p><i class="fa fa-check text-primary-gradient me-3"></i>Untuk memudahkan Gapoktan mengelola data gabah</p>
                         <p><i class="fa fa-check text-primary-gradient me-3"></i>Untuk memantau tingkat kadar air pada gabah</p>
                         <a href="#steps" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill mt-3"><h5 class="text-white mb-0">How to Use?</h5></a>
@@ -352,7 +352,7 @@
                         <h4 class="text-white mb-4">Address</h4>
                         <p><i class="fa fa-map-marker-alt me-3"></i>Indramayu, Jawa Barat</p>
                         <p><i class="fa fa-phone-alt me-3"></i>Telp. (0234) 5746464</p>
-                        <p><i class="fa fa-envelope me-3"></i>info@mangdaib.com</p>
+                        <p><i class="fa fa-envelope me-3"></i>info@IoT TaniKula.com</p>
                         <div class="d-flex pt-2">
                             <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
@@ -390,7 +390,7 @@
                 <div class="copyright">
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="">MangDaib</a>, All Right Reserved. 
+                            &copy; <a class="border-bottom" href="">IoT TaniKula</a>, All Right Reserved. 
 							
 							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
 							Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>

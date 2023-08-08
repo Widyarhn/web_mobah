@@ -1,16 +1,16 @@
 @extends("public.layouts.main")
 
-@section("title_content", "Kelola Gapoktan")
+@section("title_content", "Kelola Mitra")
 
-@section("page_title" , "Gapoktan")
+@section("page_title" , "Mitra Gapoktan")
 
 @section("breadcrumb")
 <ol class="breadcrumb">
-    <li class="breadcrumb-item">
+    <li class="breadcrumb-item ">
         Home
     </li>
     <li class="breadcrumb-item active">
-        Kelola Akun Gapoktan
+        Kelola Akun Mitra Gapoktan
     </li>
 </ol>
 @endsection
@@ -21,12 +21,17 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="card">
+                
                 <div class="card-body">
-                    <h5 class="card-title" style="margin-bottom: 0px;">Data Gapoktan</h5>
+                    <h5 class="card-title" style="margin-bottom: 0px;">Data Mitra Gapoktan</h5>
                     <div>
+                        @can("admin")
+                        @role("admin")
                         <a class="btn btn-primary modal-effect mb-3 data-table-btn" data-bs-effect="effect-super-scaled" onclick="create()">
-                            <span class="fe fe-plus"></span>Tambah Data Baru
+                            <span class="fe fe-plus"> </span>Tambah Data Baru
                         </a>
+                        @endrole
+                        @endcan
                     </div>
                     <br>
                     <div class="table-responsive text-nowrap">
@@ -39,12 +44,13 @@
                                     <th style="width: 1%">Image</th>
                                     <th>No Hp</th>
                                     <th>Alamat</th>
-                                    <th>Option</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -59,15 +65,18 @@
                     </div>
                     <div class="modal-body">
                         <form id="form" method="POST" enctype="multipart/form-data">
+                        
                             @csrf
                             <input type="hidden" name="image_lama" id="image_lama">
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        
                                         <div class="mb-3">
                                             <input type="hidden" id="id" name="id">
                                             <label for="nama" class="form-label">Nama</label>
-                                            <input type="text" name="nama" class="form-control" id="nama" value="{{ old('nama') }}">
+                                            <input type="text"  name="nama" class="form-control" id="nama" value="{{ old('nama') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -75,7 +84,7 @@
                                     <div class="form-group">
                                         <div class="mb-3">
                                             <label for="no_hp" class="form-label">No Hp</label>
-                                            <input type="number" id="no_hp" class="form-control" name="no_hp" value="{{ old('no_hp') }}">
+                                            <input type="number" id="no_hp" class="form-control" name="no_hp"value="{{ old('no_hp') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -86,21 +95,29 @@
                                             <input type="text" name="username" class="form-control" id="username" value="{{ old('username') }}">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <div class="mb-3">
-                                            <label for="alamat" class="form-label">Alamat</label>
-                                            <textarea class="form-control" name="alamat" id="alamat" rows="3">{{ old('alamat') }}</textarea>
+                                        <label class="form-label text-dark">Image</label>
+                                        <div class="p-4 border mb-4">
+                                            
+                                            @if(empty($mitra->image))
+                                                <input type="file" class="dropify" name="image" id="image" multiple data-max-file-size="2M" data-allowed-file-extensions="jpeg jpg png webp svg" value="{{ old('image') }}">
+                                            @else
+                                                <img src="{{ url('/storage/'. $mitra->image) }}" class="img-fluid gambar-preview mb-3" >
+                                                <div class="pt-2">
+                                                    <input type="file" class="form-control" name="image" id="images" multiple data-max-file-size="2M" data-allowed-file-extensions="jpeg jpg png webp svg" value="{{ old('image') }}">
+                                                </div>
+                                            @endif
+                                            
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <div class="mb-3">
-                                            <label for="image" class="form-label">Image</label>
-                                            <input type="file" id="image" class="dropify" name="image" data-height="150">
+                                    <div class="form-group ">
+                                        <div class="mb-3 ">
+                                            <label for="alamat" class="col-lg-12 form-label">Alamat</label>
+                                            <div class="col-lg-12">
+                                                <textarea name="alamat" id="alamat" class="form-control" >{{ old('alamat') }}</textarea>
+                                            </div>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -113,12 +130,12 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Row -->
+    </div>  <!-- End Row -->
 </section>
 @endsection
 
 @section('component_js')
+
 <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
     crossorigin="anonymous"></script>
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
@@ -144,6 +161,10 @@
             $("#tampilGambar").height("300");
         }
     }
+</script>
+
+<script>
+    var userRole = "{{ Auth::user()->name }}"; // Gantikan dengan cara Anda mendapatkan peran pengguna
 </script>
 
 <script>
@@ -173,7 +194,6 @@
                         $(td).text(txt.substr(0, 150) + '...')
                     }
                 },
-
             },
             {
                 targets: 2,
@@ -184,8 +204,7 @@
                         $(td).text(txt.substr(0, 150) + '...')
                     }
                 },
-
-            },
+            },            
             {
                 
                 targets: 3,
@@ -194,7 +213,6 @@
                     var imageUrl = imagePath ? "{{ url('/storage/') }}/" + imagePath : "/admin/assets/img/default_gambar.png";
                     return `<img class="img-thumbnail wd-50p wd-sm-100" src="${imageUrl}">`;
                 }
-
             },
             {
                 targets: 4,
@@ -205,7 +223,6 @@
                         $(td).text(txt.substr(0, 150) + '...')
                     }
                 },
-
             },
             {
                 targets: 5,
@@ -216,20 +233,33 @@
                         $(td).text(txt.substr(0, 150) + '...')
                     }
                 },
-
             },
             {
                 targets: -1,
                 render: function(data, type, full, meta) {
-                    return `
+                    let btn = `
                     <div class="btn-list">
-                        <a href="javascript:void(0)" onclick="edit('${data}')" class="btn btn-sm btn-primary modal-effect btn-edit" data-bs-effect="effect-super-scaled"><i class="bi bi-pencil"></i></a>
-                        <a href="javascript:void(0)" onclick="destroy('${data}')" class="btn btn-sm btn-danger btn-delete"><i class="bi bi-trash"></i></a>
+                        `;
+
+                    if (userRole === 'admin') {
+                        btn += `
+                            <a href="javascript:void(0)" onclick="edit('${data}')" class="btn btn-sm btn-primary btn-edit"><i class="bi bi-pencil"></i></a>
+                            <a href="javascript:void(0)" onclick="destroy('${data}')" class="btn btn-sm btn-danger btn-delete"><i class="bi bi-trash"></i></a>
+                        `;
+                    } if (userRole === 'mitra') {
+                        btn += `
+                            <a href="javascript:void(0)" onclick="edit('${data}')" class="btn btn-sm btn-primary btn-edit"><i class="bi bi-pencil"></i></a>
+                        `;
+                    } else {
+                        // Jika bukan role 'admin' dan 'mitra' tidak dapat melakukan action apapun
+                    }
+
+                    btn += `
                     </div>
                     `;
 
                     btn = btn.replace(':id', data);
-                    
+
                     return btn;
                 },
             }, ],
@@ -259,11 +289,10 @@
         $('#id').val('');
         $('#form')[0].reset();
 
-
         $('#modal_form').modal('show');
         
         $('.dropify').dropify();
-        $('.modal-title').text('Tambah Data Gapoktan');
+        $('.modal-title').text('Tambah Data Mitra');
         $('#btnSave').on('click', function(){
             submit();
         })
@@ -281,7 +310,7 @@
             $('#id').val(data.id);
             $('#modal_form').modal('show');
             $('.dropify').dropify();
-            $('.modal-title').text('Edit Data Gapoktan');
+            $('.modal-title').text('Edit Data Mitra');
             $('#nama').val(data.mitra.nama);
             $('#username').val(data.username); 
             // $('#username_label').hide();
@@ -350,7 +379,7 @@
             success: function(data) {
                 if (data.status) {
                     var mitra = data.mitra;
-                    console.log("Mitra:", mitra);
+                    console.log("mitra:", mitra);
                     $('#modal_form').modal('hide');
                     Swal.fire({
                         toast: false,
@@ -395,6 +424,9 @@
             },
         });
     }
+
+
+
 
     function destroy(id) {
         var url = "{{ route('kelola-gapoktan.destroy',":user_id") }}";

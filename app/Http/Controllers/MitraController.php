@@ -57,12 +57,13 @@ class MitraController extends Controller
         // Memberikan peran "mitra" kepada pengguna
         $user->assignRole('mitra');
 
-        if ($request->hasfile("image"))
-        {
-            $data = $request->file("image")->store("mitra");
+        if ($request->hasFile("image")) {
+            $data = $request->file("image")->store("mitra", 'public'); // Simpan gambar dengan izin publik
+        } else {
+            $data = null; // Atur data gambar ke null jika tidak ada gambar yang diunggah
         }
 
-        // Membuat data Validator baru
+        // Membuat data Mitra baru
         $mitra = Mitra::create([
             'user_id' => $user->id,
             'nama' => $request->nama,
@@ -74,7 +75,7 @@ class MitraController extends Controller
         
         return response()->json([
             'status' => true,
-            'message' => 'Success Add Data Validator!',
+            'message' => 'Success Add Data Mitra!',
         ]);
     }
 
@@ -122,7 +123,7 @@ class MitraController extends Controller
             return response()->json(['message' => 'Data not found.'], 404);
         }
 
-        // Mengupdate atribut-atribut Validator kecuali username
+        // Mengupdate atribut-atribut Mitra kecuali username
         $mitra->nama = $request->nama;
         $mitra->image = $request->hasFile('image') ? $request->file('image')->store('mitra') : $mitra->image;
         $mitra->no_hp = $request->no_hp;
@@ -140,7 +141,7 @@ class MitraController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => 'Success Update Data Admin!',
+            'message' => 'Success Update Data Mitra!',
         ]);
     }
 

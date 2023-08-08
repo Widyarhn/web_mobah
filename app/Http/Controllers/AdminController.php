@@ -115,7 +115,7 @@ class AdminController extends Controller
 
         if ($request->hasfile("image"))
         {
-            $data = $request->file("image")->store("admin");
+            $data = $request->file("image")->store("admin", 'public');
         }         
         
 
