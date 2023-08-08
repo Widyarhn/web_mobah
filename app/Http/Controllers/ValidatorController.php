@@ -17,7 +17,7 @@ class ValidatorController extends Controller
      */
     public function index()
     {
-        $data["validator"] = Validator::all();
+        $data["petugas"] = Validator::all();
         
         return view('akun.validator.index', $data);
     }
@@ -54,16 +54,17 @@ class ValidatorController extends Controller
             'remember_token' => $default_user_value['remember_token'],
         ]);
 
-        // Memberikan peran "Validator" kepada pengguna
+        // Memberikan peran "petugas" kepada pengguna
         $user->assignRole('validator');
 
-        if ($request->hasfile("image"))
-        {
-            $data = $request->file("image")->store("validator");
+        if ($request->hasFile("image")) {
+            $data = $request->file("image")->store("petugas", 'public'); // Simpan gambar dengan izin publik
+        } else {
+            $data = null; // Atur data gambar ke null jika tidak ada gambar yang diunggah
         }
 
-        // Membuat data Validator baru
-        $validator = Validator::create([
+        // Membuat data petugas baru
+        $petugas = Validator::create([
             'user_id' => $user->id,
             'nama' => $request->nama,
             'no_hp' => $request->no_hp,
@@ -74,7 +75,7 @@ class ValidatorController extends Controller
         
         return response()->json([
             'status' => true,
-            'message' => 'Success Add Data Validator!',
+            'message' => 'Success Add Data petugas!',
         ]);
     }
 
@@ -97,7 +98,7 @@ class ValidatorController extends Controller
      */
     public function edit($id)
     {
-        $result = User::with('validator')->find($id);
+        $result = User::with('petugas')->find($id);
     
         if ($result) {
             return response()->json(['data' => $result]);
@@ -116,20 +117,20 @@ class ValidatorController extends Controller
         
     public function update(Request $request, $id)
     {
-        $validator = Validator::find($id);
+        $petugas = Validator::find($id);
 
-        if (!$validator) {
+        if (!$petugas) {
             return response()->json(['message' => 'Data not found.'], 404);
         }
 
-        // Mengupdate atribut-atribut Validator kecuali username
-        $validator->nama = $request->nama;
-        $validator->image = $request->hasFile('image') ? $request->file('image')->store('validator') : $validator->image;
-        $validator->no_hp = $request->no_hp;
-        $validator->alamat = $request->alamat;
+        // Mengupdate atribut-atribut petugas kecuali username
+        $petugas->nama = $request->nama;
+        $petugas->image = $request->hasFile('image') ? $request->file('image')->store('petugas') : $petugas->image;
+        $petugas->no_hp = $request->no_hp;
+        $petugas->alamat = $request->alamat;
 
         // Simpan perubahan
-        $validator->save();
+        $petugas->save();
 
         // Mengupdate atribut pada tabel 'user'
         $user = User::find($id);
@@ -140,7 +141,7 @@ class ValidatorController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => 'Success Update Data Admin!',
+            'message' => 'Success Update Data petugas!',
         ]);
     }
 
@@ -159,10 +160,10 @@ class ValidatorController extends Controller
             // Find the user by ID
             $user = User::findOrFail($id);
             
-            // Find the validator by user ID and delete
-            $validator = Validator::where('user_id', $id)->first();
-            if ($validator) {
-                $validator->delete();
+            // Find the petugas by user ID and delete
+            $petugas = Validator::where('user_id', $id)->first();
+            if ($petugas) {
+                $petugas->delete();
             }
             
             // Delete the user

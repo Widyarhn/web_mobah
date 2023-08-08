@@ -25,9 +25,13 @@
                 <div class="card-body">
                     <h5 class="card-title" style="margin-bottom: 0px;">Data Admin Gapoktan</h5>
                     <div>
+                        @can("admin")
+                        @role("admin")
                         <a class="btn btn-primary modal-effect mb-3 data-table-btn" data-bs-effect="effect-super-scaled" onclick="create()">
                             <span class="fe fe-plus"> </span>Tambah Data Baru
                         </a>
+                        @endrole
+                        @endcan
                     </div>
                     <br>
                     <div class="table-responsive text-nowrap">
@@ -40,7 +44,7 @@
                                     <th style="width: 1%">Image</th>
                                     <th>No Hp</th>
                                     <th>Alamat</th>
-                                    <th>Option</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -158,22 +162,10 @@
         }
     }
 </script>
-{{-- <script>
-    function previewImage2() {
-        var input = document.getElementById('image');
-        var preview = document.querySelector('.gambar-preview');
-    
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-    
-            reader.onload = function(e) {
-                preview.src = e.target.result;
-            }
-    
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script> --}}
+
+<script>
+    var userRole = "{{ Auth::user()->name }}"; // Gantikan dengan cara Anda mendapatkan peran pengguna
+</script>
 
 <script>
     var $table;
@@ -238,17 +230,27 @@
 
             },
             {
-                targets: 6,
+                targets: -1,
                 render: function(data, type, full, meta) {
-                    return `
+                    let btn = `
                     <div class="btn-list">
-                        <a href="javascript:void(0)" onclick="edit('${data}')" class="btn btn-sm btn-primary modal-effect btn-edit" data-bs-effect="effect-super-scaled"><i class="bi bi-pencil"></i></a>
-                        <a href="javascript:void(0)" onclick="destroy('${data}')" class="btn btn-sm btn-danger btn-delete"><i class="bi bi-trash"></i></a>
+                        `;
+
+                    if (userRole === 'admin') {
+                        btn += `
+                            <a href="javascript:void(0)" onclick="edit('${data}')" class="btn btn-sm btn-primary btn-edit"><i class="bi bi-pencil"></i></a>
+                            <a href="javascript:void(0)" onclick="destroy('${data}')" class="btn btn-sm btn-danger btn-delete"><i class="bi bi-trash"></i></a>
+                        `;
+                    } else {
+                        // Jika bukan role 'admin' dan 'mitra' tidak dapat melakukan action apapun
+                    }
+
+                    btn += `
                     </div>
                     `;
 
                     btn = btn.replace(':id', data);
-                    
+
                     return btn;
                 },
             }, ],
